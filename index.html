@@ -8,132 +8,6 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <style>
-        /* Существующие стили остаются без изменений, добавляю новый медиа-запрос */
-        @media (min-width: 768px) {
-            h1 {
-                font-size: 3rem; /* Увеличил заголовок */
-                margin-bottom: 20px;
-            }
-            .form-label {
-                font-size: 1rem; /* Увеличил метки форм */
-            }
-            .form-control, .form-select {
-                font-size: 1rem; /* Увеличил текст в полях ввода */
-                height: 40px;
-            }
-            .btn {
-                font-size: 1rem; /* Увеличил текст кнопок */
-                padding: 8px 16px;
-            }
-            .btn-action {
-                font-size: 0.9rem; /* Увеличил текст действий */
-                padding: 5px 8px;
-            }
-            .btn-add-coin, .btn-add-image {
-                font-size: 1rem; /* Увеличил текст кнопок добавления */
-                padding: 5px 10px;
-            }
-            .table {
-                font-size: 1rem; /* Увеличил текст в таблице */
-            }
-            .table th, .table td {
-                padding: 8px; /* Увеличил отступы в ячейках */
-            }
-            .navbar-brand {
-                font-size: 1.1rem; /* Увеличил текст в навигации */
-                padding: 10px 15px;
-            }
-            #stats h3 {
-                font-size: 1.8rem; /* Увеличил заголовок статистики */
-                margin-bottom: 10px;
-            }
-            #stats p {
-                font-size: 1.1rem; /* Увеличил текст статистики */
-                margin: 8px 0;
-            }
-            #stats span {
-                font-size: 1.2rem; /* Увеличил значения в статистике */
-            }
-            .range-label {
-                font-size: 0.9rem; /* Увеличил метки диапазона */
-            }
-            .range-value {
-                font-size: 0.9rem; /* Увеличил значение диапазона */
-                padding: 3px 8px;
-            }
-            input[type="range"] {
-                height: 10px; /* Немного увеличил ползунок */
-            }
-            input[type="range"]::-webkit-slider-thumb {
-                width: 18px;
-                height: 18px;
-            }
-            input[type="range"]::-moz-range-thumb {
-                width: 18px;
-                height: 18px;
-            }
-            .preview-image {
-                max-height: 200px; /* Увеличил размер предпросмотра изображений */
-                margin-top: 10px;
-            }
-            .progress-bar {
-                height: 20px; /* Увеличил высоту прогресс-бара */
-                font-size: 1rem; /* Увеличил текст прогресс-бара */
-            }
-            .progress-bar span {
-                line-height: 20px;
-            }
-            .notification {
-                font-size: 1.1rem; /* Увеличил текст уведомлений */
-                padding: 10px 20px;
-            }
-            .theme-switch {
-                width: 40px;
-                height: 40px;
-            }
-            .theme-switch i {
-                font-size: 1.2rem;
-            }
-            .lang-switch {
-                font-size: 1rem; /* Увеличил текст переключателя языка */
-                height: 40px;
-                padding: 5px;
-            }
-        }
-    
-        /* Существующие медиа-запросы для мобильных устройств остаются без изменений */
-        @media (max-width: 768px) {
-            h1 { font-size: 1.2rem; margin-bottom: 10px; }
-            .container { padding: 5px; }
-            .card { padding: 8px; margin-bottom: 8px; }
-            .form-label { font-size: 0.7rem; }
-            .form-control, .form-select { height: 30px; font-size: 0.8rem; }
-            .btn { padding: 5px 10px; font-size: 0.8rem; }
-            .btn-action { padding: 3px 5px; font-size: 0.6rem; margin: 0 1px; }
-            .btn-add-coin, .btn-add-image { padding: 3px 6px; font-size: 0.8rem; margin-left: 3px; }
-            .table { font-size: 0.7rem; }
-            .table th, .table td { padding: 4px; }
-            .navbar { padding: 5px 0; }
-            .navbar-brand { font-size: 0.8rem; padding: 6px 10px; margin: 0 3px; }
-            #stats { padding: 8px; }
-            #stats h3 { font-size: 1.2rem; margin-bottom: 6px; }
-            #stats p { font-size: 0.8rem; margin: 4px 0; }
-            #stats span { font-size: 0.9rem; }
-            .range-label { font-size: 0.6rem; }
-            .range-value { top: -20px; padding: 1px 4px; font-size: 0.6rem; }
-            input[type="range"] { height: 6px; }
-            input[type="range"]::-webkit-slider-thumb { width: 12px; height: 12px; }
-            input[type="range"]::-moz-range-thumb { width: 12px; height: 12px; }
-            .preview-image { max-height: 100px; margin-top: 5px; }
-            .progress-bar { height: 12px; margin-bottom: 8px; font-size: 0.7rem; }
-            .progress-bar span { line-height: 12px; }
-            .theme-switch { width: 30px; height: 30px; }
-            .theme-switch i { font-size: 0.9rem; }
-            .lang-switch { height: 30px; padding: 3px; font-size: 0.8rem; }
-            .notification { top: 10px; right: 10px; padding: 6px 12px; font-size: 0.8rem; }
-        }
-    
-        /* Все остальные существующие стили остаются без изменений */
         * {
             margin: 0;
             padding: 0;
@@ -373,7 +247,7 @@
         .table td:nth-child(10) /* Заметки */
         {
             padding: 0;
-            padding-top: 10px; /* Смещение кнопок "Подробнее" */
+            padding-top: 8px; /* Смещение кнопок "Подробнее" */
         }
         .table td:nth-child(4) {
             text-overflow: clip;
@@ -396,11 +270,170 @@
         .table td.setup-cell, .table td.notes-cell {
             overflow: hidden;
             text-overflow: ellipsis;
-            padding-top: 10px; /* Смещение кнопок "Подробнее" */
+            padding-top: 8px; /* Смещение кнопок "Подробнее" */
         }
         .table td.setup-cell:hover, .table td.notes-cell:hover {
             overflow: visible;
             white-space: normal;
+        }
+        @media (min-width: 768px) {
+            h1 {
+                font-size: 3rem;
+                margin-bottom: 20px;
+            }
+            .form-label {
+                font-size: 1rem;
+            }
+            .form-control, .form-select {
+                font-size: 1rem;
+                height: 40px;
+            }
+            .btn {
+                font-size: 1rem;
+                padding: 8px 16px;
+            }
+            .btn-action {
+                font-size: 0.9rem;
+                padding: 5px 8px;
+            }
+            .btn-add-coin, .btn-add-image {
+                font-size: 1rem;
+                padding: 5px 10px;
+            }
+            .table {
+                font-size: 1rem;
+            }
+            .table th, .table td {
+                padding: 8px;
+            }
+            .navbar-brand {
+                font-size: 1.1rem;
+                padding: 10px 15px;
+            }
+            #stats h3 {
+                font-size: 1.8rem;
+                margin-bottom: 10px;
+            }
+            #stats p {
+                font-size: 1.1rem;
+                margin: 8px 0;
+            }
+            #stats span {
+                font-size: 1.2rem;
+            }
+            .range-label {
+                font-size: 0.9rem;
+            }
+            .range-value {
+                font-size: 0.9rem;
+                padding: 3px 8px;
+            }
+            input[type="range"] {
+                height: 10px;
+            }
+            input[type="range"]::-webkit-slider-thumb {
+                width: 18px;
+                height: 18px;
+            }
+            input[type="range"]::-moz-range-thumb {
+                width: 18px;
+                height: 18px;
+            }
+            .preview-image {
+                max-height: 200px;
+                margin-top: 10px;
+            }
+            .progress-bar {
+                height: 20px;
+                font-size: 1rem;
+            }
+            .progress-bar span {
+                line-height: 20px;
+            }
+            .notification {
+                font-size: 1.1rem;
+                padding: 10px 20px;
+            }
+            .theme-switch {
+                width: 40px;
+                height: 40px;
+            }
+            .theme-switch i {
+                font-size: 1.2rem;
+            }
+            .lang-switch {
+                font-size: 1rem;
+                height: 40px;
+                padding: 5px;
+            }
+        }
+        @media (max-width: 768px) {
+            h1 { font-size: 1.2rem; margin-bottom: 10px; }
+            .container { padding: 5px; }
+            .card { padding: 8px; margin-bottom: 8px; }
+            .form-label { font-size: 0.7rem; }
+            .form-control, .form-select { height: 30px; font-size: 0.8rem; }
+            .btn { padding: 5px 10px; font-size: 0.8rem; }
+            .btn-action { padding: 3px 5px; font-size: 0.6rem; margin: 0 1px; }
+            .btn-add-coin, .btn-add-image { padding: 3px 6px; font-size: 0.8rem; margin-left: 3px; }
+            .table { font-size: 0.7rem; display: block; }
+            .table th, .table td {
+                padding: 4px;
+                display: block;
+                text-align: left;
+                border-bottom: none;
+            }
+            .table th {
+                display: none;
+            }
+            .table td {
+                position: relative;
+                padding-left: 30%;
+            }
+            .table td:before {
+                content: attr(data-label);
+                position: absolute;
+                left: 5px;
+                width: 25%;
+                padding-right: 10px;
+                font-weight: bold;
+                color: #00F7FF;
+            }
+            .table td.actions-cell {
+                padding-left: 0;
+                text-align: right;
+                padding-right: 5px;
+            }
+            .table td.actions-cell:before {
+                content: none;
+            }
+            .table .accordion-content {
+                display: none;
+                padding: 10px 5px;
+                background: rgba(255, 255, 255, 0.05);
+                margin: 5px 0;
+                border-radius: 4px;
+            }
+            .table .accordion-content.light {
+                background: rgba(0, 0, 0, 0.05);
+            }
+            .table .accordion-content.active {
+                display: block;
+            }
+            .table .accordion-content p {
+                margin: 5px 0;
+                font-size: 0.8rem;
+            }
+            .table .accordion-content img {
+                max-width: 100%;
+                max-height: 150px;
+                margin-top: 5px;
+                border-radius: 4px;
+                border: 1px solid #00F7FF;
+            }
+            .table .accordion-content.light img {
+                border: 1px solid #007BFF;
+            }
         }
         .navbar {
             background: rgba(15, 23, 42, 0.9);
@@ -1383,23 +1416,57 @@
             filteredTrades.forEach(trade => {
                 const row = document.createElement("tr");
                 row.classList.add("fade-in");
-                row.innerHTML = `
-                    <td>${trade.id}</td>
-                    <td>${trade.coin}</td>
-                    <td>${trade.position}</td>
-                    <td>${formatDate(trade.open_date)}</td>
-                    <td>${trade.risk.toFixed(2)}</td>
-                    <td>${trade.profit.toFixed(2)}</td>
-                    <td>${trade.loss.toFixed(2)}</td>
-                    <td>${trade.result.toFixed(2)}</td>
-                    <td class="setup-cell"><button class="btn-action btn-sm" onclick="showDetailModal(${trade.id}, 'setup')" data-i18n="detailsBtn">Подробнее</button></td>
-                    <td class="notes-cell"><button class="btn-action btn-sm" onclick="showDetailModal(${trade.id}, 'notes')" data-i18n="detailsBtn">Подробнее</button></td>
-                    <td>${trade.rating.toFixed(2)}</td>
-                    <td class="actions-cell">
-                        <button class="btn-action btn-sm" onclick="editTrade(${trade.id})" data-i18n="edit">Ред.</button>
-                        <button class="btn-action btn-sm" onclick="deleteTrade(${trade.id})" data-i18n="delete">Удал.</button>
-                    </td>
-                `;
+                row.setAttribute("data-trade-id", trade.id);
+                row.addEventListener("click", () => toggleAccordion(row));
+
+                const isMobile = window.innerWidth <= 768;
+                if (isMobile) {
+                    row.innerHTML = `
+                        <td data-label="${translations[currentLang]['id']}">${trade.id}</td>
+                        <td data-label="${translations[currentLang]['coin']}">${trade.coin}</td>
+                        <td data-label="${translations[currentLang]['position']}">${trade.position}</td>
+                        <td data-label="${translations[currentLang]['date']}">${formatDate(trade.open_date)}</td>
+                        <td data-label="${translations[currentLang]['risk']}">${trade.risk.toFixed(2)}</td>
+                        <td data-label="${translations[currentLang]['profit']}">${trade.profit.toFixed(2)}</td>
+                        <td data-label="${translations[currentLang]['loss']}">${trade.loss.toFixed(2)}</td>
+                        <td data-label="${translations[currentLang]['result']}">${trade.result.toFixed(2)}</td>
+                        <td data-label="${translations[currentLang]['setup']}"></td>
+                        <td data-label="${translations[currentLang]['notes']}"></td>
+                        <td data-label="${translations[currentLang]['rating']}">${trade.rating.toFixed(2)}</td>
+                        <td class="actions-cell">
+                            <button class="btn-action btn-sm" onclick="editTrade(${trade.id}); event.stopPropagation();" data-i18n="edit">Ред.</button>
+                            <button class="btn-action btn-sm" onclick="deleteTrade(${trade.id}); event.stopPropagation();" data-i18n="delete">Удал.</button>
+                        </td>
+                    `;
+                    const accordionContent = document.createElement("td");
+                    accordionContent.colSpan = 12;
+                    accordionContent.classList.add("accordion-content");
+                    accordionContent.innerHTML = `
+                        <p><strong>${translations[currentLang]['setup']}:</strong> ${trade.setup || "Нет данных"}</p>
+                        ${trade.setupImage ? `<img src="${trade.setupImage}" alt="Setup Image">` : ""}
+                        <p><strong>${translations[currentLang]['notes']}:</strong> ${trade.notes || "Нет заметок"}</p>
+                        ${trade.notesImage ? `<img src="${trade.notesImage}" alt="Notes Image">` : ""}
+                    `;
+                    row.appendChild(accordionContent);
+                } else {
+                    row.innerHTML = `
+                        <td>${trade.id}</td>
+                        <td>${trade.coin}</td>
+                        <td>${trade.position}</td>
+                        <td>${formatDate(trade.open_date)}</td>
+                        <td>${trade.risk.toFixed(2)}</td>
+                        <td>${trade.profit.toFixed(2)}</td>
+                        <td>${trade.loss.toFixed(2)}</td>
+                        <td>${trade.result.toFixed(2)}</td>
+                        <td class="setup-cell"><button class="btn-action btn-sm" onclick="showDetailModal(${trade.id}, 'setup')" data-i18n="detailsBtn">Подробнее</button></td>
+                        <td class="notes-cell"><button class="btn-action btn-sm" onclick="showDetailModal(${trade.id}, 'notes')" data-i18n="detailsBtn">Подробнее</button></td>
+                        <td>${trade.rating.toFixed(2)}</td>
+                        <td class="actions-cell">
+                            <button class="btn-action btn-sm" onclick="editTrade(${trade.id})" data-i18n="edit">Ред.</button>
+                            <button class="btn-action btn-sm" onclick="deleteTrade(${trade.id})" data-i18n="delete">Удал.</button>
+                        </td>
+                    `;
+                }
                 tbody.appendChild(row);
             });
             updateProgressBar();
@@ -1407,6 +1474,17 @@
                 const key = btn.getAttribute("data-i18n");
                 if (key) btn.textContent = translations[currentLang][key];
             });
+        }
+
+        function toggleAccordion(row) {
+            const accordionContent = row.querySelector(".accordion-content");
+            if (accordionContent) {
+                const isActive = accordionContent.classList.contains("active");
+                document.querySelectorAll(".accordion-content.active").forEach(content => content.classList.remove("active"));
+                if (!isActive) {
+                    accordionContent.classList.add("active");
+                }
+            }
         }
 
         function updateProgressBar() {
@@ -1561,7 +1639,7 @@
                 btn.classList.toggle("active", btn.getAttribute("onclick").includes(sectionId));
             });
             if (sectionId === "stats") {
-                updateStats(); // Обновляем статистику при открытии раздела
+                updateStats();
                 document.getElementById("stats").style.display = "block";
             }
         }
@@ -1576,7 +1654,7 @@
             document.getElementById("filterCoin").value = filters.coin;
             document.getElementById("filterPosition").value = filters.position;
             updateTable();
-            updateStats(); // Вызываем обновление статистики при загрузке
+            updateStats();
             showSection("view");
 
             document.querySelectorAll("#tradesTable th[data-sort]").forEach(th => {
