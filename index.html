@@ -14,15 +14,14 @@
             box-sizing: border-box;
         }
         body {
-            background: linear-gradient(135deg, #1E2A44 0%, #0F172A 100%);
+            background: #1E2A44;
             color: #ECF0F1;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', sans-serif;
             min-height: 100vh;
-            overflow-x: hidden;
-            transition: all 0.3s ease;
+            transition: background 0.3s, color 0.3s;
         }
         body.light {
-            background: linear-gradient(135deg, #F0F4F8 0%, #D9E2EC 100%);
+            background: #F0F4F8;
             color: #333;
         }
         .container {
@@ -46,59 +45,38 @@
         }
         .card {
             background: rgba(15, 23, 42, 0.9);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 8px;
             padding: 10px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
             margin-bottom: 10px;
-            transition: transform 0.3s ease;
+            transition: transform 0.3s;
         }
         .card.light {
             background: rgba(240, 244, 248, 0.9);
-            border: 1px solid rgba(0, 0, 0, 0.1);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         }
         .card:hover {
             transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(0, 247, 255, 0.2);
-        }
-        .card.light:hover {
-            box-shadow: 0 6px 20px rgba(0, 123, 255, 0.2);
         }
         .form-control, .form-select {
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            color: #FFFFFF;
+            color: #FFF;
             border-radius: 4px;
-            transition: all 0.3s ease;
             height: 35px;
             font-size: 0.9rem;
+            transition: all 0.3s;
         }
         .form-control.light, .form-select.light {
             background: rgba(0, 0, 0, 0.05);
-            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-color: rgba(0, 0, 0, 0.1);
             color: #333;
         }
         .form-control:focus, .form-select:focus {
-            background: rgba(255, 255, 255, 0.1);
             border-color: #00F7FF;
             box-shadow: 0 0 5px rgba(0, 247, 255, 0.5);
-            color: #FFFFFF;
         }
         .form-control.light:focus, .form-select.light:focus {
-            background: rgba(0, 0, 0, 0.1);
             border-color: #007BFF;
             box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-            color: #333;
-        }
-        .form-select option {
-            background: #1E2A44;
-            color: #FFFFFF;
-        }
-        .form-select.light option {
-            background: #F0F4F8;
-            color: #333;
         }
         .form-label {
             font-size: 0.8rem;
@@ -115,13 +93,11 @@
             padding: 6px 12px;
             font-weight: bold;
             text-transform: uppercase;
-            transition: all 0.3s ease;
             font-size: 0.9rem;
-            box-shadow: 0 0 5px rgba(0, 247, 255, 0.5);
+            transition: transform 0.3s, box-shadow 0.3s;
         }
         .btn.light {
             background: linear-gradient(90deg, #FFF5E1, #FF9999);
-            box-shadow: 0 0 5px rgba(255, 153, 153, 0.5);
         }
         .btn:hover {
             transform: scale(1.05);
@@ -138,23 +114,20 @@
             border-radius: 3px;
             font-size: 0.7rem;
             margin: 0 2px;
-            transition: all 0.3s ease;
-            display: inline-block;
+            transition: all 0.3s;
         }
         .btn-action.light {
             background: #D9E2EC;
             color: #007BFF;
-            border: 1px solid #007BFF;
+            border-color: #007BFF;
         }
         .btn-action:hover {
             background: #00F7FF;
             color: #1E2A44;
-            box-shadow: 0 0 5px #00F7FF;
         }
         .btn-action.light:hover {
             background: #007BFF;
             color: #D9E2EC;
-            box-shadow: 0 0 5px #007BFF;
         }
         .btn-add-coin, .btn-add-image {
             background: #00F7FF;
@@ -164,7 +137,7 @@
             padding: 4px 8px;
             font-size: 0.9rem;
             margin-left: 5px;
-            transition: all 0.3s ease;
+            transition: all 0.3s;
         }
         .btn-add-coin.light, .btn-add-image.light {
             background: #007BFF;
@@ -172,7 +145,6 @@
         }
         .btn-add-coin:hover, .btn-add-image:hover {
             background: #FF00E6;
-            color: #FFFFFF;
             box-shadow: 0 0 5px #FF00E6;
         }
         .btn-add-coin.light:hover, .btn-add-image.light:hover {
@@ -183,8 +155,6 @@
             background: rgba(15, 23, 42, 0.9);
             border-radius: 8px;
             width: 100%;
-            table-layout: auto;
-            overflow-x: auto;
             font-size: 0.9rem;
         }
         .table.light {
@@ -198,22 +168,6 @@
             text-align: center;
             padding: 6px;
             cursor: pointer;
-            white-space: nowrap;
-            overflow: visible;
-            text-overflow: clip;
-        }
-        .table th:nth-child(7), /* Убыток ($) */
-        .table th:nth-child(8), /* Итог (%) */
-        .table th:nth-child(9)  /* Сетап */
-        {
-            padding-right: 4px;
-            padding-left: 4px;
-        }
-        .table th:first-child {
-            border-top-left-radius: 8px;
-        }
-        .table th:last-child {
-            border-top-right-radius: 8px;
         }
         .table.light th {
             background: rgba(0, 0, 0, 0.1);
@@ -227,145 +181,47 @@
         }
         .table td {
             background: rgba(255, 255, 255, 0.05);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            color: #FFFFFF;
+            color: #FFF;
             text-align: center;
             padding: 6px;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
-            font-size: 0.8rem;
         }
-        .table td:nth-child(7), /* Убыток ($) */
-        .table td:nth-child(8), /* Итог (%) */
-        .table td:nth-child(9)  /* Сетап */
-        {
-            padding-right: 4px;
-            padding-left: 4px;
-        }
-        .table td:nth-child(9), /* Сетап */
-        .table td:nth-child(10) /* Заметки */
-        {
-            padding: 0;
-            padding-top: 8px; /* Смещение кнопок "Подробнее" */
-        }
-        .table td:nth-child(4) {
-            text-overflow: clip;
-            overflow: visible;
-        }
-        .table td.actions-cell {
-            white-space: nowrap;
-        }
-        .table td:first-child {
-            border-bottom-left-radius: 8px;
-        }
-        .table td:last-child {
-            border-bottom-right-radius: 8px;
+        .table td:nth-child(9), .table td:nth-child(10) {
+            padding-top: 10px;
         }
         .table.light td {
             background: rgba(0, 0, 0, 0.05);
-            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
             color: #333;
         }
         .table td.setup-cell, .table td.notes-cell {
             overflow: hidden;
             text-overflow: ellipsis;
-            padding-top: 8px; /* Смещение кнопок "Подробнее" */
         }
         .table td.setup-cell:hover, .table td.notes-cell:hover {
             overflow: visible;
             white-space: normal;
         }
         @media (min-width: 768px) {
-            h1 {
-                font-size: 3rem;
-                margin-bottom: 20px;
-            }
-            .form-label {
-                font-size: 1rem;
-            }
-            .form-control, .form-select {
-                font-size: 1rem;
-                height: 40px;
-            }
-            .btn {
-                font-size: 1rem;
-                padding: 8px 16px;
-            }
-            .btn-action {
-                font-size: 0.9rem;
-                padding: 5px 8px;
-            }
-            .btn-add-coin, .btn-add-image {
-                font-size: 1rem;
-                padding: 5px 10px;
-            }
-            .table {
-                font-size: 1rem;
-            }
-            .table th, .table td {
-                padding: 8px;
-            }
-            .navbar-brand {
-                font-size: 1.1rem;
-                padding: 10px 15px;
-            }
-            #stats h3 {
-                font-size: 1.8rem;
-                margin-bottom: 10px;
-            }
-            #stats p {
-                font-size: 1.1rem;
-                margin: 8px 0;
-            }
-            #stats span {
-                font-size: 1.2rem;
-            }
-            .range-label {
-                font-size: 0.9rem;
-            }
-            .range-value {
-                font-size: 0.9rem;
-                padding: 3px 8px;
-            }
-            input[type="range"] {
-                height: 10px;
-            }
-            input[type="range"]::-webkit-slider-thumb {
-                width: 18px;
-                height: 18px;
-            }
-            input[type="range"]::-moz-range-thumb {
-                width: 18px;
-                height: 18px;
-            }
-            .preview-image {
-                max-height: 200px;
-                margin-top: 10px;
-            }
-            .progress-bar {
-                height: 20px;
-                font-size: 1rem;
-            }
-            .progress-bar span {
-                line-height: 20px;
-            }
-            .notification {
-                font-size: 1.1rem;
-                padding: 10px 20px;
-            }
-            .theme-switch {
-                width: 40px;
-                height: 40px;
-            }
-            .theme-switch i {
-                font-size: 1.2rem;
-            }
-            .lang-switch {
-                font-size: 1rem;
-                height: 40px;
-                padding: 5px;
-            }
+            h1 { font-size: 3rem; margin-bottom: 20px; }
+            .form-label { font-size: 1rem; }
+            .form-control, .form-select { font-size: 1rem; height: 40px; }
+            .btn { font-size: 1rem; padding: 8px 16px; }
+            .btn-action { font-size: 0.9rem; padding: 5px 8px; }
+            .btn-add-coin, .btn-add-image { font-size: 1rem; padding: 5px 10px; }
+            .table { font-size: 1rem; }
+            .table th, .table td { padding: 8px; }
+            .navbar-brand { font-size: 1.1rem; padding: 10px 15px; }
+            #stats h3 { font-size: 1.8rem; margin-bottom: 10px; }
+            #stats p { font-size: 1.1rem; margin: 8px 0; }
+            #stats span { font-size: 1.2rem; }
+            .progress-bar { height: 20px; font-size: 1rem; }
+            .progress-bar span { line-height: 20px; }
+            .notification { font-size: 1.1rem; padding: 10px 20px; }
+            .theme-switch { width: 40px; height: 40px; }
+            .theme-switch i { font-size: 1.2rem; }
+            .lang-switch { font-size: 1rem; height: 40px; padding: 5px; }
         }
         @media (max-width: 768px) {
             h1 { font-size: 1.2rem; margin-bottom: 10px; }
@@ -383,9 +239,7 @@
                 text-align: left;
                 border-bottom: none;
             }
-            .table th {
-                display: none;
-            }
+            .table th { display: none; }
             .table td {
                 position: relative;
                 padding-left: 30%;
@@ -404,9 +258,7 @@
                 text-align: right;
                 padding-right: 5px;
             }
-            .table td.actions-cell:before {
-                content: none;
-            }
+            .table td.actions-cell:before { content: none; }
             .table .accordion-content {
                 display: none;
                 padding: 10px 5px;
@@ -417,13 +269,8 @@
             .table .accordion-content.light {
                 background: rgba(0, 0, 0, 0.05);
             }
-            .table .accordion-content.active {
-                display: block;
-            }
-            .table .accordion-content p {
-                margin: 5px 0;
-                font-size: 0.8rem;
-            }
+            .table .accordion-content.active { display: block; }
+            .table .accordion-content p { margin: 5px 0; font-size: 0.8rem; }
             .table .accordion-content img {
                 max-width: 100%;
                 max-height: 150px;
@@ -431,197 +278,44 @@
                 border-radius: 4px;
                 border: 1px solid #00F7FF;
             }
-            .table .accordion-content.light img {
-                border: 1px solid #007BFF;
-            }
+            .table .accordion-content.light img { border-color: #007BFF; }
         }
         .navbar {
             background: rgba(15, 23, 42, 0.9);
-            backdrop-filter: blur(10px);
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
             padding: 8px 0;
             position: fixed;
             bottom: 0;
             width: 100%;
         }
-        .navbar.light {
-            background: rgba(240, 244, 248, 0.9);
-            border-top: 1px solid rgba(0, 0, 0, 0.1);
-        }
+        .navbar.light { background: rgba(240, 244, 248, 0.9); }
         .navbar-brand {
             background: linear-gradient(90deg, #00F7FF, #FF00E6);
             color: #1E2A44;
             font-size: 1rem;
             padding: 8px 12px;
             border-radius: 15px;
-            transition: all 0.3s ease;
+            transition: transform 0.3s;
             text-align: center;
-            box-shadow: 0 2px 5px rgba(0, 247, 255, 0.3);
             margin: 0 5px;
             text-decoration: none;
-            display: inline-block;
         }
         .navbar-brand.light {
-            background: linear-gradient(90deg, #FFFFFF, #FF9999);
+            background: linear-gradient(90deg, #FFF5E1, #FF9999);
             color: #333;
-            box-shadow: 0 2px 5px rgba(255, 153, 153, 0.3);
         }
-        .navbar-brand:hover {
-            transform: scale(1.05);
-            box-shadow: 0 4px 10px rgba(0, 247, 255, 0.5);
-        }
-        .navbar-brand.light:hover {
-            box-shadow: 0 4px 10px rgba(255, 153, 153, 0.5);
-        }
-        .navbar-brand.active {
-            background: linear-gradient(90deg, #FF00E6, #00F7FF);
-            color: #1E2A44;
-            box-shadow: 0 4px 10px rgba(255, 0, 230, 0.5);
-        }
-        .navbar-brand.light.active {
-            background: linear-gradient(90deg, #FF9999, #FFFFFF);
-            box-shadow: 0 4px 10px rgba(255, 153, 204, 0.5);
-        }
-        #stats {
-            background: rgba(15, 23, 42, 0.8);
-            backdrop-filter: blur(15px);
-            border-radius: 8px;
-            padding: 10px;
-            text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            display: none;
-        }
-        #stats.light {
-            background: rgba(240, 244, 248, 0.8);
-            border: 1px solid rgba(0, 0, 0, 0.2);
-        }
-        #stats h3 {
-            color: #00F7FF;
-            margin-bottom: 8px;
-            font-size: 1.5rem;
-        }
-        #stats.light h3 {
-            color: #007BFF;
-        }
-        #stats p {
-            margin: 6px 0;
-            font-size: 0.9rem;
-            color: #A0B1C5;
-        }
-        #stats.light p {
-            color: #555;
-        }
-        #stats span {
-            color: #00F7FF;
-            font-weight: bold;
-            font-size: 1rem;
-        }
-        #stats.light span {
-            color: #007BFF;
-        }
-        .range-label {
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.7rem;
-            color: #A0B1C5;
-            margin-top: 5px;
-            position: relative;
-        }
-        .range-label.light {
-            color: #555;
-        }
-        .range-value {
-            position: absolute;
-            top: -25px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(0, 247, 255, 0.2);
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-size: 0.7rem;
-            color: #00F7FF;
-        }
-        .range-value.light {
-            background: rgba(0, 123, 255, 0.2);
-            color: #007BFF;
-        }
-        input[type="range"] {
-            -webkit-appearance: none;
-            width: 100%;
-            height: 8px;
-            background: linear-gradient(90deg, #00F7FF, #FF00E6);
-            border-radius: 4px;
-            outline: none;
-            opacity: 0.7;
-            transition: opacity 0.2s;
-        }
-        input[type="range"].light {
-            background: linear-gradient(90deg, #007BFF, #FF1493);
-        }
-        input[type="range"]:hover {
-            opacity: 1;
-        }
-        input[type="range"]::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            appearance: none;
-            width: 15px;
-            height: 15px;
-            background: #00F7FF;
-            border-radius: 50%;
-            cursor: pointer;
-            box-shadow: 0 0 5px #00F7FF;
-            transition: transform 0.1s ease;
-        }
-        input[type="range"].light::-webkit-slider-thumb {
-            background: #007BFF;
-            box-shadow: 0 0 5px #007BFF;
-        }
-        input[type="range"]::-moz-range-thumb {
-            width: 15px;
-            height: 15px;
-            background: #00F7FF;
-            border-radius: 50%;
-            cursor: pointer;
-            box-shadow: 0 0 5px #00F7FF;
-            transition: transform 0.1s ease;
-        }
-        input[type="range"].light::-moz-range-thumb {
-            background: #007BFF;
-            box-shadow: 0 0 5px #007BFF;
-        }
-        .modal-content {
-            background: rgba(15, 23, 42, 0.9);
-            color: #ECF0F1;
-            border: 1px solid #00F7FF;
-            border-radius: 8px;
-        }
-        .modal-content.light {
-            background: rgba(240, 244, 248, 0.9);
-            color: #333;
-            border: 1px solid #007BFF;
-        }
-        .modal-header {
-            border-bottom: 1px solid #00F7FF;
-        }
-        .modal-header.light {
-            border-bottom: 1px solid #007BFF;
-        }
-        .modal-footer {
-            border-top: 1px solid #00F7FF;
-        }
-        .modal-footer.light {
-            border-top: 1px solid #007BFF;
-        }
-        .preview-image {
-            max-width: 100%;
-            max-height: 150px;
-            margin-top: 8px;
-            border-radius: 4px;
-            border: 1px solid #00F7FF;
-        }
-        .preview-image.light {
-            border: 1px solid #007BFF;
-        }
+        .navbar-brand:hover { transform: scale(1.05); }
+        .navbar-brand.active { background: linear-gradient(90deg, #FF00E6, #00F7FF); }
+        .navbar-brand.light.active { background: linear-gradient(90deg, #FF9999, #FFF5E1); }
+        #stats { display: none; padding: 10px; text-align: center; }
+        #stats.light { background: rgba(240, 244, 248, 0.8); }
+        #stats h3 { color: #00F7FF; margin-bottom: 8px; font-size: 1.5rem; }
+        #stats.light h3 { color: #007BFF; }
+        #stats p { margin: 6px 0; font-size: 0.9rem; color: #A0B1C5; }
+        #stats.light p { color: #555; }
+        #stats span { color: #00F7FF; font-weight: bold; }
+        #stats.light span { color: #007BFF; }
+        .preview-image { max-width: 100%; max-height: 150px; margin-top: 8px; border-radius: 4px; border: 1px solid #00F7FF; }
+        .preview-image.light { border-color: #007BFF; }
         .progress-bar {
             height: 15px;
             background: linear-gradient(90deg, #00F7FF, #FF00E6);
@@ -630,35 +324,9 @@
             text-align: center;
             color: #1E2A44;
             font-weight: bold;
-            font-size: 0.8rem;
         }
-        .progress-bar.light {
-            background: linear-gradient(90deg, #007BFF, #FF1493);
-        }
-        .progress-bar span {
-            line-height: 15px;
-        }
-        [data-tooltip] {
-            position: relative;
-        }
-        [data-tooltip]:hover:after {
-            content: attr(data-tooltip);
-            position: absolute;
-            bottom: 100%;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(30, 42, 68, 0.9);
-            color: #ECF0F1;
-            padding: 4px 8px;
-            border-radius: 4px;
-            font-size: 0.7rem;
-            white-space: nowrap;
-            z-index: 1;
-        }
-        [data-tooltip].light:hover:after {
-            background: rgba(217, 226, 236, 0.9);
-            color: #333;
-        }
+        .progress-bar.light { background: linear-gradient(90deg, #007BFF, #FF1493); }
+        .progress-bar span { line-height: 15px; }
         .notification {
             position: fixed;
             top: 15px;
@@ -667,21 +335,15 @@
             color: #1E2A44;
             padding: 8px 15px;
             border-radius: 4px;
-            box-shadow: 0 0 10px rgba(0, 247, 255, 0.5);
             z-index: 1000;
             display: none;
-            font-size: 0.9rem;
             animation: fadeInOut 3s ease-in-out;
         }
-        .notification.light {
-            background: rgba(0, 123, 255, 0.9);
-            box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
-        }
+        .notification.light { background: rgba(0, 123, 255, 0.9); }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes fadeInOut {
-            0% { opacity: 0; transform: translateY(-20px); }
-            10% { opacity: 1; transform: translateY(0); }
-            90% { opacity: 1; transform: translateY(0); }
-            100% { opacity: 0; transform: translateY(-20px); }
+            0%, 100% { opacity: 0; transform: translateY(-20px); }
+            10%, 90% { opacity: 1; transform: translateY(0); }
         }
         .theme-switch {
             position: fixed;
@@ -693,84 +355,39 @@
             border: none;
             border-radius: 50%;
             cursor: pointer;
-            transition: all 0.3s ease;
             display: flex;
             align-items: center;
             justify-content: center;
+            transition: background 0.3s;
         }
-        .theme-switch.light {
-            background: #007BFF;
-        }
-        .theme-switch:hover {
-            background: #FF00E6;
-            color: #FFFFFF;
-            box-shadow: 0 0 5px #FF00E6;
-        }
-        .theme-switch.light:hover {
-            background: #FF1493;
-            box-shadow: 0 0 5px #FF1493;
-        }
-        .theme-switch i {
-            font-size: 1rem;
-            color: #1E2A44;
-        }
-        .theme-switch.light i {
-            color: #F0F4F8;
-        }
+        .theme-switch.light { background: #007BFF; }
+        .theme-switch:hover { background: #FF00E6; }
+        .theme-switch.light:hover { background: #FF1493; }
+        .theme-switch i { font-size: 1rem; color: #1E2A44; }
+        .theme-switch.light i { color: #F0F4F8; }
         .lang-switch {
             position: fixed;
             top: 10px;
             left: 10px;
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            color: #FFFFFF;
+            color: #FFF;
             border-radius: 4px;
-            transition: all 0.3s ease;
             height: 35px;
             padding: 4px;
             font-size: 0.9rem;
+            transition: all 0.3s;
         }
         .lang-switch.light {
             background: rgba(0, 0, 0, 0.05);
-            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-color: rgba(0, 0, 0, 0.1);
             color: #333;
         }
         .lang-switch:focus {
-            background: rgba(255, 255, 255, 0.1);
             border-color: #00F7FF;
             box-shadow: 0 0 5px rgba(0, 247, 255, 0.5);
-            color: #FFFFFF;
         }
-        .lang-switch.light:focus {
-            background: rgba(0, 0, 0, 0.1);
-            border-color: #007BFF;
-            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-            color: #333;
-        }
-        .lang-switch option {
-            background: #1E2A44;
-            color: #FFFFFF;
-        }
-        .lang-switch.light option {
-            background: #F0F4F8;
-            color: #333;
-        }
-        .lang-switch option[selected] {
-            background: #00F7FF;
-            color: #1E2A44;
-            font-weight: bold;
-        }
-        .lang-switch.light option[selected] {
-            background: #007BFF;
-            color: #F0F4F8;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .fade-in {
-            animation: fadeIn 0.5s ease-in-out;
-        }
+        .lang-switch.light:focus { border-color: #007BFF; box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); }
     </style>
 </head>
 <body>
@@ -779,25 +396,24 @@
             <option value="ru" selected>Русский</option>
             <option value="en">English</option>
         </select>
-        <h1 class="fade-in"><i class="fas fa-chart-line"></i> <span data-i18n="title">ДНЕВНИК ТРЕЙДЕРА</span></h1>
+        <h1><i class="fas fa-chart-line"></i> <span data-i18n="title">Дневник трейдера</span></h1>
         <button class="theme-switch" onclick="toggleTheme()"><i class="fas fa-lightbulb"></i></button>
 
-        <!-- Форма добавления/редактирования сделки -->
-        <div id="main" class="card fade-in">
+        <div id="main" class="card">
             <div class="row mb-2">
                 <div class="col-6">
-                    <label for="coin" class="form-label" data-tooltip="Выберите или добавьте монету" data-i18n="coinLabel">Монета</label>
+                    <label for="coin" class="form-label" data-i18n="coinLabel">Монета</label>
                     <div class="d-flex">
                         <select class="form-select" id="coin" required>
                             <option value="BTCUSD">BTCUSD</option>
                             <option value="ETHUSD">ETHUSD</option>
                             <option value="XRPUSD">XRPUSD</option>
                         </select>
-                        <button class="btn-add-coin" onclick="promptAddCoin()" data-tooltip="Добавить новую монету" data-i18n="addCoin">+</button>
+                        <button class="btn-add-coin" onclick="promptAddCoin()" data-i18n="addCoin">+</button>
                     </div>
                 </div>
                 <div class="col-6">
-                    <label for="position" class="form-label" data-tooltip="Выберите тип позиции" data-i18n="positionLabel">Позиция</label>
+                    <label for="position" class="form-label" data-i18n="positionLabel">Позиция</label>
                     <select class="form-select" id="position" required>
                         <option value="Short">Short</option>
                         <option value="Long">Long</option>
@@ -806,70 +422,62 @@
             </div>
             <div class="row mb-2">
                 <div class="col-6">
-                    <label for="open_date" class="form-label" data-tooltip="Выберите дату открытия сделки" data-i18n="openDateLabel">Дата открытия</label>
+                    <label for="open_date" class="form-label" data-i18n="openDateLabel">Дата открытия</label>
                     <input type="date" class="form-control" id="open_date" required>
                 </div>
                 <div class="col-6">
-                    <label for="risk" class="form-label" data-tooltip="Введите риск в долларах" data-i18n="riskLabel">Риск на сделку ($)</label>
+                    <label for="risk" class="form-label" data-i18n="riskLabel">Риск на сделку ($)</label>
                     <input type="number" step="0.01" class="form-control" id="risk" required>
                 </div>
             </div>
             <div class="row mb-2">
                 <div class="col-6">
-                    <label for="profit" class="form-label" data-tooltip="Введите прибыль в долларах" data-i18n="profitLabel">Прибыль ($)</label>
+                    <label for="profit" class="form-label" data-i18n="profitLabel">Прибыль ($)</label>
                     <input type="number" step="0.01" class="form-control" id="profit" required>
                 </div>
                 <div class="col-6">
-                    <label for="loss" class="form-label" data-tooltip="Введите убыток в долларах" data-i18n="lossLabel">Убыток ($)</label>
+                    <label for="loss" class="form-label" data-i18n="lossLabel">Убыток ($)</label>
                     <input type="number" step="0.01" class="form-control" id="loss" required>
                 </div>
             </div>
             <div class="row mb-2">
                 <div class="col-6">
-                    <label for="result" class="form-label" data-tooltip="Введите итог сделки в процентах" data-i18n="resultLabel">Итог сделки (%)</label>
+                    <label for="result" class="form-label" data-i18n="resultLabel">Итог сделки (%)</label>
                     <input type="number" step="0.01" class="form-control" id="result" required>
                 </div>
                 <div class="col-6">
-                    <label for="notes" class="form-label" data-tooltip="Добавьте заметки к сделке" data-i18n="notesLabel">Заметки</label>
+                    <label for="notes" class="form-label" data-i18n="notesLabel">Заметки</label>
                     <div class="d-flex">
                         <input type="text" class="form-control" id="notes">
-                        <button class="btn-add-image" onclick="document.getElementById('notesImage').click()" data-tooltip="Загрузить изображение для заметок" data-i18n="addImage">📷</button>
-                        <input type="file" class="form-control d-none" id="notesImage" accept="image/*" onchange="handleNotesImageUpload(event)">
+                        <button class="btn-add-image" onclick="document.getElementById('notesImage').click()" data-i18n="addImage">📷</button>
+                        <input type="file" class="form-control d-none" id="notesImage" accept="image/*" onchange="handleImageUpload(event, 'notes')">
                     </div>
                     <img id="notesImagePreview" class="preview-image" style="display: none;">
                 </div>
             </div>
             <div class="row mb-2">
                 <div class="col-12">
-                    <label for="setup" class="form-label" data-tooltip="Опишите сетап сделки" data-i18n="setupLabel">Сетап</label>
+                    <label for="setup" class="form-label" data-i18n="setupLabel">Сетап</label>
                     <div class="d-flex">
                         <input type="text" class="form-control" id="setup" required style="height: 60px; resize: vertical;">
-                        <button class="btn-add-image" onclick="document.getElementById('setupImage').click()" data-tooltip="Загрузить изображение для сетапа" data-i18n="addImage">📷</button>
-                        <input type="file" class="form-control d-none" id="setupImage" accept="image/*" onchange="handleSetupImageUpload(event)">
+                        <button class="btn-add-image" onclick="document.getElementById('setupImage').click()" data-i18n="addImage">📷</button>
+                        <input type="file" class="form-control d-none" id="setupImage" accept="image/*" onchange="handleImageUpload(event, 'setup')">
                     </div>
                     <img id="setupImagePreview" class="preview-image" style="display: none;">
                 </div>
             </div>
             <div class="row mb-2">
                 <div class="col-12">
-                    <label for="rating" class="form-label" data-tooltip="Оцените сделку от 1 до 5" data-i18n="ratingLabel">Оценка (1-5)</label>
-                    <div class="range-label">
-                        <span>1</span>
-                        <span>2</span>
-                        <span>3</span>
-                        <span>4</span>
-                        <span>5</span>
-                        <div class="range-value" id="ratingValue">1</div>
-                    </div>
-                    <input type="range" class="form-range" id="rating" min="1" max="5" step="0.01" value="1" oninput="updateRatingSmoothly(this)">
+                    <label for="rating" class="form-label" data-i18n="ratingLabel">Оценка (1-5)</label>
+                    <input type="range" class="form-range" id="rating" min="1" max="5" step="0.01" value="1" oninput="document.getElementById('ratingValue').textContent = this.value">
+                    <div class="range-value" id="ratingValue">1</div>
                 </div>
             </div>
-            <button class="btn w-100" id="submitBtn" onclick="saveTrade()" data-tooltip="Сохранить или добавить сделку" data-i18n="submitBtn"><i class="fas fa-plus"></i> Добавить сделку</button>
-            <button class="btn w-100 mt-2" id="cancelBtn" style="display: none;" onclick="cancelEdit()" data-tooltip="Отменить редактирование" data-i18n="cancelBtn">Отмена</button>
+            <button class="btn w-100" id="submitBtn" onclick="saveTrade()" data-i18n="submitBtn"><i class="fas fa-plus"></i> Добавить сделку</button>
+            <button class="btn w-100 mt-2" id="cancelBtn" style="display: none;" onclick="cancelEdit()" data-i18n="cancelBtn">Отмена</button>
         </div>
 
-        <!-- Таблица сделок -->
-        <div id="view" class="card fade-in">
+        <div id="view" class="card">
             <h3 class="text-center mb-2" style="font-size: 1.5rem; background: linear-gradient(90deg, #00F7FF, #FF00E6); -webkit-background-clip: text; -webkit-text-fill-color: transparent;" data-i18n="myTrades">Мои сделки</h3>
             <div class="progress-bar" id="successProgress"><span>0%</span></div>
             <div class="row mb-2">
@@ -888,7 +496,7 @@
                     </select>
                 </div>
             </div>
-            <table class="table table-striped" id="tradesTable">
+            <table class="table" id="tradesTable">
                 <thead>
                     <tr>
                         <th data-sort="id" data-i18n="id">ID</th>
@@ -902,23 +510,22 @@
                         <th data-i18n="setup">Сетап</th>
                         <th data-i18n="notes">Заметки</th>
                         <th data-sort="rating" data-i18n="rating">Оценка</th>
-                        <th data-sort="actions" data-i18n="actions">Действия</th>
+                        <th data-i18n="actions">Действия</th>
                     </tr>
                 </thead>
                 <tbody id="tradesBody"></tbody>
             </table>
             <div class="row mt-2">
                 <div class="col-6">
-                    <button class="btn w-100" onclick="exportToCSV()" data-tooltip="Экспортировать данные в CSV" data-i18n="exportCSV">Экспорт в CSV</button>
+                    <button class="btn w-100" onclick="exportToCSV()" data-i18n="exportCSV">Экспорт в CSV</button>
                 </div>
                 <div class="col-6">
-                    <button class="btn w-100" onclick="exportToPDF()" data-tooltip="Экспортировать данные в PDF" data-i18n="exportPDF">Экспорт в PDF</button>
+                    <button class="btn w-100" onclick="exportToPDF()" data-i18n="exportPDF">Экспорт в PDF</button>
                 </div>
             </div>
         </div>
 
-        <!-- Статистика -->
-        <div id="stats" class="card fade-in">
+        <div id="stats" class="card">
             <h3 class="text-center mb-2" data-i18n="stats">Статистика</h3>
             <p data-i18n="totalTrades">Всего сделок: <span id="totalTrades">0</span></p>
             <p data-i18n="avgProfit">Средняя прибыль: <span id="avgProfit">0.00</span>$</p>
@@ -927,7 +534,6 @@
             <p data-i18n="successRate">Процент успешных сделок: <span id="successRate">0</span>%</p>
         </div>
 
-        <!-- Модальное окно для "Сетап" и "Заметки" -->
         <div class="modal fade" id="detailModal" tabindex="-1" aria-labelledby="detailModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -935,9 +541,7 @@
                         <h5 class="modal-title" id="detailModalLabel" data-i18n="details">Детали</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="modal-body" id="detailModalBody">
-                        <!-- Текст и изображение будут вставляться сюда -->
-                    </div>
+                    <div class="modal-body" id="detailModalBody"></div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-action" data-bs-dismiss="modal" data-i18n="close">Закрыть</button>
                     </div>
@@ -945,12 +549,10 @@
             </div>
         </div>
 
-        <!-- Уведомления -->
         <div class="notification" id="notification"></div>
     </div>
 
-    <!-- Нижняя панель навигации -->
-    <nav class="navbar navbar-dark">
+    <nav class="navbar">
         <div class="container-fluid">
             <a class="navbar-brand" href="#" onclick="showSection('main')" data-i18n="home"><i class="fas fa-home"></i> Главная</a>
             <a class="navbar-brand active" href="#" onclick="showSection('view')" data-i18n="myTradesNav"><i class="fas fa-table"></i> Мои сделки</a>
@@ -960,10 +562,9 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // JSON для многоязычности
         const translations = {
             "ru": {
-                "title": "ДНЕВНИК ТРЕЙДЕРА",
+                "title": "Дневник трейдера",
                 "coinLabel": "Монета",
                 "addCoin": "+",
                 "positionLabel": "Позиция",
@@ -1021,7 +622,7 @@
                 "delete": "Удал."
             },
             "en": {
-                "title": "TRADER'S JOURNAL",
+                "title": "Trader's Journal",
                 "coinLabel": "Coin",
                 "addCoin": "+",
                 "positionLabel": "Position",
@@ -1079,48 +680,59 @@
                 "delete": "Delete"
             }
         };
-        let currentLang = localStorage.getItem("lang") || "ru";
+        let currentLang = "ru";
+        let trades = JSON.parse(localStorage.getItem("trades")) || [];
+        let coins = JSON.parse(localStorage.getItem("coins")) || ["BTCUSD", "ETHUSD", "XRPUSD"];
+        let editingTradeId = null;
+        let filters = { coin: "", position: "" };
 
         function setLanguage(lang) {
             currentLang = lang;
-            localStorage.setItem("lang", lang);
             document.querySelectorAll("[data-i18n]").forEach(element => {
-                const key = element.getAttribute("data-i18n");
-                element.textContent = translations[lang][key] || element.textContent;
+                element.textContent = translations[lang][element.getAttribute("data-i18n")] || element.textContent;
             });
             updateTable();
             updateStats();
             document.querySelector(".lang-switch").value = lang;
         }
 
-        let trades = JSON.parse(localStorage.getItem("trades")) || [];
-        let coins = JSON.parse(localStorage.getItem("coins")) || ["BTCUSD", "ETHUSD", "XRPUSD"];
-        let images = JSON.parse(localStorage.getItem("images")) || {};
-        let editingTradeId = null;
-        let filters = JSON.parse(localStorage.getItem("filters")) || { coin: "", position: "" };
-        let sortColumn = null;
-        let sortDirection = 1;
+        function formatDate(dateStr) {
+            const date = new Date(dateStr);
+            return `${date.getDate().toString().padStart(2, '0')}.${(date.getMonth() + 1).toString().padStart(2, '0')}.${date.getFullYear()}`;
+        }
 
-        function updateRatingSmoothly(input) {
-            let targetValue = parseFloat(input.value);
-            let currentValue = parseFloat(input.value);
-            let start = null;
+        function sortTable(column) {
+            trades.sort((a, b) => {
+                let valA = a[column], valB = b[column];
+                if (column === "open_date") {
+                    valA = new Date(a[column]);
+                    valB = new Date(b[column]);
+                } else if (["risk", "profit", "loss", "result", "rating"].includes(column)) {
+                    valA = parseFloat(a[column]);
+                    valB = parseFloat(b[column]);
+                }
+                return valA > valB ? 1 : valA < valB ? -1 : 0;
+            });
+            localStorage.setItem("trades", JSON.stringify(trades));
+            updateTable();
+        }
 
-            function animate(timestamp) {
-                if (!start) start = timestamp;
-                let progress = timestamp - start;
-                let duration = 200;
-                let ease = progress / duration;
-                if (ease > 1) ease = 1;
-
-                let newValue = currentValue + (targetValue - currentValue) * ease;
-                input.value = Math.round(newValue * 100) / 100;
-                document.getElementById("ratingValue").textContent = newValue.toFixed(2);
-                if (progress < duration) {
-                    requestAnimationFrame(animate);
+        function validateForm() {
+            const requiredFields = ["coin", "position", "open_date", "risk", "profit", "loss", "result", "setup"];
+            for (let field of requiredFields) {
+                if (!document.getElementById(field).value.trim()) {
+                    showNotification(`${document.querySelector(`label[for="${field}"]`).textContent} ${translations[currentLang]["isRequired"]}!`);
+                    return false;
                 }
             }
-            requestAnimationFrame(animate);
+            const numericFields = ["risk", "profit", "loss"];
+            for (let field of numericFields) {
+                if (parseFloat(document.getElementById(field).value) < 0) {
+                    showNotification(`${document.querySelector(`label[for="${field}"]`).textContent} ${translations[currentLang]["cannotBeNegative"]}!`);
+                    return false;
+                }
+            }
+            return true;
         }
 
         function compressImage(file, callback) {
@@ -1134,52 +746,32 @@
                     const ctx = canvas.getContext("2d");
                     const maxWidth = 800;
                     const maxHeight = 600;
-                    let width = img.width;
-                    let height = img.height;
-
+                    let width = img.width, height = img.height;
                     if (width > height) {
                         if (width > maxWidth) {
-                            height = Math.round((height * maxWidth) / width);
+                            height = Math.round(height * maxWidth / width);
                             width = maxWidth;
                         }
-                    } else {
-                        if (height > maxHeight) {
-                            width = Math.round((width * maxHeight) / height);
-                            height = maxHeight;
-                        }
+                    } else if (height > maxHeight) {
+                        width = Math.round(width * maxHeight / height);
+                        height = maxHeight;
                     }
-
                     canvas.width = width;
                     canvas.height = height;
                     ctx.drawImage(img, 0, 0, width, height);
-                    const compressedImage = canvas.toDataURL("image/jpeg", 0.7);
-                    callback(compressedImage);
+                    callback(canvas.toDataURL("image/jpeg", 0.7));
                 };
             };
         }
 
-        function handleSetupImageUpload(event) {
+        function handleImageUpload(event, type) {
             const file = event.target.files[0];
             if (file) {
                 compressImage(file, compressedImage => {
-                    images["setupImage"] = compressedImage;
-                    localStorage.setItem("images", JSON.stringify(images));
-                    document.getElementById("setupImagePreview").src = compressedImage;
-                    document.getElementById("setupImagePreview").style.display = "block";
-                    showNotification("Image uploaded successfully!");
-                });
-            }
-        }
-
-        function handleNotesImageUpload(event) {
-            const file = event.target.files[0];
-            if (file) {
-                compressImage(file, compressedImage => {
-                    images["notesImage"] = compressedImage;
-                    localStorage.setItem("images", JSON.stringify(images));
-                    document.getElementById("notesImagePreview").src = compressedImage;
-                    document.getElementById("notesImagePreview").style.display = "block";
-                    showNotification("Image uploaded successfully!");
+                    const previewId = `${type}ImagePreview`;
+                    document.getElementById(previewId).src = compressedImage;
+                    document.getElementById(previewId).style.display = "block";
+                    showNotification("Image uploaded!");
                 });
             }
         }
@@ -1192,94 +784,26 @@
                 updateCoinSelect();
                 updateFilterCoinOptions();
                 showNotification(translations[currentLang]["coinLabel"] + " added!");
-            } else if (newCoin && coins.includes(newCoin.trim())) {
-                showNotification(translations[currentLang]["coinLabel"] + " already exists!");
-            } else {
-                showNotification(translations[currentLang]["coinLabel"] + " cannot be empty!");
+            } else if (newCoin) {
+                showNotification(translations[currentLang]["coinLabel"] + " already exists or is empty!");
             }
         }
 
         function updateCoinSelect() {
             const select = document.getElementById("coin");
-            select.innerHTML = "";
-            coins.forEach(coin => {
-                const option = document.createElement("option");
-                option.value = coin;
-                option.textContent = coin;
-                select.appendChild(option);
-            });
+            select.innerHTML = coins.map(coin => `<option value="${coin}">${coin}</option>`).join("");
         }
 
         function updateFilterCoinOptions() {
             const filterCoin = document.getElementById("filterCoin");
-            filterCoin.innerHTML = '<option value="">' + translations[currentLang]["filterCoinLabel"].split(" ")[0] + '</option>';
-            coins.forEach(coin => {
-                const option = document.createElement("option");
-                option.value = coin;
-                option.textContent = coin;
-                filterCoin.appendChild(option);
-            });
+            filterCoin.innerHTML = '<option value="">Все</option>' + coins.map(coin => `<option value="${coin}">${coin}</option>`).join("");
             filterCoin.value = filters.coin;
         }
 
         function applyFilters() {
             filters.coin = document.getElementById("filterCoin").value;
             filters.position = document.getElementById("filterPosition").value;
-            localStorage.setItem("filters", JSON.stringify(filters));
             updateTable();
-        }
-
-        function formatDate(dateStr) {
-            const date = new Date(dateStr);
-            const day = String(date.getDate()).padStart(2, '0');
-            const month = String(date.getMonth() + 1).padStart(2, '0');
-            const year = date.getFullYear();
-            return `${day}.${month}.${year}`;
-        }
-
-        function sortTable(column) {
-            if (sortColumn === column) {
-                sortDirection *= -1;
-            } else {
-                sortColumn = column;
-                sortDirection = 1;
-            }
-            trades.sort((a, b) => {
-                let valA = a[column];
-                let valB = b[column];
-                if (column === "open_date") {
-                    valA = new Date(a[column]);
-                    valB = new Date(b[column]);
-                } else if (["risk", "profit", "loss", "result", "rating"].includes(column)) {
-                    valA = parseFloat(a[column]);
-                    valB = parseFloat(b[column]);
-                }
-                return valA > valB ? sortDirection : valA < valB ? -sortDirection : 0;
-            });
-            localStorage.setItem("trades", JSON.stringify(trades));
-            updateTable();
-        }
-
-        function validateForm() {
-            const requiredFields = ["coin", "position", "open_date", "risk", "profit", "loss", "result", "setup"];
-            for (let field of requiredFields) {
-                const value = document.getElementById(field).value.trim();
-                if (!value) {
-                    showNotification(`${document.querySelector(`label[for="${field}"]`).textContent} ${translations[currentLang]["isRequired"]}!`);
-                    return false;
-                }
-            }
-
-            const numericFields = ["risk", "profit", "loss"];
-            for (let field of numericFields) {
-                const value = parseFloat(document.getElementById(field).value);
-                if (value < 0) {
-                    showNotification(`${document.querySelector(`label[for="${field}"]`).textContent} ${translations[currentLang]["cannotBeNegative"]}!`);
-                    return false;
-                }
-            }
-
-            return true;
         }
 
         function editTrade(id) {
@@ -1296,14 +820,7 @@
                 document.getElementById("setup").value = trade.setup;
                 document.getElementById("notes").value = trade.notes || "";
                 document.getElementById("rating").value = trade.rating;
-                document.getElementById("ratingValue").textContent = trade.rating.toFixed(2);
-                document.getElementById("setupImage").value = "";
-                document.getElementById("notesImage").value = "";
-                images = {
-                    "setupImage": trade.setupImage || "",
-                    "notesImage": trade.notesImage || ""
-                };
-                localStorage.setItem("images", JSON.stringify(images));
+                document.getElementById("ratingValue").textContent = trade.rating;
                 if (trade.setupImage) {
                     document.getElementById("setupImagePreview").src = trade.setupImage;
                     document.getElementById("setupImagePreview").style.display = "block";
@@ -1312,69 +829,45 @@
                     document.getElementById("notesImagePreview").src = trade.notesImage;
                     document.getElementById("notesImagePreview").style.display = "block";
                 }
-
-                document.getElementById("submitBtn").textContent = translations[currentLang]["submitBtnEdit"] || "Сохранить изменения";
+                document.getElementById("submitBtn").textContent = "Сохранить изменения";
                 document.getElementById("cancelBtn").style.display = "block";
-                showSection('main');
+                showSection("main");
             }
         }
 
         function saveTrade() {
             if (!validateForm()) return;
-
-            if (editingTradeId && !confirm(translations[currentLang]["confirmEdit"])) {
-                return;
-            }
-
+            if (editingTradeId && !confirm(translations[currentLang]["confirmEdit"])) return;
+            const tradeData = {
+                id: editingTradeId || trades.length + 1,
+                coin: document.getElementById("coin").value,
+                position: document.getElementById("position").value,
+                open_date: document.getElementById("open_date").value,
+                risk: parseFloat(document.getElementById("risk").value),
+                profit: parseFloat(document.getElementById("profit").value),
+                loss: parseFloat(document.getElementById("loss").value),
+                result: parseFloat(document.getElementById("result").value),
+                setup: document.getElementById("setup").value,
+                notes: document.getElementById("notes").value,
+                rating: parseFloat(document.getElementById("rating").value),
+                setupImage: document.getElementById("setupImagePreview").src || "",
+                notesImage: document.getElementById("notesImagePreview").src || ""
+            };
             if (editingTradeId) {
-                const tradeIndex = trades.findIndex(t => t.id === editingTradeId);
-                if (tradeIndex !== -1) {
-                    const updatedTrade = {
-                        id: editingTradeId,
-                        coin: document.getElementById("coin").value,
-                        position: document.getElementById("position").value,
-                        open_date: document.getElementById("open_date").value,
-                        risk: parseFloat(document.getElementById("risk").value) || 0,
-                        profit: parseFloat(document.getElementById("profit").value) || 0,
-                        loss: parseFloat(document.getElementById("loss").value) || 0,
-                        result: parseFloat(document.getElementById("result").value) || 0,
-                        setup: document.getElementById("setup").value,
-                        notes: document.getElementById("notes").value,
-                        rating: parseFloat(document.getElementById("rating").value) || 1,
-                        setupImage: images["setupImage"] || "",
-                        notesImage: images["notesImage"] || ""
-                    };
-                    trades[tradeIndex] = updatedTrade;
-                    localStorage.setItem("trades", JSON.stringify(trades));
-                    showNotification(translations[currentLang]["tradeUpdated"]);
-                }
-                editingTradeId = null;
-                document.getElementById("submitBtn").textContent = translations[currentLang]["submitBtn"];
-                document.getElementById("cancelBtn").style.display = "none";
+                const index = trades.findIndex(t => t.id === editingTradeId);
+                trades[index] = tradeData;
+                showNotification(translations[currentLang]["tradeUpdated"]);
             } else {
-                const trade = {
-                    id: trades.length + 1,
-                    coin: document.getElementById("coin").value,
-                    position: document.getElementById("position").value,
-                    open_date: document.getElementById("open_date").value,
-                    risk: parseFloat(document.getElementById("risk").value) || 0,
-                    profit: parseFloat(document.getElementById("profit").value) || 0,
-                    loss: parseFloat(document.getElementById("loss").value) || 0,
-                    result: parseFloat(document.getElementById("result").value) || 0,
-                    setup: document.getElementById("setup").value,
-                    notes: document.getElementById("notes").value,
-                    rating: parseFloat(document.getElementById("rating").value) || 1,
-                    setupImage: images["setupImage"] || "",
-                    notesImage: images["notesImage"] || ""
-                };
-                trades.push(trade);
-                localStorage.setItem("trades", JSON.stringify(trades));
+                trades.push(tradeData);
                 showNotification(translations[currentLang]["tradeAdded"]);
             }
+            localStorage.setItem("trades", JSON.stringify(trades));
             clearForm();
             updateTable();
             updateStats();
-            autoSave();
+            editingTradeId = null;
+            document.getElementById("submitBtn").textContent = translations[currentLang]["submitBtn"];
+            document.getElementById("cancelBtn").style.display = "none";
         }
 
         function cancelEdit() {
@@ -1382,13 +875,13 @@
             clearForm();
             document.getElementById("submitBtn").textContent = translations[currentLang]["submitBtn"];
             document.getElementById("cancelBtn").style.display = "none";
-            showSection('main');
+            showSection("main");
         }
 
         function clearForm() {
             document.getElementById("coin").value = "BTCUSD";
             document.getElementById("position").value = "Short";
-            document.getElementById("open_date").value = new Date().toISOString().split('T')[0];
+            document.getElementById("open_date").value = new Date().toISOString().split("T")[0];
             document.getElementById("risk").value = "";
             document.getElementById("profit").value = "";
             document.getElementById("loss").value = "";
@@ -1397,20 +890,16 @@
             document.getElementById("notes").value = "";
             document.getElementById("rating").value = "1";
             document.getElementById("ratingValue").textContent = "1";
-            document.getElementById("setupImage").value = "";
-            document.getElementById("notesImage").value = "";
             document.getElementById("setupImagePreview").style.display = "none";
             document.getElementById("notesImagePreview").style.display = "none";
-            images = {};
-            localStorage.setItem("images", JSON.stringify(images));
         }
 
         function updateTable() {
             const tbody = document.getElementById("tradesBody");
             tbody.innerHTML = "";
             const filteredTrades = trades.filter(trade => {
-                const matchesCoin = filters.coin ? trade.coin === filters.coin : true;
-                const matchesPosition = filters.position ? trade.position === filters.position : true;
+                const matchesCoin = !filters.coin || trade.coin === filters.coin;
+                const matchesPosition = !filters.position || trade.position === filters.position;
                 return matchesCoin && matchesPosition;
             });
             filteredTrades.forEach(trade => {
@@ -1418,7 +907,6 @@
                 row.classList.add("fade-in");
                 row.setAttribute("data-trade-id", trade.id);
                 row.addEventListener("click", () => toggleAccordion(row));
-
                 const isMobile = window.innerWidth <= 768;
                 if (isMobile) {
                     row.innerHTML = `
@@ -1471,35 +959,30 @@
             });
             updateProgressBar();
             document.querySelectorAll("#tradesBody .btn-action").forEach(btn => {
-                const key = btn.getAttribute("data-i18n");
-                if (key) btn.textContent = translations[currentLang][key];
+                btn.textContent = translations[currentLang][btn.getAttribute("data-i18n")] || btn.textContent;
             });
         }
 
         function toggleAccordion(row) {
             const accordionContent = row.querySelector(".accordion-content");
             if (accordionContent) {
-                const isActive = accordionContent.classList.contains("active");
                 document.querySelectorAll(".accordion-content.active").forEach(content => content.classList.remove("active"));
-                if (!isActive) {
-                    accordionContent.classList.add("active");
-                }
+                accordionContent.classList.toggle("active");
             }
         }
 
         function updateProgressBar() {
             const successRate = parseFloat(document.getElementById("successRate").textContent) || 0;
-            const progressBar = document.getElementById("successProgress");
-            progressBar.style.width = `${successRate}%`;
-            progressBar.firstChild.textContent = `${successRate.toFixed(2)}%`;
+            document.getElementById("successProgress").style.width = `${successRate}%`;
+            document.getElementById("successProgress").firstChild.textContent = `${successRate.toFixed(2)}%`;
         }
 
         function updateStats() {
             const totalTrades = trades.length;
-            const avgProfit = trades.length ? (trades.reduce((sum, trade) => sum + trade.profit, 0) / trades.length).toFixed(2) : 0;
-            const avgLoss = trades.length ? (trades.reduce((sum, trade) => sum + trade.loss, 0) / trades.length).toFixed(2) : 0;
-            const avgResult = trades.length ? (trades.reduce((sum, trade) => sum + trade.result, 0) / trades.length).toFixed(2) : 0;
-            const successRate = trades.length ? (trades.filter(trade => trade.result > 0).length / trades.length * 100).toFixed(2) : 0;
+            const avgProfit = totalTrades ? (trades.reduce((sum, t) => sum + t.profit, 0) / totalTrades).toFixed(2) : 0;
+            const avgLoss = totalTrades ? (trades.reduce((sum, t) => sum + t.loss, 0) / totalTrades).toFixed(2) : 0;
+            const avgResult = totalTrades ? (trades.reduce((sum, t) => sum + t.result, 0) / totalTrades).toFixed(2) : 0;
+            const successRate = totalTrades ? (trades.filter(t => t.result > 0).length / totalTrades * 100).toFixed(2) : 0;
 
             document.getElementById("totalTrades").textContent = totalTrades;
             document.getElementById("avgProfit").textContent = avgProfit;
@@ -1513,33 +996,20 @@
             const trade = trades.find(t => t.id === id);
             if (trade) {
                 const modalBody = document.getElementById("detailModalBody");
-                modalBody.innerHTML = "";
-                if (type === "setup") {
-                    modalBody.innerHTML = `<p>${trade.setup || "Нет данных"}</p>`;
-                    if (trade.setupImage) {
-                        const img = document.createElement("img");
-                        img.src = trade.setupImage;
-                        img.classList.add("preview-image");
-                        modalBody.appendChild(img);
-                    }
-                } else if (type === "notes") {
-                    modalBody.innerHTML = `<p>${trade.notes || "Нет заметок"}</p>`;
-                    if (trade.notesImage) {
-                        const img = document.createElement("img");
-                        img.src = trade.notesImage;
-                        img.classList.add("preview-image");
-                        modalBody.appendChild(img);
-                    }
+                modalBody.innerHTML = type === "setup" ? trade.setup || "Нет данных" : trade.notes || "Нет заметок";
+                if ((type === "setup" && trade.setupImage) || (type === "notes" && trade.notesImage)) {
+                    const img = document.createElement("img");
+                    img.src = type === "setup" ? trade.setupImage : trade.notesImage;
+                    img.classList.add("preview-image");
+                    modalBody.appendChild(img);
                 }
-                const modal = new bootstrap.Modal(document.getElementById("detailModal"));
-                modal.show();
+                new bootstrap.Modal(document.getElementById("detailModal")).show();
             }
         }
 
         function deleteTrade(id) {
             if (confirm(`${translations[currentLang]["confirmDelete"]} ${id}?`)) {
-                trades = trades.filter(trade => trade.id !== id);
-                trades = trades.map((trade, index) => ({ ...trade, id: index + 1 }));
+                trades = trades.filter(t => t.id !== id).map((t, i) => ({ ...t, id: i + 1 }));
                 localStorage.setItem("trades", JSON.stringify(trades));
                 updateTable();
                 updateStats();
@@ -1553,21 +1023,12 @@
                 return;
             }
             const headers = ["ID", "Coin", "Position", "Date", "Risk ($)", "Profit ($)", "Loss ($)", "Result (%)", "Setup", "Notes", "Rating"];
-            const rows = trades.map(trade => [
-                trade.id,
-                trade.coin,
-                trade.position,
-                formatDate(trade.open_date),
-                trade.risk,
-                trade.profit,
-                trade.loss,
-                trade.result,
-                `"${trade.setup.replace(/"/g, '""')}"`,
-                `"${trade.notes ? trade.notes.replace(/"/g, '""') : ""}"`,
-                trade.rating
+            const rows = trades.map(t => [
+                t.id, t.coin, t.position, formatDate(t.open_date), t.risk.toFixed(2), t.profit.toFixed(2),
+                t.loss.toFixed(2), t.result.toFixed(2), `"${t.setup.replace(/"/g, '""')}"`, `"${t.notes || ""}"`, t.rating.toFixed(2)
             ]);
-            const csvContent = [headers.join(","), ...rows.map(row => row.join(","))].join("\n");
-            const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+            const csv = [headers.join(","), ...rows.map(r => r.join(","))].join("\n");
+            const blob = new Blob([csv], { type: "text/csv" });
             const link = document.createElement("a");
             link.href = URL.createObjectURL(blob);
             link.download = "trades.csv";
@@ -1582,27 +1043,15 @@
             }
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
-            doc.setFontSize(16);
             doc.text(translations[currentLang]["myTrades"], 10, 10);
-            doc.setFontSize(12);
-            const headers = [["ID", "Coin", "Position", "Date", "Risk ($)", "Profit ($)", "Loss ($)", "Result (%)", "Rating"]];
-            const data = trades.map(trade => [
-                trade.id,
-                trade.coin,
-                trade.position,
-                formatDate(trade.open_date),
-                trade.risk.toFixed(2),
-                trade.profit.toFixed(2),
-                trade.loss.toFixed(2),
-                trade.result.toFixed(2),
-                trade.rating.toFixed(2)
-            ]);
             doc.autoTable({
-                head: headers,
-                body: data,
+                head: [["ID", "Coin", "Position", "Date", "Risk ($)", "Profit ($)", "Loss ($)", "Result (%)", "Rating"]],
+                body: trades.map(t => [
+                    t.id, t.coin, t.position, formatDate(t.open_date), t.risk.toFixed(2), t.profit.toFixed(2),
+                    t.loss.toFixed(2), t.result.toFixed(2), t.rating.toFixed(2)
+                ]),
                 startY: 20,
-                theme: "grid",
-                styles: { fontSize: 10 }
+                theme: "grid"
             });
             doc.save("trades.pdf");
             showNotification(translations[currentLang]["exportedToPDF"]);
@@ -1612,54 +1061,31 @@
             const notification = document.getElementById("notification");
             notification.textContent = message;
             notification.style.display = "block";
-            setTimeout(() => {
-                notification.style.display = "none";
-            }, 3000);
-        }
-
-        function autoSave() {
-            localStorage.setItem("trades", JSON.stringify(trades));
-            localStorage.setItem("coins", JSON.stringify(coins));
-            localStorage.setItem("images", JSON.stringify(images));
+            setTimeout(() => notification.style.display = "none", 3000);
         }
 
         function toggleTheme() {
             document.body.classList.toggle("light");
-            document.querySelectorAll(".card, .form-control, .form-select, .table, .btn, .btn-action, .btn-add-coin, .btn-add-image, .navbar, .modal-content, .modal-header, .modal-footer, .preview-image, .progress-bar, .notification, .theme-switch, .lang-switch, .range-label, .range-value, input[type='range'], [data-tooltip]").forEach(element => {
-                element.classList.toggle("light");
-            });
+            document.querySelectorAll(".card, .form-control, .form-select, .table, .btn, .btn-action, .btn-add-coin, .btn-add-image, .navbar, .modal-content, .preview-image, .progress-bar, .notification, .theme-switch, .lang-switch").forEach(el => el.classList.toggle("light"));
             localStorage.setItem("theme", document.body.classList.contains("light") ? "light" : "dark");
         }
 
         function showSection(sectionId) {
-            document.querySelectorAll("#main, #view, #stats").forEach(section => {
-                section.style.display = section.id === sectionId ? "block" : "none";
-            });
-            document.querySelectorAll(".navbar-brand").forEach(btn => {
-                btn.classList.toggle("active", btn.getAttribute("onclick").includes(sectionId));
-            });
-            if (sectionId === "stats") {
-                updateStats();
-                document.getElementById("stats").style.display = "block";
-            }
+            document.querySelectorAll("#main, #view, #stats").forEach(s => s.style.display = s.id === sectionId ? "block" : "none");
+            document.querySelectorAll(".navbar-brand").forEach(b => b.classList.toggle("active", b.getAttribute("onclick").includes(sectionId)));
+            if (sectionId === "stats") updateStats();
         }
 
         document.addEventListener("DOMContentLoaded", () => {
-            if (localStorage.getItem("theme") === "light") {
-                toggleTheme();
-            }
+            if (localStorage.getItem("theme") === "light") toggleTheme();
             setLanguage(currentLang);
             updateCoinSelect();
             updateFilterCoinOptions();
             document.getElementById("filterCoin").value = filters.coin;
             document.getElementById("filterPosition").value = filters.position;
             updateTable();
-            updateStats();
             showSection("view");
-
-            document.querySelectorAll("#tradesTable th[data-sort]").forEach(th => {
-                th.addEventListener("click", () => sortTable(th.getAttribute("data-sort")));
-            });
+            document.querySelectorAll("#tradesTable th[data-sort]").forEach(th => th.addEventListener("click", () => sortTable(th.getAttribute("data-sort"))));
         });
     </script>
 </body>
