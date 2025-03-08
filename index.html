@@ -46,8 +46,8 @@
         .card {
             background: rgba(15, 23, 42, 0.9);
             border-radius: 8px;
-            padding: 10px;
-            margin-bottom: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
             transition: transform 0.3s;
         }
         .card.light {
@@ -77,6 +77,14 @@
         .form-control.light:focus, .form-select.light:focus {
             border-color: #007BFF;
             box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        }
+        .form-select option {
+            background: #1E2A44;
+            color: #FFF;
+        }
+        .form-select.light option {
+            background: #F0F4F8;
+            color: #333;
         }
         .form-label {
             font-size: 0.8rem;
@@ -213,15 +221,7 @@
             .table { font-size: 1rem; }
             .table th, .table td { padding: 8px; }
             .navbar-brand { font-size: 1.1rem; padding: 10px 15px; }
-            #stats h3 { font-size: 1.8rem; margin-bottom: 10px; }
-            #stats p { font-size: 1.1rem; margin: 8px 0; }
-            #stats span { font-size: 1.2rem; }
-            .progress-bar { height: 20px; font-size: 1rem; }
-            .progress-bar span { line-height: 20px; }
-            .notification { font-size: 1.1rem; padding: 10px 20px; }
-            .theme-switch { width: 40px; height: 40px; }
-            .theme-switch i { font-size: 1.2rem; }
-            .lang-switch { font-size: 1rem; height: 40px; padding: 5px; }
+            .search-input { font-size: 1rem; padding: 5px 10px; }
         }
         @media (max-width: 768px) {
             h1 { font-size: 1.2rem; margin-bottom: 10px; }
@@ -306,21 +306,61 @@
         .navbar-brand:hover { transform: scale(1.05); }
         .navbar-brand.active { background: linear-gradient(90deg, #FF00E6, #00F7FF); }
         .navbar-brand.light.active { background: linear-gradient(90deg, #FF9999, #FFF5E1); }
-        #stats { display: none; padding: 10px; text-align: center; }
-        #stats.light { background: rgba(240, 244, 248, 0.8); }
-        #stats h3 { color: #00F7FF; margin-bottom: 8px; font-size: 1.5rem; }
-        #stats.light h3 { color: #007BFF; }
-        #stats p { margin: 6px 0; font-size: 0.9rem; color: #A0B1C5; }
-        #stats.light p { color: #555; }
-        #stats span { color: #00F7FF; font-weight: bold; }
-        #stats.light span { color: #007BFF; }
+        .search-input {
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 5px;
+            border-radius: 4px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.05);
+            color: #FFF;
+        }
+        .search-input.light {
+            border-color: rgba(0, 0, 0, 0.1);
+            background: rgba(0, 0, 0, 0.05);
+            color: #333;
+        }
+        .stats-card {
+            background: rgba(15, 23, 42, 0.95);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s;
+        }
+        .stats-card.light {
+            background: rgba(240, 244, 248, 0.95);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        .stats-card:hover { transform: translateY(-5px); }
+        .stats-card h3 {
+            color: #00F7FF;
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        .stats-card.light h3 { color: #007BFF; }
+        .stats-card .stat-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 1.1rem;
+        }
+        .stats-card.light .stat-item { border-color: rgba(0, 0, 0, 0.1); }
+        .stats-card .stat-item:last-child { border-bottom: none; }
+        .stats-card .stat-item span {
+            color: #00F7FF;
+            font-weight: bold;
+        }
+        .stats-card.light .stat-item span { color: #007BFF; }
         .preview-image { max-width: 100%; max-height: 150px; margin-top: 8px; border-radius: 4px; border: 1px solid #00F7FF; }
         .preview-image.light { border-color: #007BFF; }
         .progress-bar {
             height: 15px;
             background: linear-gradient(90deg, #00F7FF, #FF00E6);
             border-radius: 8px;
-            margin-bottom: 10px;
+            margin: 10px 0;
             text-align: center;
             color: #1E2A44;
             font-weight: bold;
@@ -388,6 +428,27 @@
             box-shadow: 0 0 5px rgba(0, 247, 255, 0.5);
         }
         .lang-switch.light:focus { border-color: #007BFF; box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); }
+        [data-tooltip] {
+            position: relative;
+        }
+        [data-tooltip]:hover:after {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(30, 42, 68, 0.9);
+            color: #ECF0F1;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            white-space: nowrap;
+            z-index: 1;
+        }
+        [data-tooltip].light:hover:after {
+            background: rgba(217, 226, 236, 0.9);
+            color: #333;
+        }
     </style>
 </head>
 <body>
@@ -402,18 +463,18 @@
         <div id="main" class="card">
             <div class="row mb-2">
                 <div class="col-6">
-                    <label for="coin" class="form-label" data-i18n="coinLabel">Монета</label>
+                    <label for="coin" class="form-label" data-tooltip="Выберите или добавьте монету" data-i18n="coinLabel">Монета</label>
                     <div class="d-flex">
                         <select class="form-select" id="coin" required>
                             <option value="BTCUSD">BTCUSD</option>
                             <option value="ETHUSD">ETHUSD</option>
                             <option value="XRPUSD">XRPUSD</option>
                         </select>
-                        <button class="btn-add-coin" onclick="promptAddCoin()" data-i18n="addCoin">+</button>
+                        <button class="btn-add-coin" onclick="promptAddCoin()" data-tooltip="Добавить новую монету" data-i18n="addCoin">+</button>
                     </div>
                 </div>
                 <div class="col-6">
-                    <label for="position" class="form-label" data-i18n="positionLabel">Позиция</label>
+                    <label for="position" class="form-label" data-tooltip="Выберите тип позиции" data-i18n="positionLabel">Позиция</label>
                     <select class="form-select" id="position" required>
                         <option value="Short">Short</option>
                         <option value="Long">Long</option>
@@ -422,34 +483,34 @@
             </div>
             <div class="row mb-2">
                 <div class="col-6">
-                    <label for="open_date" class="form-label" data-i18n="openDateLabel">Дата открытия</label>
+                    <label for="open_date" class="form-label" data-tooltip="Выберите дату открытия сделки" data-i18n="openDateLabel">Дата открытия</label>
                     <input type="date" class="form-control" id="open_date" required>
                 </div>
                 <div class="col-6">
-                    <label for="risk" class="form-label" data-i18n="riskLabel">Риск на сделку ($)</label>
+                    <label for="risk" class="form-label" data-tooltip="Введите риск в долларах" data-i18n="riskLabel">Риск на сделку ($)</label>
                     <input type="number" step="0.01" class="form-control" id="risk" required>
                 </div>
             </div>
             <div class="row mb-2">
                 <div class="col-6">
-                    <label for="profit" class="form-label" data-i18n="profitLabel">Прибыль ($)</label>
+                    <label for="profit" class="form-label" data-tooltip="Введите прибыль в долларах" data-i18n="profitLabel">Прибыль ($)</label>
                     <input type="number" step="0.01" class="form-control" id="profit" required>
                 </div>
                 <div class="col-6">
-                    <label for="loss" class="form-label" data-i18n="lossLabel">Убыток ($)</label>
+                    <label for="loss" class="form-label" data-tooltip="Введите убыток в долларах" data-i18n="lossLabel">Убыток ($)</label>
                     <input type="number" step="0.01" class="form-control" id="loss" required>
                 </div>
             </div>
             <div class="row mb-2">
                 <div class="col-6">
-                    <label for="result" class="form-label" data-i18n="resultLabel">Итог сделки (%)</label>
+                    <label for="result" class="form-label" data-tooltip="Введите итог сделки в процентах" data-i18n="resultLabel">Итог сделки (%)</label>
                     <input type="number" step="0.01" class="form-control" id="result" required>
                 </div>
                 <div class="col-6">
-                    <label for="notes" class="form-label" data-i18n="notesLabel">Заметки</label>
+                    <label for="notes" class="form-label" data-tooltip="Добавьте заметки к сделке" data-i18n="notesLabel">Заметки</label>
                     <div class="d-flex">
                         <input type="text" class="form-control" id="notes">
-                        <button class="btn-add-image" onclick="document.getElementById('notesImage').click()" data-i18n="addImage">📷</button>
+                        <button class="btn-add-image" onclick="document.getElementById('notesImage').click()" data-tooltip="Загрузить изображение для заметок" data-i18n="addImage">📷</button>
                         <input type="file" class="form-control d-none" id="notesImage" accept="image/*" onchange="handleImageUpload(event, 'notes')">
                     </div>
                     <img id="notesImagePreview" class="preview-image" style="display: none;">
@@ -457,10 +518,10 @@
             </div>
             <div class="row mb-2">
                 <div class="col-12">
-                    <label for="setup" class="form-label" data-i18n="setupLabel">Сетап</label>
+                    <label for="setup" class="form-label" data-tooltip="Опишите сетап сделки" data-i18n="setupLabel">Сетап</label>
                     <div class="d-flex">
                         <input type="text" class="form-control" id="setup" required style="height: 60px; resize: vertical;">
-                        <button class="btn-add-image" onclick="document.getElementById('setupImage').click()" data-i18n="addImage">📷</button>
+                        <button class="btn-add-image" onclick="document.getElementById('setupImage').click()" data-tooltip="Загрузить изображение для сетапа" data-i18n="addImage">📷</button>
                         <input type="file" class="form-control d-none" id="setupImage" accept="image/*" onchange="handleImageUpload(event, 'setup')">
                     </div>
                     <img id="setupImagePreview" class="preview-image" style="display: none;">
@@ -468,7 +529,7 @@
             </div>
             <div class="row mb-2">
                 <div class="col-12">
-                    <label for="rating" class="form-label" data-i18n="ratingLabel">Оценка (1-5)</label>
+                    <label for="rating" class="form-label" data-tooltip="Оцените сделку от 1 до 5" data-i18n="ratingLabel">Оценка (1-5)</label>
                     <input type="range" class="form-range" id="rating" min="1" max="5" step="0.01" value="1" oninput="document.getElementById('ratingValue').textContent = this.value">
                     <div class="range-value" id="ratingValue">1</div>
                 </div>
@@ -477,8 +538,9 @@
             <button class="btn w-100 mt-2" id="cancelBtn" style="display: none;" onclick="cancelEdit()" data-i18n="cancelBtn">Отмена</button>
         </div>
 
-        <div id="view" class="card">
+        <div id="view" class="card" style="display: none;">
             <h3 class="text-center mb-2" style="font-size: 1.5rem; background: linear-gradient(90deg, #00F7FF, #FF00E6); -webkit-background-clip: text; -webkit-text-fill-color: transparent;" data-i18n="myTrades">Мои сделки</h3>
+            <input type="text" class="search-input" id="searchInput" placeholder="Поиск..." oninput="applyFilters()">
             <div class="progress-bar" id="successProgress"><span>0%</span></div>
             <div class="row mb-2">
                 <div class="col-6">
@@ -525,13 +587,15 @@
             </div>
         </div>
 
-        <div id="stats" class="card">
-            <h3 class="text-center mb-2" data-i18n="stats">Статистика</h3>
-            <p data-i18n="totalTrades">Всего сделок: <span id="totalTrades">0</span></p>
-            <p data-i18n="avgProfit">Средняя прибыль: <span id="avgProfit">0.00</span>$</p>
-            <p data-i18n="avgLoss">Средний убыток: <span id="avgLoss">0.00</span>$</p>
-            <p data-i18n="avgResult">Средний результат: <span id="avgResult">0.00</span>%</p>
-            <p data-i18n="successRate">Процент успешных сделок: <span id="successRate">0</span>%</p>
+        <div id="stats" class="card" style="display: none;">
+            <div class="stats-card">
+                <h3 data-i18n="stats">Статистика</h3>
+                <div class="stat-item"><span data-i18n="totalTrades">Всего сделок:</span> <span id="totalTrades">0</span></div>
+                <div class="stat-item"><span data-i18n="avgProfit">Средняя прибыль:</span> <span id="avgProfit">0.00</span>$</div>
+                <div class="stat-item"><span data-i18n="avgLoss">Средний убыток:</span> <span id="avgLoss">0.00</span>$</div>
+                <div class="stat-item"><span data-i18n="avgResult">Средний результат:</span> <span id="avgResult">0.00</span>%</div>
+                <div class="stat-item"><span data-i18n="successRate">Успешных сделок:</span> <span id="successRate">0</span>%</div>
+            </div>
         </div>
 
         <div class="modal fade" id="detailModal" tabindex="-1" aria-labelledby="detailModalLabel" aria-hidden="true">
@@ -555,7 +619,7 @@
     <nav class="navbar">
         <div class="container-fluid">
             <a class="navbar-brand" href="#" onclick="showSection('main')" data-i18n="home"><i class="fas fa-home"></i> Главная</a>
-            <a class="navbar-brand active" href="#" onclick="showSection('view')" data-i18n="myTradesNav"><i class="fas fa-table"></i> Мои сделки</a>
+            <a class="navbar-brand" href="#" onclick="showSection('view')" data-i18n="myTradesNav"><i class="fas fa-table"></i> Мои сделки</a>
             <a class="navbar-brand" href="#" onclick="showSection('stats')" data-i18n="statsNav"><i class="fas fa-chart-bar"></i> Статистика</a>
         </div>
     </nav>
@@ -601,7 +665,7 @@
                 "avgProfit": "Средняя прибыль:",
                 "avgLoss": "Средний убыток:",
                 "avgResult": "Средний результат:",
-                "successRate": "Процент успешных сделок:",
+                "successRate": "Успешных сделок:",
                 "details": "Детали",
                 "close": "Закрыть",
                 "home": "Главная",
@@ -680,14 +744,15 @@
                 "delete": "Delete"
             }
         };
-        let currentLang = "ru";
+        let currentLang = localStorage.getItem("lang") || "ru";
         let trades = JSON.parse(localStorage.getItem("trades")) || [];
         let coins = JSON.parse(localStorage.getItem("coins")) || ["BTCUSD", "ETHUSD", "XRPUSD"];
         let editingTradeId = null;
-        let filters = { coin: "", position: "" };
+        let filters = { coin: "", position: "", search: "" };
 
         function setLanguage(lang) {
             currentLang = lang;
+            localStorage.setItem("lang", lang);
             document.querySelectorAll("[data-i18n]").forEach(element => {
                 element.textContent = translations[lang][element.getAttribute("data-i18n")] || element.textContent;
             });
@@ -803,6 +868,7 @@
         function applyFilters() {
             filters.coin = document.getElementById("filterCoin").value;
             filters.position = document.getElementById("filterPosition").value;
+            filters.search = document.getElementById("searchInput").value.toLowerCase();
             updateTable();
         }
 
@@ -837,37 +903,48 @@
 
         function saveTrade() {
             if (!validateForm()) return;
-            if (editingTradeId && !confirm(translations[currentLang]["confirmEdit"])) return;
-            const tradeData = {
-                id: editingTradeId || trades.length + 1,
-                coin: document.getElementById("coin").value,
-                position: document.getElementById("position").value,
-                open_date: document.getElementById("open_date").value,
-                risk: parseFloat(document.getElementById("risk").value),
-                profit: parseFloat(document.getElementById("profit").value),
-                loss: parseFloat(document.getElementById("loss").value),
-                result: parseFloat(document.getElementById("result").value),
-                setup: document.getElementById("setup").value,
-                notes: document.getElementById("notes").value,
-                rating: parseFloat(document.getElementById("rating").value),
-                setupImage: document.getElementById("setupImagePreview").src || "",
-                notesImage: document.getElementById("notesImagePreview").src || ""
-            };
-            if (editingTradeId) {
-                const index = trades.findIndex(t => t.id === editingTradeId);
-                trades[index] = tradeData;
-                showNotification(translations[currentLang]["tradeUpdated"]);
-            } else {
-                trades.push(tradeData);
-                showNotification(translations[currentLang]["tradeAdded"]);
-            }
-            localStorage.setItem("trades", JSON.stringify(trades));
-            clearForm();
-            updateTable();
-            updateStats();
-            editingTradeId = null;
-            document.getElementById("submitBtn").textContent = translations[currentLang]["submitBtn"];
-            document.getElementById("cancelBtn").style.display = "none";
+            const loading = document.createElement("div");
+            loading.className = "notification";
+            loading.textContent = "Сохранение...";
+            document.body.appendChild(loading);
+            setTimeout(() => {
+                if (editingTradeId && !confirm(translations[currentLang]["confirmEdit"])) {
+                    document.body.removeChild(loading);
+                    return;
+                }
+                const tradeData = {
+                    id: editingTradeId || trades.length + 1,
+                    coin: document.getElementById("coin").value,
+                    position: document.getElementById("position").value,
+                    open_date: document.getElementById("open_date").value,
+                    risk: parseFloat(document.getElementById("risk").value),
+                    profit: parseFloat(document.getElementById("profit").value),
+                    loss: parseFloat(document.getElementById("loss").value),
+                    result: parseFloat(document.getElementById("result").value),
+                    setup: document.getElementById("setup").value,
+                    notes: document.getElementById("notes").value,
+                    rating: parseFloat(document.getElementById("rating").value),
+                    setupImage: document.getElementById("setupImagePreview").src || "",
+                    notesImage: document.getElementById("notesImagePreview").src || ""
+                };
+                if (editingTradeId) {
+                    const index = trades.findIndex(t => t.id === editingTradeId);
+                    trades[index] = tradeData;
+                    showNotification(translations[currentLang]["tradeUpdated"]);
+                } else {
+                    trades.push(tradeData);
+                    showNotification(translations[currentLang]["tradeAdded"]);
+                }
+                localStorage.setItem("trades", JSON.stringify(trades));
+                autoSave();
+                clearForm();
+                updateTable();
+                updateStats();
+                editingTradeId = null;
+                document.getElementById("submitBtn").textContent = translations[currentLang]["submitBtn"];
+                document.getElementById("cancelBtn").style.display = "none";
+                document.body.removeChild(loading);
+            }, 500);
         }
 
         function cancelEdit() {
@@ -900,7 +977,8 @@
             const filteredTrades = trades.filter(trade => {
                 const matchesCoin = !filters.coin || trade.coin === filters.coin;
                 const matchesPosition = !filters.position || trade.position === filters.position;
-                return matchesCoin && matchesPosition;
+                const matchesSearch = !filters.search || Object.values(trade).some(val => val.toString().toLowerCase().includes(filters.search));
+                return matchesCoin && matchesPosition && matchesSearch;
             });
             filteredTrades.forEach(trade => {
                 const row = document.createElement("tr");
@@ -972,9 +1050,11 @@
         }
 
         function updateProgressBar() {
-            const successRate = parseFloat(document.getElementById("successRate").textContent) || 0;
-            document.getElementById("successProgress").style.width = `${successRate}%`;
-            document.getElementById("successProgress").firstChild.textContent = `${successRate.toFixed(2)}%`;
+            const totalTrades = trades.length;
+            const successfulTrades = totalTrades ? trades.filter(t => t.result > 0).length / totalTrades * 100 : 0;
+            const progressBar = document.getElementById("successProgress");
+            progressBar.style.width = `${successfulTrades}%`;
+            progressBar.firstChild.textContent = `${successfulTrades.toFixed(2)}%`;
         }
 
         function updateStats() {
@@ -1011,6 +1091,7 @@
             if (confirm(`${translations[currentLang]["confirmDelete"]} ${id}?`)) {
                 trades = trades.filter(t => t.id !== id).map((t, i) => ({ ...t, id: i + 1 }));
                 localStorage.setItem("trades", JSON.stringify(trades));
+                autoSave();
                 updateTable();
                 updateStats();
                 showNotification(translations[currentLang]["tradeDeleted"]);
@@ -1064,9 +1145,14 @@
             setTimeout(() => notification.style.display = "none", 3000);
         }
 
+        function autoSave() {
+            localStorage.setItem("trades", JSON.stringify(trades));
+            localStorage.setItem("coins", JSON.stringify(coins));
+        }
+
         function toggleTheme() {
             document.body.classList.toggle("light");
-            document.querySelectorAll(".card, .form-control, .form-select, .table, .btn, .btn-action, .btn-add-coin, .btn-add-image, .navbar, .modal-content, .preview-image, .progress-bar, .notification, .theme-switch, .lang-switch").forEach(el => el.classList.toggle("light"));
+            document.querySelectorAll(".card, .form-control, .form-select, .table, .btn, .btn-action, .btn-add-coin, .btn-add-image, .navbar, .modal-content, .preview-image, .progress-bar, .notification, .theme-switch, .lang-switch, .search-input, .stats-card").forEach(el => el.classList.toggle("light"));
             localStorage.setItem("theme", document.body.classList.contains("light") ? "light" : "dark");
         }
 
@@ -1084,8 +1170,27 @@
             document.getElementById("filterCoin").value = filters.coin;
             document.getElementById("filterPosition").value = filters.position;
             updateTable();
-            showSection("view");
+            showSection("main"); // Отображение главной формы при загрузке
             document.querySelectorAll("#tradesTable th[data-sort]").forEach(th => th.addEventListener("click", () => sortTable(th.getAttribute("data-sort"))));
+            document.querySelectorAll("[data-tooltip]").forEach(element => {
+                element.addEventListener("mouseover", () => {
+                    const tooltip = document.createElement("div");
+                    tooltip.className = `notification ${document.body.classList.contains("light") ? "light" : ""}`;
+                    tooltip.textContent = element.getAttribute("data-tooltip");
+                    tooltip.style.position = "absolute";
+                    tooltip.style.bottom = "100%";
+                    tooltip.style.left = "50%";
+                    tooltip.style.transform = "translateX(-50%)";
+                    tooltip.style.padding = "4px 8px";
+                    tooltip.style.borderRadius = "4px";
+                    tooltip.style.zIndex = "1000";
+                    element.appendChild(tooltip);
+                });
+                element.addEventListener("mouseout", () => {
+                    const tooltip = element.querySelector(".notification");
+                    if (tooltip) tooltip.remove();
+                });
+            });
         });
     </script>
 </body>
