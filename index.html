@@ -520,253 +520,344 @@
             }
         }
 
-        /* Медиа-запросы для мобильных устройств (max-width: 768px) */
-        @media (max-width: 768px) {
-            /* Общий контейнер */
-            .container {
-                padding: 8px;
-                padding-bottom: 100px; /* Увеличиваем отступ снизу для навигационной панели */
-            }
+      /* Медиа-запросы для мобильных устройств (max-width: 768px) */
+@media (max-width: 768px) {
+    /* Общий контейнер */
+    .container {
+        padding: 10px;
+        padding-bottom: 120px; /* Увеличиваем для навигационной панели с анимацией */
+    }
 
-            /* Заголовок */
-            h1 {
-                font-size: 1.5rem;
-                margin-bottom: 10px;
-                letter-spacing: 1px;
-            }
+    /* Заголовок */
+    h1 {
+        font-size: 1.8rem;
+        margin-bottom: 15px;
+        letter-spacing: 1px;
+        padding: 5px 0;
+        animation: slideIn 0.5s ease-out;
+    }
 
-            /* Карточки */
-            .card {
-                padding: 10px;
-                margin-bottom: 10px;
-                border-radius: 6px;
-            }
+    /* Карточки */
+    .card {
+        padding: 12px;
+        margin-bottom: 15px;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        animation: fadeInUp 0.5s ease-out;
+    }
 
-            /* Поля ввода и селекты */
-            .form-control, .form-select {
-                height: 32px;
-                font-size: 0.85rem;
-                padding: 5px;
-            }
-            .form-label {
-                font-size: 0.7rem;
-                margin-bottom: 2px;
-            }
-            .row.mb-2 {
-                margin-bottom: 8px !important;
-            }
-            .col-6 {
-                padding-left: 5px;
-                padding-right: 5px;
-            }
+    /* Форма: вертикальная компоновка */
+    .row.mb-2 {
+        display: block !important;
+        margin-bottom: 12px !important;
+    }
+    .col-6 {
+        width: 100% !important;
+        padding: 0;
+        margin-bottom: 10px;
+    }
 
-            /* Кнопки в форме */
-            .btn {
-                padding: 6px 10px;
-                font-size: 0.85rem;
-            }
-            .btn-add-coin, .btn-add-image {
-                padding: 4px 8px;
-                font-size: 0.8rem;
-                margin-left: 3px;
-            }
-            .btn-action {
-                padding: 3px 5px;
-                font-size: 0.65rem;
-                margin: 0 1px;
-            }
+    /* Поля ввода и селекты */
+    .form-control, .form-select {
+        height: 40px;
+        font-size: 0.9rem;
+        padding: 8px;
+        margin-bottom: 8px;
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    .form-control.light, .form-select.light {
+        background: rgba(0, 0, 0, 0.08);
+        border-color: rgba(0, 0, 0, 0.2);
+    }
+    .form-label {
+        font-size: 0.85rem;
+        margin-bottom: 4px;
+        color: #A0B1C5;
+        font-weight: 500;
+    }
+    .form-label.light {
+        color: #666;
+    }
 
-            /* Поле для сетапа */
-            #setup {
-                height: 50px !important;
-            }
+    /* Кнопки в форме */
+    .btn {
+        padding: 10px 20px;
+        font-size: 0.95rem;
+        border-radius: 10px;
+        margin-top: 10px;
+        width: 100%;
+        transition: transform 0.3s ease, background 0.3s ease;
+    }
+    .btn:hover {
+        transform: scale(1.05);
+    }
+    .btn-add-coin, .btn-add-image {
+        padding: 8px 12px;
+        font-size: 0.9rem;
+        margin-left: 0;
+        margin-top: 5px;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .btn-action {
+        padding: 6px 10px;
+        font-size: 0.8rem;
+        margin: 0 5px 5px 0;
+        border-radius: 8px;
+    }
 
-            /* Превью изображений */
-            .preview-image {
-                max-height: 120px;
-                margin-top: 5px;
-            }
+    /* Поле для сетапа */
+    #setup {
+        height: 80px !important;
+        resize: none;
+        font-size: 0.9rem;
+    }
 
-            /* Таблица */
-            .table {
-                font-size: 0.75rem;
-                display: block;
-            }
-            .table th, .table td {
-                padding: 4px;
-                display: block;
-                text-align: left;
-                border-bottom: none;
-            }
-            .table th {
-                display: none;
-            }
-            .table td {
-                position: relative;
-                padding-left: 35%;
-                font-size: 0.8rem;
-            }
-            .table td:before {
-                content: attr(data-label);
-                position: absolute;
-                left: 5px;
-                width: 30%;
-                padding-right: 5px;
-                font-weight: bold;
-                color: #00F7FF;
-                font-size: 0.75rem;
-            }
-            .table.light td:before {
-                color: #007BFF;
-            }
-            .table td.actions-cell {
-                padding-left: 0;
-                text-align: right;
-                padding-right: 5px;
-            }
-            .table td.actions-cell:before {
-                content: none;
-            }
-            .table .accordion-content {
-                display: none;
-                padding: 8px 5px;
-                background: rgba(255, 255, 255, 0.05);
-                margin: 5px 0;
-                border-radius: 4px;
-            }
-            .table .accordion-content.light {
-                background: rgba(0, 0, 0, 0.05);
-            }
-            .table .accordion-content.active {
-                display: block;
-            }
-            .table .accordion-content p {
-                margin: 4px 0;
-                font-size: 0.75rem;
-            }
-            .table .accordion-content img {
-                max-width: 100%;
-                max-height: 120px;
-                margin-top: 4px;
-                border-radius: 4px;
-                border: 1px solid #00F7FF;
-            }
-            .table .accordion-content.light img {
-                border-color: #007BFF;
-            }
+    /* Превью изображений */
+    .preview-image {
+        max-height: 150px;
+        margin-top: 10px;
+        border-radius: 10px;
+        border: 2px solid #00F7FF;
+        animation: zoomIn 0.5s ease-out;
+    }
+    .preview-image.light {
+        border-color: #007BFF;
+    }
 
-            /* Поле поиска */
-            .search-input {
-                font-size: 0.85rem;
-                padding: 5px;
-                margin-bottom: 8px;
-            }
+    /* Таблица */
+    .table {
+        font-size: 0.85rem;
+        border-radius: 10px;
+    }
+    .table th, .table td {
+        padding: 8px;
+        display: block;
+        text-align: left;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .table th {
+        display: none;
+    }
+    .table td {
+        position: relative;
+        padding-left: 40%;
+        font-size: 0.9rem;
+    }
+    .table td:before {
+        content: attr(data-label);
+        position: absolute;
+        left: 10px;
+        width: 35%;
+        padding-right: 10px;
+        font-weight: 600;
+        color: #00F7FF;
+        font-size: 0.85rem;
+    }
+    .table.light td:before {
+        color: #007BFF;
+    }
+    .table td.actions-cell {
+        padding-left: 0;
+        text-align: center;
+        padding-bottom: 10px;
+    }
+    .table td.actions-cell:before {
+        content: none;
+    }
+    .table .accordion-content {
+        padding: 10px;
+        background: rgba(255, 255, 255, 0.05);
+        margin: 5px 0;
+        border-radius: 8px;
+        animation: slideDown 0.5s ease-out;
+    }
+    .table .accordion-content.light {
+        background: rgba(0, 0, 0, 0.05);
+    }
+    .table .accordion-content p {
+        margin: 6px 0;
+        font-size: 0.85rem;
+    }
+    .table .accordion-content img {
+        max-width: 100%;
+        max-height: 150px;
+        margin-top: 6px;
+        border-radius: 8px;
+        border: 2px solid #00F7FF;
+    }
+    .table .accordion-content.light img {
+        border-color: #007BFF;
+    }
 
-            /* Прогресс-бар */
-            .progress-bar {
-                height: 12px;
-                margin: 8px 0;
-            }
-            .progress-bar span {
-                line-height: 12px;
-                font-size: 0.75rem;
-            }
+    /* Поле поиска */
+    .search-input {
+        font-size: 0.9rem;
+        padding: 8px;
+        margin-bottom: 12px;
+        border-radius: 8px;
+    }
 
-            /* Статистика */
-            .stats-container {
-                gap: 10px;
-            }
-            .stats-card {
-                flex: 1 1 100%;
-                min-width: 100%;
-                padding: 10px;
-                border-radius: 8px;
-            }
-            .stats-card i {
-                font-size: 1.5rem;
-            }
-            .stats-card .stat-text h4 {
-                font-size: 0.9rem;
-            }
-            .stats-card .stat-text span {
-                font-size: 1rem;
-            }
+    /* Прогресс-бар */
+    .progress-bar {
+        height: 10px;
+        margin: 10px 0;
+        border-radius: 10px;
+        overflow: hidden;
+    }
+    .progress-bar span {
+        font-size: 0.75rem;
+        padding: 0 5px;
+        line-height: 10px;
+    }
 
-            /* Навигационная панель */
-            .navbar {
-                padding: 5px 0;
-                flex-direction: row; /* Оставляем кнопки горизонтальными */
-                justify-content: space-around; /* Равномерно распределяем кнопки */
-                align-items: center;
-            }
-            .navbar-brand {
-                margin: 0 5px;
-                font-size: 0.9rem;
-                padding: 8px 12px;
-                min-width: 0; /* Убираем минимальную ширину */
-                width: 30%; /* Кнопки занимают 30% ширины экрана */
-                border-radius: 15px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                font-weight: normal;
-            }
-            .navbar-brand i {
-                margin-right: 5px;
-                font-size: 1rem;
-            }
-            /* Уменьшаем текст кнопок, чтобы он помещался */
-            .navbar-brand span {
-                font-size: 0.85rem;
-            }
+    /* Статистика */
+    .stats-container {
+        gap: 12px;
+    }
+    .stats-card {
+        flex: 1 1 100%;
+        min-width: 100%;
+        padding: 12px;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        animation: fadeInUp 0.5s ease-out;
+    }
+    .stats-card i {
+        font-size: 1.8rem;
+    }
+    .stats-card .stat-text h4 {
+        font-size: 0.9rem;
+    }
+    .stats-card .stat-text span {
+        font-size: 1.1rem;
+    }
 
-            /* Переключатель языка и темы */
-            .lang-switch {
-                top: 5px;
-                left: 5px;
-                height: 30px;
-                font-size: 0.8rem;
-                padding: 2px;
-            }
-            .theme-switch {
-                top: 5px;
-                right: 5px;
-                width: 30px;
-                height: 30px;
-            }
-            .theme-switch i {
-                font-size: 0.9rem;
-            }
+    /* Навигационная панель */
+    .navbar {
+        padding: 10px 0;
+        background: linear-gradient(90deg, #1E2A44, #2C3E50);
+        box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.3);
+        animation: slideUp 0.5s ease-out;
+    }
+    .navbar.light {
+        background: linear-gradient(90deg, #D9E2EC, #E0E8F0);
+    }
+    .navbar-brand {
+        margin: 0 8px;
+        font-size: 1rem;
+        padding: 12px 15px;
+        border-radius: 15px;
+        min-width: 0;
+        width: 28%;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, background 0.3s ease;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        font-weight: 600;
+    }
+    .navbar-brand i {
+        margin-bottom: 4px;
+        font-size: 1.2rem;
+    }
+    .navbar-brand span {
+        font-size: 0.85rem;
+        white-space: normal;
+    }
+    .navbar-brand:hover {
+        transform: scale(1.1);
+        background: rgba(0, 247, 255, 0.3);
+    }
+    .navbar-brand.light:hover {
+        background: rgba(0, 123, 255, 0.3);
+    }
 
-            /* Уведомления */
-            .notification {
-                top: 10px;
-                right: 10px;
-                padding: 6px 10px;
-                font-size: 0.8rem;
-            }
+    /* Переключатель языка и темы */
+    .lang-switch {
+        top: 10px;
+        left: 10px;
+        height: 35px;
+        font-size: 0.9rem;
+        padding: 4px 8px;
+        border-radius: 10px;
+    }
+    .theme-switch {
+        top: 10px;
+        right: 10px;
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+    }
+    .theme-switch i {
+        font-size: 1rem;
+    }
 
-            /* Модальное окно */
-            .modal-content {
-                border-radius: 8px;
-            }
-            .modal-header {
-                padding: 10px;
-            }
-            .modal-title {
-                font-size: 1.2rem;
-            }
-            .modal-body {
-                padding: 15px;
-                font-size: 0.9rem;
-            }
-            .modal-footer {
-                padding: 10px;
-            }
-            .btn-close {
-                font-size: 1.2rem;
-            }
-        }
+    /* Уведомления */
+    .notification {
+        top: 15px;
+        right: 15px;
+        padding: 8px 15px;
+        font-size: 0.9rem;
+        border-radius: 10px;
+        animation: bounceIn 0.5s ease-out;
+    }
+
+    /* Модальное окно */
+    .modal-content {
+        border-radius: 12px;
+    }
+    .modal-header {
+        padding: 12px;
+    }
+    .modal-title {
+        font-size: 1.3rem;
+    }
+    .modal-body {
+        padding: 15px;
+        font-size: 0.95rem;
+    }
+    .modal-footer {
+        padding: 12px;
+    }
+    .btn-close {
+        font-size: 1.3rem;
+    }
+
+    /* Новые анимации */
+    @keyframes slideIn {
+        from { transform: translateY(-20px); opacity: 0; }
+        to { transform: translateY(0); opacity: 1; }
+    }
+    @keyframes fadeInUp {
+        from { transform: translateY(20px); opacity: 0; }
+        to { transform: translateY(0); opacity: 1; }
+    }
+    @keyframes slideUp {
+        from { transform: translateY(100px); opacity: 0; }
+        to { transform: translateY(0); opacity: 1; }
+    }
+    @keyframes slideDown {
+        from { transform: translateY(-20px); opacity: 0; }
+        to { transform: translateY(0); opacity: 1; }
+    }
+    @keyframes zoomIn {
+        from { transform: scale(0.5); opacity: 0; }
+        to { transform: scale(1); opacity: 1; }
+    }
+    @keyframes bounceIn {
+        0% { transform: scale(0.5); opacity: 0; }
+        50% { transform: scale(1.05); }
+        100% { transform: scale(1); opacity: 1; }
+    }
+}
     </style>
 </head>
 <body>
