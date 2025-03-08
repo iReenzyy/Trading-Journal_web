@@ -220,7 +220,15 @@
             .btn-add-coin, .btn-add-image { font-size: 1rem; padding: 5px 10px; }
             .table { font-size: 1rem; }
             .table th, .table td { padding: 8px; }
-            .navbar-brand { font-size: 1.1rem; padding: 10px 15px; }
+            .navbar-brand { 
+                font-size: 1.3rem; 
+                font-weight: bold; 
+                padding: 10px 20px; 
+                background: linear-gradient(90deg, rgba(0, 247, 255, 0.7), rgba(255, 0, 230, 0.7));
+            }
+            .navbar-brand.light {
+                background: linear-gradient(90deg, rgba(0, 123, 255, 0.7), rgba(255, 20, 147, 0.7));
+            }
             .search-input { font-size: 1rem; padding: 5px 10px; }
         }
         @media (max-width: 768px) {
@@ -320,40 +328,59 @@
             background: rgba(0, 0, 0, 0.05);
             color: #333;
         }
+        .stats-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: space-around;
+        }
         .stats-card {
             background: rgba(15, 23, 42, 0.95);
             border-radius: 10px;
-            padding: 20px;
-            margin-bottom: 15px;
+            padding: 15px;
+            flex: 1 1 30%;
+            min-width: 200px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
             transition: transform 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
         .stats-card.light {
             background: rgba(240, 244, 248, 0.95);
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         }
         .stats-card:hover { transform: translateY(-5px); }
-        .stats-card h3 {
+        .stats-card i {
+            font-size: 2rem;
             color: #00F7FF;
-            font-size: 1.8rem;
-            margin-bottom: 15px;
-            text-align: center;
         }
-        .stats-card.light h3 { color: #007BFF; }
-        .stats-card .stat-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 10px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            font-size: 1.1rem;
+        .stats-card.light i { color: #007BFF; }
+        .stats-card .stat-text {
+            text-align: right;
         }
-        .stats-card.light .stat-item { border-color: rgba(0, 0, 0, 0.1); }
-        .stats-card .stat-item:last-child { border-bottom: none; }
-        .stats-card .stat-item span {
-            color: #00F7FF;
+        .stats-card .stat-text h4 {
+            font-size: 1rem;
+            color: #A0B1C5;
+            margin-bottom: 5px;
+        }
+        .stats-card.light .stat-text h4 { color: #555; }
+        .stats-card .stat-text span {
+            font-size: 1.2rem;
             font-weight: bold;
+            color: #00F7FF;
         }
-        .stats-card.light .stat-item span { color: #007BFF; }
+        .stats-card.light .stat-text span { color: #007BFF; }
+        @media (max-width: 768px) {
+            .stats-card {
+                flex: 1 1 100%;
+                min-width: 100%;
+                padding: 10px;
+            }
+            .stats-card i { font-size: 1.5rem; }
+            .stats-card .stat-text h4 { font-size: 0.9rem; }
+            .stats-card .stat-text span { font-size: 1rem; }
+        }
         .preview-image { max-width: 100%; max-height: 150px; margin-top: 8px; border-radius: 4px; border: 1px solid #00F7FF; }
         .preview-image.light { border-color: #007BFF; }
         .progress-bar {
@@ -449,13 +476,65 @@
             background: rgba(217, 226, 236, 0.9);
             color: #333;
         }
+        .modal-content {
+            background: rgba(15, 23, 42, 0.95);
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+            color: #ECF0F1;
+        }
+        .modal-content.light {
+            background: rgba(240, 244, 248, 0.95);
+            color: #333;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        .modal-header {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 15px;
+        }
+        .modal-header.light {
+            border-bottom-color: rgba(0, 0, 0, 0.1);
+        }
+        .modal-title {
+            font-size: 1.5rem;
+            color: #00F7FF;
+        }
+        .modal-title.light {
+            color: #007BFF;
+        }
+        .modal-body {
+            padding: 20px;
+            font-size: 1rem;
+        }
+        .modal-footer {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            justify-content: center;
+        }
+        .modal-footer.light {
+            border-top-color: rgba(0, 0, 0, 0.1);
+        }
+        .btn-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #FFF;
+            opacity: 0.7;
+            transition: opacity 0.3s;
+        }
+        .btn-close:hover {
+            opacity: 1;
+        }
+        .btn-close.light {
+            color: #333;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <select class="lang-switch" onchange="setLanguage(this.value)">
-            <option value="ru" selected>Русский</option>
-            <option value="en">English</option>
+            <option value="ru" selected>RU</option>
+            <option value="en">EN</option>
         </select>
         <h1><i class="fas fa-chart-line"></i> <span data-i18n="title">Дневник трейдера</span></h1>
         <button class="theme-switch" onclick="toggleTheme()"><i class="fas fa-lightbulb"></i></button>
@@ -588,13 +667,57 @@
         </div>
 
         <div id="stats" class="card" style="display: none;">
-            <div class="stats-card">
-                <h3 data-i18n="stats">Статистика</h3>
-                <div class="stat-item"><span data-i18n="totalTrades">Всего сделок:</span> <span id="totalTrades">0</span></div>
-                <div class="stat-item"><span data-i18n="avgProfit">Средняя прибыль:</span> <span id="avgProfit">0.00</span>$</div>
-                <div class="stat-item"><span data-i18n="avgLoss">Средний убыток:</span> <span id="avgLoss">0.00</span>$</div>
-                <div class="stat-item"><span data-i18n="avgResult">Средний результат:</span> <span id="avgResult">0.00</span>%</div>
-                <div class="stat-item"><span data-i18n="successRate">Успешных сделок:</span> <span id="successRate">0</span>%</div>
+            <h3 class="text-center mb-3" style="font-size: 1.5rem; background: linear-gradient(90deg, #00F7FF, #FF00E6); -webkit-background-clip: text; -webkit-text-fill-color: transparent;" data-i18n="stats">Статистика</h3>
+            <div class="stats-container">
+                <div class="stats-card">
+                    <i class="fas fa-list"></i>
+                    <div class="stat-text">
+                        <h4 data-i18n="totalTrades">Всего сделок</h4>
+                        <span id="totalTrades">0</span>
+                    </div>
+                </div>
+                <div class="stats-card">
+                    <i class="fas fa-dollar-sign"></i>
+                    <div class="stat-text">
+                        <h4 data-i18n="totalProfit">Общая прибыль</h4>
+                        <span id="totalProfit">0.00</span>$
+                    </div>
+                </div>
+                <div class="stats-card">
+                    <i class="fas fa-dollar-sign"></i>
+                    <div class="stat-text">
+                        <h4 data-i18n="totalLoss">Общий убыток</h4>
+                        <span id="totalLoss">0.00</span>$
+                    </div>
+                </div>
+                <div class="stats-card">
+                    <i class="fas fa-arrow-up"></i>
+                    <div class="stat-text">
+                        <h4 data-i18n="maxProfit">Макс. прибыль</h4>
+                        <span id="maxProfit">0.00</span>$
+                    </div>
+                </div>
+                <div class="stats-card">
+                    <i class="fas fa-arrow-down"></i>
+                    <div class="stat-text">
+                        <h4 data-i18n="maxLoss">Макс. убыток</h4>
+                        <span id="maxLoss">0.00</span>$
+                    </div>
+                </div>
+                <div class="stats-card">
+                    <i class="fas fa-exchange-alt"></i>
+                    <div class="stat-text">
+                        <h4 data-i18n="positionRatio">Шорт/Лонг</h4>
+                        <span id="positionRatio">0 / 0</span>
+                    </div>
+                </div>
+                <div class="stats-card">
+                    <i class="fas fa-star"></i>
+                    <div class="stat-text">
+                        <h4 data-i18n="avgRating">Средняя оценка</h4>
+                        <span id="avgRating">0.00</span>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -661,11 +784,13 @@
                 "exportCSV": "Экспорт в CSV",
                 "exportPDF": "Экспорт в PDF",
                 "stats": "Статистика",
-                "totalTrades": "Всего сделок:",
-                "avgProfit": "Средняя прибыль:",
-                "avgLoss": "Средний убыток:",
-                "avgResult": "Средний результат:",
-                "successRate": "Успешных сделок:",
+                "totalTrades": "Всего сделок",
+                "totalProfit": "Общая прибыль",
+                "totalLoss": "Общий убыток",
+                "maxProfit": "Макс. прибыль",
+                "maxLoss": "Макс. убыток",
+                "positionRatio": "Шорт/Лонг",
+                "avgRating": "Средняя оценка",
                 "details": "Детали",
                 "close": "Закрыть",
                 "home": "Главная",
@@ -719,11 +844,13 @@
                 "exportCSV": "Export to CSV",
                 "exportPDF": "Export to PDF",
                 "stats": "Statistics",
-                "totalTrades": "Total Trades:",
-                "avgProfit": "Average Profit:",
-                "avgLoss": "Average Loss:",
-                "avgResult": "Average Result:",
-                "successRate": "Success Rate:",
+                "totalTrades": "Total Trades",
+                "totalProfit": "Total Profit",
+                "totalLoss": "Total Loss",
+                "maxProfit": "Max Profit",
+                "maxLoss": "Max Loss",
+                "positionRatio": "Short/Long",
+                "avgRating": "Average Rating",
                 "details": "Details",
                 "close": "Close",
                 "home": "Home",
@@ -1059,17 +1186,21 @@
 
         function updateStats() {
             const totalTrades = trades.length;
-            const avgProfit = totalTrades ? (trades.reduce((sum, t) => sum + t.profit, 0) / totalTrades).toFixed(2) : 0;
-            const avgLoss = totalTrades ? (trades.reduce((sum, t) => sum + t.loss, 0) / totalTrades).toFixed(2) : 0;
-            const avgResult = totalTrades ? (trades.reduce((sum, t) => sum + t.result, 0) / totalTrades).toFixed(2) : 0;
-            const successRate = totalTrades ? (trades.filter(t => t.result > 0).length / totalTrades * 100).toFixed(2) : 0;
+            const totalProfit = trades.reduce((sum, t) => sum + t.profit, 0).toFixed(2);
+            const totalLoss = trades.reduce((sum, t) => sum + t.loss, 0).toFixed(2);
+            const maxProfit = trades.length ? Math.max(...trades.map(t => t.profit)).toFixed(2) : 0;
+            const maxLoss = trades.length ? Math.max(...trades.map(t => t.loss)).toFixed(2) : 0;
+            const shortTrades = trades.filter(t => t.position === "Short").length;
+            const longTrades = trades.filter(t => t.position === "Long").length;
+            const avgRating = totalTrades ? (trades.reduce((sum, t) => sum + t.rating, 0) / totalTrades).toFixed(2) : 0;
 
             document.getElementById("totalTrades").textContent = totalTrades;
-            document.getElementById("avgProfit").textContent = avgProfit;
-            document.getElementById("avgLoss").textContent = avgLoss;
-            document.getElementById("avgResult").textContent = avgResult;
-            document.getElementById("successRate").textContent = successRate;
-            updateProgressBar();
+            document.getElementById("totalProfit").textContent = totalProfit;
+            document.getElementById("totalLoss").textContent = totalLoss;
+            document.getElementById("maxProfit").textContent = maxProfit;
+            document.getElementById("maxLoss").textContent = maxLoss;
+            document.getElementById("positionRatio").textContent = `${shortTrades} / ${longTrades}`;
+            document.getElementById("avgRating").textContent = avgRating;
         }
 
         function showDetailModal(id, type) {
@@ -1170,7 +1301,7 @@
             document.getElementById("filterCoin").value = filters.coin;
             document.getElementById("filterPosition").value = filters.position;
             updateTable();
-            showSection("main"); // Отображение главной формы при загрузке
+            showSection("main");
             document.querySelectorAll("#tradesTable th[data-sort]").forEach(th => th.addEventListener("click", () => sortTable(th.getAttribute("data-sort"))));
             document.querySelectorAll("[data-tooltip]").forEach(element => {
                 element.addEventListener("mouseover", () => {
