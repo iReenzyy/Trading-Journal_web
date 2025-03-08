@@ -28,6 +28,7 @@
             padding: 10px;
             max-width: 1200px;
             margin: 0 auto;
+            padding-bottom: 70px; /* Учитываем фиксированную панель навигации */
         }
         h1 {
             text-align: center;
@@ -211,75 +212,7 @@
             overflow: visible;
             white-space: normal;
         }
-        @media (min-width: 768px) {
-            h1 { font-size: 3rem; margin-bottom: 20px; }
-            .form-label { font-size: 1rem; }
-            .form-control, .form-select { font-size: 1rem; height: 40px; }
-            .btn { font-size: 1rem; padding: 8px 16px; }
-            .btn-action { font-size: 0.9rem; padding: 5px 8px; }
-            .btn-add-coin, .btn-add-image { font-size: 1rem; padding: 5px 10px; }
-            .table { font-size: 1rem; }
-            .table th, .table td { padding: 8px; }
-            .search-input { font-size: 1rem; padding: 5px 10px; }
-        }
-        @media (max-width: 768px) {
-            h1 { font-size: 1.2rem; margin-bottom: 10px; }
-            .container { padding: 5px; }
-            .card { padding: 8px; margin-bottom: 8px; }
-            .form-label { font-size: 0.7rem; }
-            .form-control, .form-select { height: 30px; font-size: 0.8rem; }
-            .btn { padding: 5px 10px; font-size: 0.8rem; }
-            .btn-action { padding: 3px 5px; font-size: 0.6rem; margin: 0 1px; }
-            .btn-add-coin, .btn-add-image { padding: 3px 6px; font-size: 0.8rem; margin-left: 3px; }
-            .table { font-size: 0.7rem; display: block; }
-            .table th, .table td {
-                padding: 4px;
-                display: block;
-                text-align: left;
-                border-bottom: none;
-            }
-            .table th { display: none; }
-            .table td {
-                position: relative;
-                padding-left: 30%;
-            }
-            .table td:before {
-                content: attr(data-label);
-                position: absolute;
-                left: 5px;
-                width: 25%;
-                padding-right: 10px;
-                font-weight: bold;
-                color: #00F7FF;
-            }
-            .table td.actions-cell {
-                padding-left: 0;
-                text-align: right;
-                padding-right: 5px;
-            }
-            .table td.actions-cell:before { content: none; }
-            .table .accordion-content {
-                display: none;
-                padding: 10px 5px;
-                background: rgba(255, 255, 255, 0.05);
-                margin: 5px 0;
-                border-radius: 4px;
-            }
-            .table .accordion-content.light {
-                background: rgba(0, 0, 0, 0.05);
-            }
-            .table .accordion-content.active { display: block; }
-            .table .accordion-content p { margin: 5px 0; font-size: 0.8rem; }
-            .table .accordion-content img {
-                max-width: 100%;
-                max-height: 150px;
-                margin-top: 5px;
-                border-radius: 4px;
-                border: 1px solid #00F7FF;
-            }
-            .table .accordion-content.light img { border-color: #007BFF; }
-        }
-        /* Обновлённые стили для навигационной панели */
+        /* Стили для навигационной панели */
         .navbar {
             background: rgba(15, 23, 42, 0.9);
             padding: 8px 0;
@@ -293,7 +226,6 @@
         .navbar.light {
             background: rgba(240, 244, 248, 0.9);
         }
-        /* Обновлённые стили для кнопок навигации */
         .navbar-brand {
             background: linear-gradient(90deg, rgba(135, 206, 235, 0.4), rgba(221, 160, 221, 0.4));
             color: #1E2A44;
@@ -390,42 +322,6 @@
         }
         .stats-card.light .stat-text span {
             color: #007BFF;
-        }
-        @media (max-width: 768px) {
-            .stats-card {
-                flex: 1 1 100%;
-                min-width: 100%;
-                padding: 10px;
-            }
-            .stats-card i {
-                font-size: 1.5rem;
-            }
-            .stats-card .stat-text h4 {
-                font-size: 0.9rem;
-            }
-            .stats-card .stat-text span {
-                font-size: 1rem;
-            }
-            /* Адаптивность для кнопок на мобильных */
-            .navbar {
-                padding: 5px 0;
-                flex-direction: column;
-                align-items: center;
-            }
-            .navbar-brand {
-                margin: 5px 0;
-                font-size: 1.2rem;
-                padding: 12px 25px;
-                min-width: 140px;
-                border-radius: 25px;
-            }
-        }
-        @media (min-width: 768px) {
-            .navbar-brand {
-                font-size: 1.5rem;
-                padding: 15px 30px;
-                min-width: 150px;
-            }
         }
         .preview-image {
             max-width: 100%;
@@ -604,6 +500,272 @@
         }
         .btn-close.light {
             color: #333;
+        }
+
+        /* Медиа-запросы для десктопов (min-width: 768px) */
+        @media (min-width: 768px) {
+            h1 { font-size: 3rem; margin-bottom: 20px; }
+            .form-label { font-size: 1rem; }
+            .form-control, .form-select { font-size: 1rem; height: 40px; }
+            .btn { font-size: 1rem; padding: 8px 16px; }
+            .btn-action { font-size: 0.9rem; padding: 5px 8px; }
+            .btn-add-coin, .btn-add-image { font-size: 1rem; padding: 5px 10px; }
+            .table { font-size: 1rem; }
+            .table th, .table td { padding: 8px; }
+            .search-input { font-size: 1rem; padding: 5px 10px; }
+            .navbar-brand {
+                font-size: 1.5rem;
+                padding: 15px 30px;
+                min-width: 150px;
+            }
+        }
+
+        /* Медиа-запросы для мобильных устройств (max-width: 768px) */
+        @media (max-width: 768px) {
+            /* Общий контейнер */
+            .container {
+                padding: 8px;
+                padding-bottom: 100px; /* Увеличиваем отступ снизу для навигационной панели */
+            }
+
+            /* Заголовок */
+            h1 {
+                font-size: 1.5rem;
+                margin-bottom: 10px;
+                letter-spacing: 1px;
+            }
+
+            /* Карточки */
+            .card {
+                padding: 10px;
+                margin-bottom: 10px;
+                border-radius: 6px;
+            }
+
+            /* Поля ввода и селекты */
+            .form-control, .form-select {
+                height: 32px;
+                font-size: 0.85rem;
+                padding: 5px;
+            }
+            .form-label {
+                font-size: 0.7rem;
+                margin-bottom: 2px;
+            }
+            .row.mb-2 {
+                margin-bottom: 8px !important;
+            }
+            .col-6 {
+                padding-left: 5px;
+                padding-right: 5px;
+            }
+
+            /* Кнопки в форме */
+            .btn {
+                padding: 6px 10px;
+                font-size: 0.85rem;
+            }
+            .btn-add-coin, .btn-add-image {
+                padding: 4px 8px;
+                font-size: 0.8rem;
+                margin-left: 3px;
+            }
+            .btn-action {
+                padding: 3px 5px;
+                font-size: 0.65rem;
+                margin: 0 1px;
+            }
+
+            /* Поле для сетапа */
+            #setup {
+                height: 50px !important;
+            }
+
+            /* Превью изображений */
+            .preview-image {
+                max-height: 120px;
+                margin-top: 5px;
+            }
+
+            /* Таблица */
+            .table {
+                font-size: 0.75rem;
+                display: block;
+            }
+            .table th, .table td {
+                padding: 4px;
+                display: block;
+                text-align: left;
+                border-bottom: none;
+            }
+            .table th {
+                display: none;
+            }
+            .table td {
+                position: relative;
+                padding-left: 35%;
+                font-size: 0.8rem;
+            }
+            .table td:before {
+                content: attr(data-label);
+                position: absolute;
+                left: 5px;
+                width: 30%;
+                padding-right: 5px;
+                font-weight: bold;
+                color: #00F7FF;
+                font-size: 0.75rem;
+            }
+            .table.light td:before {
+                color: #007BFF;
+            }
+            .table td.actions-cell {
+                padding-left: 0;
+                text-align: right;
+                padding-right: 5px;
+            }
+            .table td.actions-cell:before {
+                content: none;
+            }
+            .table .accordion-content {
+                display: none;
+                padding: 8px 5px;
+                background: rgba(255, 255, 255, 0.05);
+                margin: 5px 0;
+                border-radius: 4px;
+            }
+            .table .accordion-content.light {
+                background: rgba(0, 0, 0, 0.05);
+            }
+            .table .accordion-content.active {
+                display: block;
+            }
+            .table .accordion-content p {
+                margin: 4px 0;
+                font-size: 0.75rem;
+            }
+            .table .accordion-content img {
+                max-width: 100%;
+                max-height: 120px;
+                margin-top: 4px;
+                border-radius: 4px;
+                border: 1px solid #00F7FF;
+            }
+            .table .accordion-content.light img {
+                border-color: #007BFF;
+            }
+
+            /* Поле поиска */
+            .search-input {
+                font-size: 0.85rem;
+                padding: 5px;
+                margin-bottom: 8px;
+            }
+
+            /* Прогресс-бар */
+            .progress-bar {
+                height: 12px;
+                margin: 8px 0;
+            }
+            .progress-bar span {
+                line-height: 12px;
+                font-size: 0.75rem;
+            }
+
+            /* Статистика */
+            .stats-container {
+                gap: 10px;
+            }
+            .stats-card {
+                flex: 1 1 100%;
+                min-width: 100%;
+                padding: 10px;
+                border-radius: 8px;
+            }
+            .stats-card i {
+                font-size: 1.5rem;
+            }
+            .stats-card .stat-text h4 {
+                font-size: 0.9rem;
+            }
+            .stats-card .stat-text span {
+                font-size: 1rem;
+            }
+
+            /* Навигационная панель */
+            .navbar {
+                padding: 5px 0;
+                flex-direction: row; /* Оставляем кнопки горизонтальными */
+                justify-content: space-around; /* Равномерно распределяем кнопки */
+                align-items: center;
+            }
+            .navbar-brand {
+                margin: 0 5px;
+                font-size: 0.9rem;
+                padding: 8px 12px;
+                min-width: 0; /* Убираем минимальную ширину */
+                width: 30%; /* Кнопки занимают 30% ширины экрана */
+                border-radius: 15px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-weight: normal;
+            }
+            .navbar-brand i {
+                margin-right: 5px;
+                font-size: 1rem;
+            }
+            /* Уменьшаем текст кнопок, чтобы он помещался */
+            .navbar-brand span {
+                font-size: 0.85rem;
+            }
+
+            /* Переключатель языка и темы */
+            .lang-switch {
+                top: 5px;
+                left: 5px;
+                height: 30px;
+                font-size: 0.8rem;
+                padding: 2px;
+            }
+            .theme-switch {
+                top: 5px;
+                right: 5px;
+                width: 30px;
+                height: 30px;
+            }
+            .theme-switch i {
+                font-size: 0.9rem;
+            }
+
+            /* Уведомления */
+            .notification {
+                top: 10px;
+                right: 10px;
+                padding: 6px 10px;
+                font-size: 0.8rem;
+            }
+
+            /* Модальное окно */
+            .modal-content {
+                border-radius: 8px;
+            }
+            .modal-header {
+                padding: 10px;
+            }
+            .modal-title {
+                font-size: 1.2rem;
+            }
+            .modal-body {
+                padding: 15px;
+                font-size: 0.9rem;
+            }
+            .modal-footer {
+                padding: 10px;
+            }
+            .btn-close {
+                font-size: 1.2rem;
+            }
         }
     </style>
 </head>
