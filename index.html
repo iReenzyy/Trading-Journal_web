@@ -95,7 +95,7 @@
             color: #555;
         }
         .btn {
-            background: linear-gradient(90deg, #00F7FF, #FF00E6);
+            background: linear-gradient(90deg, rgba(0, 247, 255, 0.7), rgba(255, 0, 230, 0.7));
             border: none;
             border-radius: 4px;
             padding: 6px 12px;
@@ -105,7 +105,7 @@
             transition: transform 0.3s, box-shadow 0.3s;
         }
         .btn.light {
-            background: linear-gradient(90deg, #FFF5E1, #FF9999);
+            background: linear-gradient(90deg, rgba(0, 123, 255, 0.7), rgba(255, 20, 147, 0.7));
         }
         .btn:hover {
             transform: scale(1.05);
@@ -152,12 +152,12 @@
             color: #F0F4F8;
         }
         .btn-add-coin:hover, .btn-add-image:hover {
-            background: #FF00E6;
-            box-shadow: 0 0 5px #FF00E6;
+            background: rgba(255, 0, 230, 0.7);
+            box-shadow: 0 0 5px rgba(255, 0, 230, 0.7);
         }
         .btn-add-coin.light:hover, .btn-add-image.light:hover {
-            background: #FF1493;
-            box-shadow: 0 0 5px #FF1493;
+            background: rgba(255, 20, 147, 0.7);
+            box-shadow: 0 0 5px rgba(255, 20, 147, 0.7);
         }
         .table {
             background: rgba(15, 23, 42, 0.9);
@@ -220,15 +220,6 @@
             .btn-add-coin, .btn-add-image { font-size: 1rem; padding: 5px 10px; }
             .table { font-size: 1rem; }
             .table th, .table td { padding: 8px; }
-            .navbar-brand { 
-                font-size: 1.3rem; 
-                font-weight: bold; 
-                padding: 10px 20px; 
-                background: linear-gradient(90deg, rgba(0, 247, 255, 0.7), rgba(255, 0, 230, 0.7));
-            }
-            .navbar-brand.light {
-                background: linear-gradient(90deg, rgba(0, 123, 255, 0.7), rgba(255, 20, 147, 0.7));
-            }
             .search-input { font-size: 1rem; padding: 5px 10px; }
         }
         @media (max-width: 768px) {
@@ -288,32 +279,53 @@
             }
             .table .accordion-content.light img { border-color: #007BFF; }
         }
+        /* Обновлённые стили для навигационной панели */
         .navbar {
             background: rgba(15, 23, 42, 0.9);
             padding: 8px 0;
             position: fixed;
             bottom: 0;
             width: 100%;
+            display: flex;
+            justify-content: center;
+            z-index: 1000;
         }
-        .navbar.light { background: rgba(240, 244, 248, 0.9); }
+        .navbar.light {
+            background: rgba(240, 244, 248, 0.9);
+        }
+        /* Обновлённые стили для кнопок навигации */
         .navbar-brand {
-            background: linear-gradient(90deg, #00F7FF, #FF00E6);
+            background: linear-gradient(90deg, rgba(135, 206, 235, 0.4), rgba(221, 160, 221, 0.4));
             color: #1E2A44;
             font-size: 1rem;
-            padding: 8px 12px;
-            border-radius: 15px;
-            transition: transform 0.3s;
+            padding: 10px 20px;
+            border-radius: 20px;
+            transition: transform 0.3s, background 0.3s;
             text-align: center;
-            margin: 0 5px;
+            margin: 0 10px;
             text-decoration: none;
+            min-width: 120px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            font-weight: bold;
         }
         .navbar-brand.light {
-            background: linear-gradient(90deg, #FFF5E1, #FF9999);
+            background: linear-gradient(90deg, rgba(173, 216, 230, 0.4), rgba(216, 191, 216, 0.4));
             color: #333;
         }
-        .navbar-brand:hover { transform: scale(1.05); }
-        .navbar-brand.active { background: linear-gradient(90deg, #FF00E6, #00F7FF); }
-        .navbar-brand.light.active { background: linear-gradient(90deg, #FF9999, #FFF5E1); }
+        .navbar-brand:hover {
+            transform: scale(1.05);
+            background: linear-gradient(90deg, rgba(135, 206, 235, 0.6), rgba(221, 160, 221, 0.6));
+        }
+        .navbar-brand.light:hover {
+            background: linear-gradient(90deg, rgba(173, 216, 230, 0.6), rgba(216, 191, 216, 0.6));
+        }
+        .navbar-brand.active {
+            background: linear-gradient(90deg, rgba(221, 160, 221, 0.6), rgba(135, 206, 235, 0.6));
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+        .navbar-brand.light.active {
+            background: linear-gradient(90deg, rgba(216, 191, 216, 0.6), rgba(173, 216, 230, 0.6));
+        }
         .search-input {
             width: 100%;
             margin-bottom: 10px;
@@ -350,12 +362,16 @@
             background: rgba(240, 244, 248, 0.95);
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         }
-        .stats-card:hover { transform: translateY(-5px); }
+        .stats-card:hover {
+            transform: translateY(-5px);
+        }
         .stats-card i {
             font-size: 2rem;
             color: #00F7FF;
         }
-        .stats-card.light i { color: #007BFF; }
+        .stats-card.light i {
+            color: #007BFF;
+        }
         .stats-card .stat-text {
             text-align: right;
         }
@@ -364,36 +380,78 @@
             color: #A0B1C5;
             margin-bottom: 5px;
         }
-        .stats-card.light .stat-text h4 { color: #555; }
+        .stats-card.light .stat-text h4 {
+            color: #555;
+        }
         .stats-card .stat-text span {
             font-size: 1.2rem;
             font-weight: bold;
             color: #00F7FF;
         }
-        .stats-card.light .stat-text span { color: #007BFF; }
+        .stats-card.light .stat-text span {
+            color: #007BFF;
+        }
         @media (max-width: 768px) {
             .stats-card {
                 flex: 1 1 100%;
                 min-width: 100%;
                 padding: 10px;
             }
-            .stats-card i { font-size: 1.5rem; }
-            .stats-card .stat-text h4 { font-size: 0.9rem; }
-            .stats-card .stat-text span { font-size: 1rem; }
+            .stats-card i {
+                font-size: 1.5rem;
+            }
+            .stats-card .stat-text h4 {
+                font-size: 0.9rem;
+            }
+            .stats-card .stat-text span {
+                font-size: 1rem;
+            }
+            /* Адаптивность для кнопок на мобильных */
+            .navbar {
+                padding: 5px 0;
+                flex-direction: column;
+                align-items: center;
+            }
+            .navbar-brand {
+                margin: 5px 0;
+                font-size: 1.2rem;
+                padding: 12px 25px;
+                min-width: 140px;
+                border-radius: 25px;
+            }
         }
-        .preview-image { max-width: 100%; max-height: 150px; margin-top: 8px; border-radius: 4px; border: 1px solid #00F7FF; }
-        .preview-image.light { border-color: #007BFF; }
+        @media (min-width: 768px) {
+            .navbar-brand {
+                font-size: 1.5rem;
+                padding: 15px 30px;
+                min-width: 150px;
+            }
+        }
+        .preview-image {
+            max-width: 100%;
+            max-height: 150px;
+            margin-top: 8px;
+            border-radius: 4px;
+            border: 1px solid #00F7FF;
+        }
+        .preview-image.light {
+            border-color: #007BFF;
+        }
         .progress-bar {
             height: 15px;
-            background: linear-gradient(90deg, #00F7FF, #FF00E6);
+            background: linear-gradient(90deg, rgba(0, 247, 255, 0.7), rgba(255, 0, 230, 0.7));
             border-radius: 8px;
             margin: 10px 0;
             text-align: center;
             color: #1E2A44;
             font-weight: bold;
         }
-        .progress-bar.light { background: linear-gradient(90deg, #007BFF, #FF1493); }
-        .progress-bar span { line-height: 15px; }
+        .progress-bar.light {
+            background: linear-gradient(90deg, rgba(0, 123, 255, 0.7), rgba(255, 20, 147, 0.7));
+        }
+        .progress-bar span {
+            line-height: 15px;
+        }
         .notification {
             position: fixed;
             top: 15px;
@@ -406,8 +464,13 @@
             display: none;
             animation: fadeInOut 3s ease-in-out;
         }
-        .notification.light { background: rgba(0, 123, 255, 0.9); }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+        .notification.light {
+            background: rgba(0, 123, 255, 0.9);
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
         @keyframes fadeInOut {
             0%, 100% { opacity: 0; transform: translateY(-20px); }
             10%, 90% { opacity: 1; transform: translateY(0); }
@@ -427,11 +490,22 @@
             justify-content: center;
             transition: background 0.3s;
         }
-        .theme-switch.light { background: #007BFF; }
-        .theme-switch:hover { background: #FF00E6; }
-        .theme-switch.light:hover { background: #FF1493; }
-        .theme-switch i { font-size: 1rem; color: #1E2A44; }
-        .theme-switch.light i { color: #F0F4F8; }
+        .theme-switch.light {
+            background: #007BFF;
+        }
+        .theme-switch:hover {
+            background: rgba(255, 0, 230, 0.7);
+        }
+        .theme-switch.light:hover {
+            background: rgba(255, 20, 147, 0.7);
+        }
+        .theme-switch i {
+            font-size: 1rem;
+            color: #1E2A44;
+        }
+        .theme-switch.light i {
+            color: #F0F4F8;
+        }
         .lang-switch {
             position: fixed;
             top: 10px;
@@ -454,7 +528,10 @@
             border-color: #00F7FF;
             box-shadow: 0 0 5px rgba(0, 247, 255, 0.5);
         }
-        .lang-switch.light:focus { border-color: #007BFF; box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); }
+        .lang-switch.light:focus {
+            border-color: #007BFF;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        }
         [data-tooltip] {
             position: relative;
         }
