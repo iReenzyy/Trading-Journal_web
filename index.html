@@ -117,6 +117,25 @@
             color: #FFFFFF;
             box-shadow: 0 0 5px #FF00E6;
         }
+        .btn-add-image {
+            position: absolute;
+            right: 25px;
+            top: 50%;
+            transform: translateY(-1%);
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            border-radius: 5px;
+            padding: 7px 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .btn-add-image:hover {
+            background: #00F7FF;
+            color: #1E2A44;
+        }
+        .btn-add-image i {
+            font-size: 0.9rem;
+        }
         .table {
             background: rgba(15, 23, 42, 0.9);
             border-radius: 10px;
@@ -151,16 +170,41 @@
             padding: 8px;
             max-width: 150px;
         }
-        .table td.setup-cell, .table td.notes-cell {
-            max-width: 100px;
+        .image-icon-container {
+            margin-top: 5px;
         }
-        .table td:first-child, .table th:first-child {
-            border-top-left-radius: 10px;
-            border-bottom-left-radius: 10px;
+        .image-icon {
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+            object-fit: cover;
+            border-radius: 4px;
+            transition: transform 0.3s ease;
         }
-        .table td:last-child, .table th:last-child {
-            border-top-right-radius: 10px;
-            border-bottom-right-radius: 10px;
+        .image-icon:hover {
+            transform: scale(1.2);
+        }
+        .modal-image {
+            max-width: 100%;
+            max-height: 80vh;
+            display: block;
+            margin: 0 auto;
+            border-radius: 5px;
+        }
+        .modal-content {
+            background: rgba(15, 23, 42, 0.9);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #ECF0F1;
+        }
+        .modal-header, .modal-footer {
+            background: rgba(15, 23, 42, 0.9);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            border-top: none;
+        }
+        .modal-body {
+            background: rgba(15, 23, 42, 0.9);
+            padding: 15px;
         }
         @media (min-width: 969px) {
             .table {
@@ -191,9 +235,6 @@
             display: flex;
             justify-content: space-between;
             width: 100%;
-        }
-        #view .card {
-            padding: 15px;
         }
         .navbar {
             background: rgba(15, 23, 42, 0.9);
@@ -387,7 +428,6 @@
             transform: translateX(-50%);
             color: #FFFFFF;
         }
-        /* Подсказки включены только вне #view */
         [data-tooltip] {
             position: relative;
         }
@@ -407,7 +447,6 @@
             box-shadow: 0 0 5px rgba(0, 247, 255, 0.5);
             pointer-events: none;
         }
-        /* Отключаем подсказки внутри #view */
         #view [data-tooltip]:hover:after {
             display: none;
         }
@@ -439,49 +478,6 @@
             color: #A0B1C5;
             cursor: pointer;
         }
-        .btn-add-image {
-            position: absolute;
-            right: 5px;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(255, 255, 255, 0.1);
-            border: none;
-            border-radius: 3px;
-            padding: 2px 5px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        .btn-add-image:hover {
-            background: #00F7FF;
-            color: #1E2A44;
-        }
-        .btn-add-image i {
-            font-size: 0.9rem;
-        }
-        /* Стили для модального окна */
-        .modal-content {
-            background: rgba(15, 23, 42, 0.9);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: #ECF0F1;
-        }
-        .modal-header, .modal-footer {
-            background: rgba(15, 23, 42, 0.9);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            border-top: none;
-        }
-        .modal-body {
-            background: rgba(15, 23, 42, 0.9);
-            padding: 15px;
-        }
-        .modal-body p {
-            margin: 0 0 10px;
-        }
-        .modal-body img {
-            max-width: 100%;
-            border-radius: 5px;
-        }
-        /* Стили для ползунка рейтинга */
         .rating-wrapper {
             position: relative;
             width: 100%;
@@ -507,7 +503,7 @@
             border-radius: 50%;
             cursor: pointer;
             box-shadow: 0 0 5px rgba(0, 247, 255, 0.5);
-            transition: transform 0.3s ease, background 0.3s ease; /* Плавное изменение ползунка */
+            transition: transform 0.3s ease;
         }
         .form-range::-moz-range-thumb {
             width: 16px;
@@ -516,7 +512,7 @@
             border-radius: 50%;
             cursor: pointer;
             box-shadow: 0 0 5px rgba(0, 247, 255, 0.5);
-            transition: transform 0.3s ease, background 0.3s ease; /* Плавное изменение ползунка */
+            transition: transform 0.3s ease;
         }
         .form-range::-webkit-slider-runnable-track {
             height: 10px;
@@ -530,7 +526,7 @@
             position: absolute;
             width: 100%;
             height: 10px;
-            background: rgba(255, 255, 255, 0.1); /* Белое пространство */
+            background: rgba(255, 255, 255, 0.1);
             border-radius: 5px;
             overflow: hidden;
             top: 50%;
@@ -586,25 +582,16 @@
             .stat-card p { font-size: 1rem; }
             .stat-card span { font-size: 1.1rem; }
             .stat-icon { font-size: 1.5rem; }
-            .rating-value {
-                font-size: 1rem;
-                top: -18px;
-            }
-            .rating-track, .form-range {
-                height: 8px;
-            }
-            .rating-fill {
-                height: 8px;
-            }
+            .rating-value { font-size: 1rem; top: -18px; }
+            .rating-track, .form-range { height: 8px; }
+            .rating-fill { height: 8px; }
             .form-range::-webkit-slider-thumb {
                 width: 14px;
                 height: 14px;
-                transition: transform 0.3s ease, background 0.3s ease;
             }
             .form-range::-moz-range-thumb {
                 width: 14px;
                 height: 14px;
-                transition: transform 0.3s ease, background 0.3s ease;
             }
         }
     </style>
@@ -667,20 +654,24 @@
                     <div class="input-with-button">
                         <input type="text" class="form-control" id="notes">
                         <button class="btn-add-image" onclick="document.getElementById('notesImage').click()" data-tooltip="Добавить изображение"><i class="fas fa-paperclip"></i></button>
-                        <input type="file" class="form-control" id="notesImage" accept="image/*" onchange="handleNotesImageUpload(event)" style="display: none;">
+                        <input type="file" class="form-control" id="notesImage" accept="image/*" onchange="handleImageUpload('notes', event)" style="display: none;">
                     </div>
-                    <img id="notesImagePreview" class="preview-image" style="display: none;">
+                    <div id="notesImageIcon" class="image-icon-container" style="display: none;">
+                        <img id="notesImagePreview" class="image-icon" onclick="showImageModal('notes')" alt="Иконка заметок">
+                    </div>
                 </div>
             </div>
             <div class="row mb-2">
                 <div class="col-12">
                     <label for="setup" class="form-label" data-tooltip="Опишите сетап сделки">Сетап</label>
                     <div class="input-with-button">
-                        <input type="text" class="form-control" id="setup" required style="height: 80px; resize: vertical;">
+                        <input type="text" class="form-control" id="setup" required style="height: 125px; resize: vertical;">
                         <button class="btn-add-image" onclick="document.getElementById('setupImage').click()" data-tooltip="Добавить изображение"><i class="fas fa-paperclip"></i></button>
-                        <input type="file" class="form-control" id="setupImage" accept="image/*" onchange="handleSetupImageUpload(event)" style="display: none;">
+                        <input type="file" class="form-control" id="setupImage" accept="image/*" onchange="handleImageUpload('setup', event)" style="display: none;">
                     </div>
-                    <img id="setupImagePreview" class="preview-image" style="display: none;">
+                    <div id="setupImageIcon" class="image-icon-container" style="display: none;">
+                        <img id="setupImagePreview" class="image-icon" onclick="showImageModal('setup')" alt="Иконка сетапа">
+                    </div>
                 </div>
             </div>
             <div class="row mb-2">
@@ -699,7 +690,7 @@
             <button class="btn w-100 mt-2" id="cancelBtn" style="display: none;" onclick="cancelEdit()" data-tooltip="Отменить редактирование">Отмена</button>
         </div>
 
-        <div id="view" class="card fade-in">
+        <div id="view" class="card fade-in" style="display: none;">
             <h3 class="text-center mb-2" style="font-size: 1.8rem; background: linear-gradient(90deg, #00F7FF, #FF00E6); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Мои сделки</h3>
             <div class="progress-bar" id="successProgress"><span>0.00%</span></div>
             <div class="row mb-3">
@@ -765,7 +756,7 @@
             </div>
         </div>
 
-        <div id="stats" class="stats-container fade-in">
+        <div id="stats" class="stats-container fade-in" style="display: none;">
             <h3 class="text-center mb-4">Статистика</h3>
             <div class="stats-grid">
                 <div class="stat-card" data-tooltip="Максимальная прибыль за одну сделку">
@@ -805,9 +796,25 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="detailModalLabel">Детали</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
                     </div>
-                    <div class="modal-body" id="detailModalBody">
+                    <div class="modal-body" id="detailModalBody"></div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-action" data-bs-dismiss="modal">Закрыть</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="imageModalLabel">Просмотр изображения</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+                    </div>
+                    <div class="modal-body">
+                        <img id="modalImage" class="modal-image" alt="Полное изображение">
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-action" data-bs-dismiss="modal">Закрыть</button>
@@ -842,7 +849,7 @@
         let filters = JSON.parse(localStorage.getItem("filters")) || { coin: "", position: "", date: "", rating: "" };
         let sortColumn = null;
         let sortDirection = 1;
-        let currentLanguage = "ru";
+        let currentLanguage = localStorage.getItem("language") || "ru";
 
         const translations = {
             ru: {
@@ -875,6 +882,7 @@
                 setupDetails: "Сетап",
                 notesDetails: "Заметки",
                 closeButton: "Закрыть",
+                errorTitle: "Ошибка",
                 deleteConfirm: "Удалить сделку с ID",
                 addCoinPrompt: "Введите название новой монеты:",
                 coinExistsAlert: "Монета уже существует!",
@@ -884,6 +892,7 @@
                 tradeDeletedAlert: "Сделка удалена!",
                 noTradesAlert: "Нет сделок для экспорта!",
                 requiredFieldAlert: "Поле",
+                requiredFieldMessage: "обязательно для заполнения!",
                 negativeValueAlert: "не может быть отрицательным!",
                 maxProfitLabel: "Макс. прибыль",
                 maxLossLabel: "Макс. убыток",
@@ -893,7 +902,6 @@
                 editButton: "Ред.",
                 deleteButton: "Удал.",
                 actionLabel: "Действия",
-                detailsButton: "Подробнее",
                 tooltipSelectCoin: "Выберите или добавьте монету",
                 tooltipSelectPosition: "Выберите тип позиции",
                 tooltipSelectDate: "Выберите дату открытия сделки",
@@ -944,6 +952,7 @@
                 setupDetails: "Setup",
                 notesDetails: "Notes",
                 closeButton: "Close",
+                errorTitle: "Error",
                 deleteConfirm: "Delete trade with ID",
                 addCoinPrompt: "Enter the name of a new coin:",
                 coinExistsAlert: "Coin already exists!",
@@ -953,6 +962,7 @@
                 tradeDeletedAlert: "Trade deleted!",
                 noTradesAlert: "No trades to export!",
                 requiredFieldAlert: "Field",
+                requiredFieldMessage: "is required!",
                 negativeValueAlert: "cannot be negative!",
                 maxProfitLabel: "Max Profit",
                 maxLossLabel: "Max Loss",
@@ -962,7 +972,6 @@
                 editButton: "Edit",
                 deleteButton: "Delete",
                 actionLabel: "Actions",
-                detailsButton: "Details",
                 tooltipSelectCoin: "Select or add a coin",
                 tooltipSelectPosition: "Select position type",
                 tooltipSelectDate: "Select trade opening date",
@@ -985,66 +994,32 @@
             }
         };
 
-        function compressImage(file, callback) {
-            if (!file.type.startsWith("image/")) {
-                alert(translations[currentLanguage].noTradesAlert);
-                return;
-            }
-            const reader = new FileReader();
-            reader.readAsDataURL(file);
-            reader.onload = function(e) {
-                const img = new Image();
-                img.src = e.target.result;
-                img.onload = function() {
-                    const canvas = document.createElement("canvas");
-                    const ctx = canvas.getContext("2d");
-                    const maxWidth = 800;
-                    const maxHeight = 600;
-                    let width = img.width;
-                    let height = img.height;
-
-                    if (width > height) {
-                        if (width > maxWidth) {
-                            height = Math.round((height * maxWidth) / width);
-                            width = maxWidth;
-                        }
-                    } else {
-                        if (height > maxHeight) {
-                            width = Math.round((width * maxHeight) / height);
-                            height = maxHeight;
-                        }
-                    }
-
-                    canvas.width = width;
-                    canvas.height = height;
-                    ctx.drawImage(img, 0, 0, width, height);
-                    const compressedImage = canvas.toDataURL("image/jpeg", 0.7);
-                    callback(compressedImage);
+        // Обработка загрузки изображений
+        function handleImageUpload(type, event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const imageData = e.target.result;
+                    images[type] = imageData;
+                    localStorage.setItem("images", JSON.stringify(images));
+                    const preview = document.getElementById(`${type}ImagePreview`);
+                    preview.src = imageData;
+                    document.getElementById(`${type}ImageIcon`).style.display = 'block';
                 };
-            };
-        }
-
-        function handleSetupImageUpload(event) {
-            const file = event.target.files[0];
-            if (file) {
-                compressImage(file, compressedImage => {
-                    images["setupImage"] = compressedImage;
-                    localStorage.setItem("images", JSON.stringify(images));
-                    document.getElementById("setupImagePreview").src = compressedImage;
-                    document.getElementById("setupImagePreview").style.display = "block";
-                });
+                reader.readAsDataURL(file);
             }
         }
 
-        function handleNotesImageUpload(event) {
-            const file = event.target.files[0];
-            if (file) {
-                compressImage(file, compressedImage => {
-                    images["notesImage"] = compressedImage;
-                    localStorage.setItem("images", JSON.stringify(images));
-                    document.getElementById("notesImagePreview").src = compressedImage;
-                    document.getElementById("notesImagePreview").style.display = "block";
-                });
+        // Показ изображения в модальном окне
+        function showImageModal(type) {
+            const imageSrc = images[type];
+            if (imageSrc) {
+                const modalImage = document.getElementById('modalImage');
+                modalImage.src = imageSrc;
+                document.getElementById('imageModalLabel').textContent = type === 'setup' ? 'Сетап' : 'Заметки';
+                const modal = new bootstrap.Modal(document.getElementById('imageModal'));
+                modal.show();
             }
         }
 
@@ -1100,7 +1075,7 @@
             const day = String(date.getDate()).padStart(2, '0');
             const month = String(date.getMonth() + 1).padStart(2, '0');
             const year = date.getFullYear();
-            return `${year}-${month}-${day}`; // Формат для input type="date" (YYYY-MM-DD)
+            return `${year}-${month}-${day}`;
         }
 
         function sortTable(column) {
@@ -1126,12 +1101,20 @@
             updateTable();
         }
 
+        function showErrorModal(message) {
+            const modalBody = document.getElementById("detailModalBody");
+            modalBody.textContent = message;
+            document.getElementById("detailModalLabel").textContent = translations[currentLanguage].errorTitle;
+            new bootstrap.Modal(document.getElementById('detailModal')).show();
+        }
+
         function validateForm() {
             const requiredFields = ["coin", "position", "open_date", "risk", "profit", "loss", "result", "setup"];
             for (let field of requiredFields) {
                 const value = document.getElementById(field).value.trim();
                 if (!value) {
-                    alert(`${translations[currentLanguage].requiredFieldAlert} "${document.querySelector(`label[for="${field}"]`).textContent}" ${translations[currentLanguage].requiredFieldAlert}!`);
+                    const fieldLabel = document.querySelector(`label[for="${field}"]`).textContent;
+                    showErrorModal(`${translations[currentLanguage].requiredFieldAlert} "${fieldLabel}" ${translations[currentLanguage].requiredFieldMessage}`);
                     return false;
                 }
             }
@@ -1140,58 +1123,13 @@
             for (let field of numericFields) {
                 const value = parseFloat(document.getElementById(field).value);
                 if (value < 0) {
-                    alert(`${document.querySelector(`label[for="${field}"]`).textContent} ${translations[currentLanguage].negativeValueAlert}`);
+                    const fieldLabel = document.querySelector(`label[for="${field}"]`).textContent;
+                    showErrorModal(`${fieldLabel} ${translations[currentLanguage].negativeValueAlert}`);
                     return false;
                 }
             }
 
             return true;
-        }
-
-        function editTrade(id) {
-            const trade = trades.find(t => t.id === id);
-            if (trade) {
-                editingTradeId = id;
-                document.getElementById("coin").value = trade.coin;
-                document.getElementById("position").value = trade.position;
-                document.getElementById("open_date").value = trade.open_date; // Уже в формате YYYY-MM-DD
-                document.getElementById("risk").value = trade.risk;
-                document.getElementById("profit").value = trade.profit;
-                document.getElementById("loss").value = trade.loss;
-                document.getElementById("result").value = trade.result;
-                document.getElementById("setup").value = trade.setup;
-                document.getElementById("notes").value = trade.notes || "";
-                document.getElementById("rating").value = trade.rating;
-                document.getElementById("ratingValue").textContent = trade.rating;
-                document.getElementById("setupImage").value = "";
-                document.getElementById("notesImage").value = "";
-                images = {
-                    "setupImage": trade.setupImage || "",
-                    "notesImage": trade.notesImage || ""
-                };
-                localStorage.setItem("images", JSON.stringify(images));
-                if (trade.setupImage) {
-                    document.getElementById("setupImagePreview").src = trade.setupImage;
-                    document.getElementById("setupImagePreview").style.display = "block";
-                }
-                if (trade.notesImage) {
-                    document.getElementById("notesImagePreview").src = trade.notesImage;
-                    document.getElementById("notesImagePreview").style.display = "block";
-                }
-
-                document.getElementById("submitBtn").textContent = translations[currentLanguage].addTradeButton;
-                document.getElementById("cancelBtn").style.display = "block";
-                updateRatingDisplay(); // Обновляем ползунок рейтинга при редактировании
-                showSection('main');
-            }
-        }
-
-        function showSpinner() {
-            document.getElementById('loadingSpinner').style.display = 'flex';
-        }
-
-        function hideSpinner() {
-            document.getElementById('loadingSpinner').style.display = 'none';
         }
 
         function saveTrade() {
@@ -1215,8 +1153,8 @@
                             setup: document.getElementById("setup").value,
                             notes: document.getElementById("notes").value,
                             rating: parseInt(document.getElementById("rating").value) || 1,
-                            setupImage: images["setupImage"] || "",
-                            notesImage: images["notesImage"] || ""
+                            setupImage: images['setup'] || "",
+                            notesImage: images['notes'] || ""
                         };
                         trades[tradeIndex] = updatedTrade;
                         localStorage.setItem("trades", JSON.stringify(trades));
@@ -1238,8 +1176,8 @@
                         setup: document.getElementById("setup").value,
                         notes: document.getElementById("notes").value,
                         rating: parseInt(document.getElementById("rating").value) || 1,
-                        setupImage: images["setupImage"] || "",
-                        notesImage: images["notesImage"] || ""
+                        setupImage: images['setup'] || "",
+                        notesImage: images['notes'] || ""
                     };
                     trades.push(trade);
                     localStorage.setItem("trades", JSON.stringify(trades));
@@ -1264,7 +1202,7 @@
         function clearForm() {
             document.getElementById("coin").value = "BTCUSD";
             document.getElementById("position").value = "Short";
-            document.getElementById("open_date").value = formatDate(new Date()); // Устанавливаем текущую дату в формате YYYY-MM-DD
+            document.getElementById("open_date").value = formatDate(new Date());
             document.getElementById("risk").value = "";
             document.getElementById("profit").value = "";
             document.getElementById("loss").value = "";
@@ -1275,11 +1213,60 @@
             document.getElementById("ratingValue").textContent = "1";
             document.getElementById("setupImage").value = "";
             document.getElementById("notesImage").value = "";
-            document.getElementById("setupImagePreview").style.display = "none";
-            document.getElementById("notesImagePreview").style.display = "none";
+            document.getElementById("setupImageIcon").style.display = "none";
+            document.getElementById("notesImageIcon").style.display = "none";
             images = {};
             localStorage.setItem("images", JSON.stringify(images));
-            updateRatingDisplay(); // Обновляем ползунок рейтинга при очистке формы
+            updateRatingDisplay();
+        }
+
+        function editTrade(id) {
+            const trade = trades.find(t => t.id === id);
+            if (trade) {
+                editingTradeId = id;
+                document.getElementById("coin").value = trade.coin;
+                document.getElementById("position").value = trade.position;
+                document.getElementById("open_date").value = trade.open_date;
+                document.getElementById("risk").value = trade.risk;
+                document.getElementById("profit").value = trade.profit;
+                document.getElementById("loss").value = trade.loss;
+                document.getElementById("result").value = trade.result;
+                document.getElementById("setup").value = trade.setup;
+                document.getElementById("notes").value = trade.notes || "";
+                document.getElementById("rating").value = trade.rating;
+                document.getElementById("ratingValue").textContent = trade.rating;
+                document.getElementById("setupImage").value = "";
+                document.getElementById("notesImage").value = "";
+                images = {
+                    "setup": trade.setupImage || "",
+                    "notes": trade.notesImage || ""
+                };
+                localStorage.setItem("images", JSON.stringify(images));
+                if (trade.setupImage) {
+                    document.getElementById("setupImagePreview").src = trade.setupImage;
+                    document.getElementById("setupImageIcon").style.display = "block";
+                } else {
+                    document.getElementById("setupImageIcon").style.display = "none";
+                }
+                if (trade.notesImage) {
+                    document.getElementById("notesImagePreview").src = trade.notesImage;
+                    document.getElementById("notesImageIcon").style.display = "block";
+                } else {
+                    document.getElementById("notesImageIcon").style.display = "none";
+                }
+                document.getElementById("submitBtn").textContent = translations[currentLanguage].addTradeButton;
+                document.getElementById("cancelBtn").style.display = "block";
+                updateRatingDisplay();
+                showSection('main');
+            }
+        }
+
+        function showSpinner() {
+            document.getElementById('loadingSpinner').style.display = 'flex';
+        }
+
+        function hideSpinner() {
+            document.getElementById('loadingSpinner').style.display = 'none';
         }
 
         function updateTable() {
@@ -1304,8 +1291,8 @@
                     <td>${trade.profit.toFixed(2)}</td>
                     <td>${trade.loss.toFixed(2)}</td>
                     <td>${trade.result.toFixed(2)}</td>
-                    <td class="setup-cell"><button class="btn-action btn-sm" onclick="showDetailModal(${trade.id}, 'setup')">${translations[currentLanguage].detailsButton}</button></td>
-                    <td class="notes-cell"><button class="btn-action btn-sm" onclick="showDetailModal(${trade.id}, 'notes')">${translations[currentLanguage].detailsButton}</button></td>
+                    <td><button class="btn-action btn-sm" onclick="showDetailModal(${trade.id}, 'setup')">Подробнее</button></td>
+                    <td><button class="btn-action btn-sm" onclick="showDetailModal(${trade.id}, 'notes')">Подробнее</button></td>
                     <td>${trade.rating}</td>
                     <td>
                         <button class="btn-action btn-sm" onclick="editTrade(${trade.id})">${translations[currentLanguage].editButton}</button>
@@ -1457,7 +1444,6 @@
             translateInterface();
             document.querySelector('.lang-icon').textContent = lang.toUpperCase();
             document.querySelector('.lang-dropdown').classList.remove('active');
-            // Обновляем таблицу и фильтры после смены языка
             updateTable();
             updateFilterCoinOptions();
         }
@@ -1533,50 +1519,48 @@
             document.querySelectorAll('.stat-card')[4].setAttribute("data-tooltip", translations[currentLanguage].tooltipLossTrades);
         }
 
-        function autoSave() {
-            setTimeout(() => {
-                localStorage.setItem("trades", JSON.stringify(trades));
-                localStorage.setItem("coins", JSON.stringify(coins));
-                localStorage.setItem("images", JSON.stringify(images));
-                localStorage.setItem("filters", JSON.stringify(filters));
-            }, 1000);
-        }
-
         function updateRatingDisplay() {
             const ratingInput = document.getElementById("rating");
             const ratingValue = document.getElementById("ratingValue");
             const ratingFill = document.getElementById("ratingFill");
-            let value = parseFloat(ratingInput.value);
-            
-            const roundedValue = Math.round(value);
-            ratingValue.textContent = roundedValue;
-            
-            const percentage = ((roundedValue - 1) / 4) * 100;
-            ratingFill.style.width = `${percentage}%`;
-            
-            // Принудительно устанавливаем градиент для совместимости
-            ratingFill.style.background = `linear-gradient(90deg, #00F7FF, #FF00E6)`;
+
+            ratingInput.addEventListener("input", () => {
+                const value = ratingInput.value;
+                ratingValue.textContent = value;
+                const percentage = ((value - 1) / 4) * 100;
+                ratingFill.style.width = `${percentage}%`;
+            });
+
+            const initialValue = ratingInput.value;
+            ratingValue.textContent = initialValue;
+            const initialPercentage = ((initialValue - 1) / 4) * 100;
+            ratingFill.style.width = `${initialPercentage}%`;
         }
 
-        // Привязываем обновление к событиям ползунка
-        document.getElementById("rating").addEventListener("input", updateRatingDisplay);
+        function autoSave() {
+            localStorage.setItem("trades", JSON.stringify(trades));
+            localStorage.setItem("coins", JSON.stringify(coins));
+            localStorage.setItem("filters", JSON.stringify(filters));
+        }
 
-        // Инициализация при загрузке
-        updateRatingDisplay();
-
-        // Initialize the application
         document.addEventListener("DOMContentLoaded", () => {
-            updateCoinSelect();
-            updateFilterCoinOptions();
-            showSection('view');
-            if (localStorage.getItem("language")) {
-                setLanguage(localStorage.getItem("language"));
-            }
-            document.querySelectorAll('.lang-option').forEach(option => {
-                option.addEventListener('click', () => setLanguage(option.getAttribute('data-lang')));
-            });
-            updateTable();
-            updateStats();
+            showSpinner();
+            setTimeout(() => {
+                updateCoinSelect();
+                updateFilterCoinOptions();
+                document.getElementById("filterCoin").value = filters.coin;
+                document.getElementById("filterPosition").value = filters.position;
+                document.getElementById("filterDate").value = filters.date;
+                document.getElementById("filterRating").value = filters.rating;
+                document.querySelector('.lang-icon').textContent = currentLanguage.toUpperCase();
+                document.querySelectorAll('.lang-option').forEach(option => {
+                    option.addEventListener('click', () => setLanguage(option.getAttribute('data-lang')));
+                });
+                translateInterface();
+                showSection('view');
+                updateRatingDisplay();
+                hideSpinner();
+            }, 1000);
         });
     </script>
 </body>
