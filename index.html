@@ -119,13 +119,13 @@
         }
         .btn-add-image {
             position: absolute;
-            right: 25px;
+            right: 26px;
             top: 50%;
-            transform: translateY(-1%);
-            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-0%);
+            background: rgba(0, 183, 255, 0.1);
             border: none;
             border-radius: 5px;
-            padding: 7px 5px;
+            padding: 6px 5px;
             cursor: pointer;
             transition: all 0.3s ease;
         }
@@ -994,7 +994,6 @@
             }
         };
 
-        // Обработка загрузки изображений
         function handleImageUpload(type, event) {
             const file = event.target.files[0];
             if (file) {
@@ -1011,15 +1010,13 @@
             }
         }
 
-        // Показ изображения в модальном окне
         function showImageModal(type) {
             const imageSrc = images[type];
             if (imageSrc) {
                 const modalImage = document.getElementById('modalImage');
                 modalImage.src = imageSrc;
                 document.getElementById('imageModalLabel').textContent = type === 'setup' ? 'Сетап' : 'Заметки';
-                const modal = new bootstrap.Modal(document.getElementById('imageModal'));
-                modal.show();
+                new bootstrap.Modal(document.getElementById('imageModal')).show();
             }
         }
 
