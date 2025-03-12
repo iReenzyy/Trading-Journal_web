@@ -120,13 +120,13 @@
         }
         .btn-add-image {
             position: absolute;
-            right: 25px;
+            right: 27px;
             top: 50%;
-            transform: translateY(-1%);
+            transform: translateY(-0%);
             background: rgba(0, 195, 255, 0.692);
             border: none;
-            border-radius: 5px;
-            padding: 7px 5px;
+            border-radius: 35px;
+            padding: 3px 5px;
             cursor: pointer;
             transition: all 0.3s ease;
         }
@@ -602,93 +602,99 @@
         <h1 class="fade-in"><i class="fas fa-chart-line"></i> Дневник трейдера</h1>
 
         <div id="main" class="card fade-in">
-            <div class="row mb-2">
-                <div class="col-6">
-                    <label for="coin" class="form-label" data-tooltip="Выберите или добавьте монету">Монета</label>
-                    <div class="d-flex">
-                        <select class="form-select" id="coin" required>
-                            <option value="BTCUSD">BTCUSD</option>
-                            <option value="ETHUSD">ETHUSD</option>
-                            <option value="XRPUSD">XRPUSD</option>
-                        </select>
-                        <button class="btn-add-coin" onclick="promptAddCoin()" data-tooltip="Добавить новую монету"><i class="fas fa-plus"></i></button>
-                    </div>
-                </div>
-                <div class="col-6">
-                    <label for="position" class="form-label" data-tooltip="Выберите тип позиции">Позиция</label>
-                    <select class="form-select" id="position" required>
-                        <option value="Short">Short</option>
-                        <option value="Long">Long</option>
-                    </select>
-                </div>
-            </div>
-            <div class="row mb-2">
-                <div class="col-6">
-                    <label for="open_date" class="form-label" data-tooltip="Выберите дату открытия сделки">Дата открытия</label>
-                    <div class="input-with-button">
-                        <input type="date" class="form-control" id="open_date" required>
-                        <i class="fas fa-calendar-alt" onclick="document.getElementById('open_date').showPicker();" data-tooltip="Выбрать дату"></i>
-                    </div>
-                </div>
-                <div class="col-6">
-                    <label for="risk" class="form-label" data-tooltip="Введите риск в долларах">Риск на сделку ($)</label>
-                    <input type="number" step="0.01" class="form-control" id="risk" required>
-                </div>
-            </div>
-            <div class="row mb-2">
-                <div class="col-6">
-                    <label for="profit" class="form-label" data-tooltip="Введите прибыль в долларах">Прибыль ($)</label>
-                    <input type="number" step="0.01" class="form-control" id="profit" required>
-                </div>
-                <div class="col-6">
-                    <label for="loss" class="form-label" data-tooltip="Введите убыток в долларах">Убыток ($)</label>
-                    <input type="number" step="0.01" class="form-control" id="loss" required>
-                </div>
-            </div>
-            <div class="row mb-2">
-                <div class="col-6">
-                    <label for="result" class="form-label" data-tooltip="Введите итог сделки в процентах">Итог сделки (%)</label>
-                    <input type="number" step="0.01" class="form-control" id="result" required>
-                </div>
-                <div class="col-6">
-                    <label for="notes" class="form-label" data-tooltip="Добавьте заметки к сделке">Заметки</label>
-                    <div class="input-with-button">
-                        <input type="text" class="form-control" id="notes">
-                        <button class="btn-add-image" onclick="document.getElementById('notesImage').click()" data-tooltip="Добавить изображение"><i class="fas fa-paperclip"></i></button>
-                        <input type="file" class="form-control" id="notesImage" accept="image/*" onchange="handleImageUpload('notes', event)" style="display: none;">
-                    </div>
-                    <div id="notesImageIcon" class="image-icon-container" style="display: none;">
-                        <img id="notesImagePreview" class="image-icon" onclick="showImageModal('notes')" alt="Иконка заметок">
-                    </div>
-                </div>
-            </div>
-            <div class="row mb-2">
-                <div class="col-12">
-                    <label for="setup" class="form-label" data-tooltip="Опишите сетап сделки">Сетап</label>
-                    <div class="input-with-button">
-                        <input type="text" class="form-control" id="setup" required style="height: 80px; resize: vertical;">
-                        <button class="btn-add-image" onclick="document.getElementById('setupImage').click()" data-tooltip="Добавить изображение"><i class="fas fa-paperclip"></i></button>
-                        <input type="file" class="form-control" id="setupImage" accept="image/*" onchange="handleImageUpload('setup', event)" style="display: none;">
-                    </div>
-                    <div id="setupImageIcon" class="image-icon-container" style="display: none;">
-                        <img id="setupImagePreview" class="image-icon" onclick="showImageModal('setup')" alt="Иконка сетапа">
-                    </div>
-                </div>
-            </div>
-            <div class="row mb-2">
-                <div class="col-12">
-                    <label for="rating" class="form-label" data-tooltip="Оцените сделку от 1 до 5">Оценка (1-5)</label>
-                    <div class="rating-wrapper">
-                        <input type="range" class="form-range" id="rating" min="1" max="5" value="1">
-                        <div class="rating-track">
-                            <div class="rating-fill" id="ratingFill"></div>
+            <form id="tradeForm" onsubmit="saveTrade(event)">
+                <div class="row mb-2">
+                    <div class="col-6">
+                        <label for="coin" class="form-label" data-tooltip="Выберите или добавьте монету">Монета</label>
+                        <div class="d-flex">
+                            <select class="form-select" id="coin" required>
+                                <option value="BTCUSD">BTCUSD</option>
+                                <option value="ETHUSD">ETHUSD</option>
+                                <option value="XRPUSD">XRPUSD</option>
+                            </select>
+                            <button type="button" class="btn-add-coin" onclick="promptAddCoin()" data-tooltip="Добавить новую монету"><i class="fas fa-plus"></i></button>
                         </div>
-                        <div class="rating-value" id="ratingValue">1</div>
+                    </div>
+                    <div class="col-6">
+                        <label for="position" class="form-label" data-tooltip="Выберите тип позиции">Позиция</label>
+                        <select class="form-select" id="position" required>
+                            <option value="Short">Short</option>
+                            <option value="Long">Long</option>
+                        </select>
                     </div>
                 </div>
-            </div>
-            <button class="btn w-100" id="submitBtn" onclick="saveTrade()" data-tooltip="Сохранить или добавить сделку"><i class="fas fa-plus"></i> Добавить сделку</button>
-            <button class="btn w-100 mt-2" id="cancelBtn" style="display: none;" onclick="cancelEdit()" data-tooltip="Отменить редактирование">Отмена</button>
+                <div class="row mb-2">
+                    <div class="col-6">
+                        <label for="open_date" class="form-label" data-tooltip="Выберите дату открытия сделки">Дата открытия</label>
+                        <div class="input-with-button">
+                            <input type="date" class="form-control" id="open_date" required max="${new Date().toISOString().split('T')[0]}">
+                            <i class="fas fa-calendar-alt" onclick="document.getElementById('open_date').showPicker();" data-tooltip="Выбрать дату"></i>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <label for="risk" class="form-label" data-tooltip="Введите риск в долларах">Риск на сделку ($)</label>
+                        <input type="number" step="0.01" class="form-control" id="risk" required min="0">
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-6">
+                        <label for="profit" class="form-label" data-tooltip="Введите прибыль в долларах">Прибыль ($)</label>
+                        <input type="number" step="0.01" class="form-control" id="profit" min="0">
+                    </div>
+                    <div class="col-6">
+                        <label for="loss" class="form-label" data-tooltip="Введите убыток в долларах">Убыток ($)</label>
+                        <input type="number" step="0.01" class="form-control" id="loss" min="0">
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-6">
+                        <label for="result" class="form-label" data-tooltip="Введите итог сделки в процентах">Итог сделки (%)</label>
+                        <input type="number" step="0.01" class="form-control" id="result" required>
+                    </div>
+                    <div class="col-6">
+                        <label for="notes" class="form-label" data-tooltip="Добавьте заметки к сделке">Заметки</label>
+                        <div class="input-with-button">
+                            <input type="text" class="form-control" id="notes">
+                            <button type="button" class="btn-add-image" onclick="document.getElementById('notesImage').click()" data-tooltip="Добавить изображение"><i class="fas fa-paperclip"></i></button>
+                            <input type="file" class="form-control" id="notesImage" accept="image/*" onchange="handleImageUpload('notes', event)" style="display: none;">
+                        </div>
+                        <div id="notesImageIcon" class="image-icon-container" style="display: none;">
+                            <img id="notesImagePreview" class="image-icon" onclick="showImageModal('notes')" alt="Иконка заметок">
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-12">
+                        <label for="setup" class="form-label" data-tooltip="Опишите сетап сделки">Сетап</label>
+                        <div class="input-with-button">
+                            <textarea class="form-control" id="setup" required style="height: 80px; resize: vertical;"></textarea>
+                            <button type="button" class="btn-add-image" onclick="document.getElementById('setupImage').click()" data-tooltip="Добавить изображение"><i class="fas fa-paperclip"></i></button>
+                            <input type="file" class="form-control" id="setupImage" accept="image/*" onchange="handleImageUpload('setup', event)" style="display: none;">
+                        </div>
+                        <div id="setupImageIcon" class="image-icon-container" style="display: none;">
+                            <img id="setupImagePreview" class="image-icon" onclick="showImageModal('setup')" alt="Иконка сетапа">
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-12">
+                        <label for="rating" class="form-label" data-tooltip="Оцените сделку от 1 до 5">Оценка (1-5)</label>
+                        <div class="rating-wrapper">
+                            <input type="range" class="form-range" id="rating" min="1" max="5" value="1">
+                            <div class="rating-track">
+                                <div class="rating-fill" id="ratingFill"></div>
+                            </div>
+                            <div class="rating-value" id="ratingValue">1</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <button type="submit" class="btn w-100" id="submitBtn" data-tooltip="Сохранить или добавить сделку"><i class="fas fa-plus"></i> Добавить сделку</button>
+                        <button type="button" class="btn w-100 mt-2" id="cancelBtn" style="display: none;" onclick="cancelEdit()" data-tooltip="Отменить редактирование">Отмена</button>
+                    </div>
+                </div>
+            </form>
         </div>
 
         <div id="view" class="card fade-in" style="display: none;">
@@ -1108,26 +1114,26 @@
         }
 
         function validateForm() {
-            const requiredFields = ["coin", "position", "open_date", "risk", "profit", "loss", "result", "setup"];
+            const requiredFields = [
+                { id: "coin", type: "select" },
+                { id: "position", type: "select" },
+                { id: "open_date", type: "date" },
+                { id: "risk", type: "number", min: 0 },
+                { id: "result", type: "number" },
+                { id: "setup", type: "textarea" }
+            ];
+
             for (let field of requiredFields) {
-                const value = document.getElementById(field).value.trim();
+                const value = document.getElementById(field.id).value.trim();
                 if (!value) {
-                    const fieldLabel = document.querySelector(`label[for="${field}"]`).textContent;
-                    showErrorModal(`${translations[currentLanguage].requiredFieldAlert} "${fieldLabel}" ${translations[currentLanguage].requiredFieldMessage}`);
+                    showNotification(`${translations[currentLanguage].requiredFieldAlert} "${document.querySelector(`label[for="${field.id}"]`).textContent}" ${translations[currentLanguage].requiredFieldMessage}`, 'error');
+                    return false;
+                }
+                if (field.type === "number" && parseFloat(value) < (field.min || 0)) {
+                    showNotification(`${document.querySelector(`label[for="${field.id}"]`).textContent} ${translations[currentLanguage].negativeValueAlert}`, 'error');
                     return false;
                 }
             }
-
-            const numericFields = ["risk", "profit", "loss"];
-            for (let field of numericFields) {
-                const value = parseFloat(document.getElementById(field).value);
-                if (value < 0) {
-                    const fieldLabel = document.querySelector(`label[for="${field}"]`).textContent;
-                    showErrorModal(`${fieldLabel} ${translations[currentLanguage].negativeValueAlert}`);
-                    return false;
-                }
-            }
-
             return true;
         }
 
@@ -1142,57 +1148,44 @@
             }).showToast();
         }
 
-        function saveTrade() {
+        function saveTrade(event) {
+            event.preventDefault();
             if (!validateForm()) return;
 
             showSpinner();
 
             setTimeout(() => {
+                const tradeData = {
+                    id: editingTradeId || trades.length + 1,
+                    coin: document.getElementById("coin").value,
+                    position: document.getElementById("position").value,
+                    open_date: document.getElementById("open_date").value,
+                    risk: parseFloat(document.getElementById("risk").value) || 0,
+                    profit: parseFloat(document.getElementById("profit").value) || 0,
+                    loss: parseFloat(document.getElementById("loss").value) || 0,
+                    result: parseFloat(document.getElementById("result").value) || 0,
+                    setup: document.getElementById("setup").value,
+                    notes: document.getElementById("notes").value || "",
+                    rating: parseInt(document.getElementById("rating").value) || 1,
+                    setupImage: images['setup'] || "",
+                    notesImage: images['notes'] || ""
+                };
+
                 if (editingTradeId) {
                     const tradeIndex = trades.findIndex(t => t.id === editingTradeId);
                     if (tradeIndex !== -1) {
-                        const updatedTrade = {
-                            id: editingTradeId,
-                            coin: document.getElementById("coin").value,
-                            position: document.getElementById("position").value,
-                            open_date: document.getElementById("open_date").value,
-                            risk: parseFloat(document.getElementById("risk").value) || 0,
-                            profit: parseFloat(document.getElementById("profit").value) || 0,
-                            loss: parseFloat(document.getElementById("loss").value) || 0,
-                            result: parseFloat(document.getElementById("result").value) || 0,
-                            setup: document.getElementById("setup").value,
-                            notes: document.getElementById("notes").value,
-                            rating: parseInt(document.getElementById("rating").value) || 1,
-                            setupImage: images['setup'] || "",
-                            notesImage: images['notes'] || ""
-                        };
-                        trades[tradeIndex] = updatedTrade;
-                        localStorage.setItem("trades", JSON.stringify(trades));
+                        trades[tradeIndex] = tradeData;
                         showNotification(translations[currentLanguage].tradeUpdatedAlert);
                     }
                     editingTradeId = null;
                     document.getElementById("submitBtn").textContent = translations[currentLanguage].addTradeButton;
                     document.getElementById("cancelBtn").style.display = "none";
                 } else {
-                    const trade = {
-                        id: trades.length + 1,
-                        coin: document.getElementById("coin").value,
-                        position: document.getElementById("position").value,
-                        open_date: document.getElementById("open_date").value,
-                        risk: parseFloat(document.getElementById("risk").value) || 0,
-                        profit: parseFloat(document.getElementById("profit").value) || 0,
-                        loss: parseFloat(document.getElementById("loss").value) || 0,
-                        result: parseFloat(document.getElementById("result").value) || 0,
-                        setup: document.getElementById("setup").value,
-                        notes: document.getElementById("notes").value,
-                        rating: parseInt(document.getElementById("rating").value) || 1,
-                        setupImage: images['setup'] || "",
-                        notesImage: images['notes'] || ""
-                    };
-                    trades.push(trade);
-                    localStorage.setItem("trades", JSON.stringify(trades));
+                    trades.push(tradeData);
                     showNotification(translations[currentLanguage].tradeAddedAlert);
                 }
+
+                localStorage.setItem("trades", JSON.stringify(trades));
                 clearForm();
                 updateTable();
                 updateStats();
@@ -1210,19 +1203,12 @@
         }
 
         function clearForm() {
+            document.getElementById("tradeForm").reset();
             document.getElementById("coin").value = "BTCUSD";
             document.getElementById("position").value = "Short";
-            document.getElementById("open_date").value = formatDate(new Date());
-            document.getElementById("risk").value = "";
-            document.getElementById("profit").value = "";
-            document.getElementById("loss").value = "";
-            document.getElementById("result").value = "";
-            document.getElementById("setup").value = "";
-            document.getElementById("notes").value = "";
+            document.getElementById("open_date").value = new Date().toISOString().split('T')[0];
             document.getElementById("rating").value = "1";
             document.getElementById("ratingValue").textContent = "1";
-            document.getElementById("setupImage").value = "";
-            document.getElementById("notesImage").value = "";
             document.getElementById("setupImageIcon").style.display = "none";
             document.getElementById("notesImageIcon").style.display = "none";
             images = {};
@@ -1283,10 +1269,10 @@
             const tbody = document.getElementById("tradesBody");
             tbody.innerHTML = "";
             const filteredTrades = trades.filter(trade => {
-                const matchesCoin = filters.coin ? trade.coin === filters.coin : true;
-                const matchesPosition = filters.position ? trade.position === filters.position : true;
-                const matchesDate = filters.date ? trade.open_date === filters.date : true;
-                const matchesRating = filters.rating ? Math.floor(trade.rating) === parseInt(filters.rating) : true;
+                const matchesCoin = !filters.coin || trade.coin === filters.coin;
+                const matchesPosition = !filters.position || trade.position === filters.position;
+                const matchesDate = !filters.date || trade.open_date === filters.date;
+                const matchesRating = !filters.rating || Math.floor(trade.rating) === parseInt(filters.rating);
                 return matchesCoin && matchesPosition && matchesDate && matchesRating;
             });
             filteredTrades.forEach(trade => {
@@ -1327,12 +1313,12 @@
                 const modalBody = document.getElementById("detailModalBody");
                 let content = "";
                 if (type === 'setup') {
-                    content = trade.setup || "No setup information available.";
+                    content = trade.setup || "Информация о сетапе отсутствует.";
                     if (trade.setupImage) {
                         content += `<img src="${trade.setupImage}" alt="Setup Image" style="max-width: 100%; margin-top: 10px;">`;
                     }
                 } else if (type === 'notes') {
-                    content = trade.notes || "No notes available.";
+                    content = trade.notes || "Заметки отсутствуют.";
                     if (trade.notesImage) {
                         content += `<img src="${trade.notesImage}" alt="Notes Image" style="max-width: 100%; margin-top: 10px;">`;
                     }
@@ -1550,9 +1536,12 @@
         }
 
         function autoSave() {
-            localStorage.setItem("trades", JSON.stringify(trades));
-            localStorage.setItem("coins", JSON.stringify(coins));
-            localStorage.setItem("filters", JSON.stringify(filters));
+            clearTimeout(window.autoSaveTimeout);
+            window.autoSaveTimeout = setTimeout(() => {
+                localStorage.setItem("trades", JSON.stringify(trades));
+                localStorage.setItem("coins", JSON.stringify(coins));
+                localStorage.setItem("filters", JSON.stringify(filters));
+            }, 500);
         }
 
         document.addEventListener("DOMContentLoaded", () => {
@@ -1571,9 +1560,16 @@
                 translateInterface();
                 showSection('view');
                 updateRatingDisplay();
+                ['risk', 'profit', 'loss'].forEach(id => {
+                    document.getElementById(id).addEventListener('input', () => {
+                        if (parseFloat(document.getElementById(id).value) < 0) {
+                            document.getElementById(id).value = 0;
+                        }
+                    });
+                });
                 hideSpinner();
             }, 1000);
         });
     </script>
 </body>
-</html>
+</html>Й
