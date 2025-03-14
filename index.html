@@ -792,6 +792,35 @@
                     <p><span id="lossTrades">0</span></p>
                 </div>
             </div>
+            <div class="mt-4">
+                <h3 class="text-center mb-4" style="font-size: 1.5rem;">Достижения</h3>
+                <div class="stats-grid" id="achievementsGrid">
+                    <div class="stat-card" data-tooltip="За первую записанную сделку">
+                        <i class="fas fa-trophy stat-icon profit"></i>
+                        <h4>Новичок</h4>
+                        <p id="newbieAchievement">Не получено</p>
+                    </div>
+                    <div class="stat-card" data-tooltip="За 10 сделок подряд без убытков">
+                        <i class="fas fa-star stat-icon profit"></i>
+                        <h4>Стабильный трейдер</h4>
+                        <p id="stableTraderAchievement">Не получено</p>
+                    </div>
+                    <div class="stat-card" data-tooltip="За заполнение сетапов и заметок в 20 сделках">
+                        <i class="fas fa-book stat-icon profit"></i>
+                        <h4>Мастер анализа</h4>
+                        <p id="analysisMasterAchievement">Не получено</p>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-4">
+                <h3 class="text-center mb-4" style="font-size: 1.5rem;">Уровень трейдера</h3>
+                <div class="stat-card mx-auto" data-tooltip="Ваш текущий уровень трейдера">
+                    <i class="fas fa-user-graduate stat-icon profit"></i>
+                    <h4 id="traderLevelTitle">Стажер</h4>
+                    <p><span id="traderLevel">Уровень 1</span></p>
+                </div>
+                <div class="progress-bar mt-3" id="levelProgress"><span id="levelProgressText">0%</span></div>
+            </div>
         </div>
 
         <div id="loadingSpinner" class="spinner" style="display: none;">
@@ -858,6 +887,7 @@
         let sortColumn = null;
         let sortDirection = 1;
         let currentLanguage = localStorage.getItem("language") || "ru";
+        let cachedStats = JSON.parse(localStorage.getItem("cachedStats")) || {};
 
         const translations = {
             ru: {
@@ -928,7 +958,14 @@
                 tooltipMaxLoss: "Максимальный убыток за одну сделку",
                 tooltipLongShortRatio: "Соотношение лонгов к шортам",
                 tooltipProfitableTrades: "Количество прибыльных сделок",
-                tooltipLossTrades: "Количество убыточных сделок"
+                tooltipLossTrades: "Количество убыточных сделок",
+                newbieAchievement: "Новичок",
+                stableTraderAchievement: "Стабильный трейдер",
+                analysisMasterAchievement: "Мастер анализа",
+                sniperAchievement: "Снайпер",
+                marathonAchievement: "Марафонец",
+                levelUpMessage: "Поздравляем! Вы достигли уровня: ",
+                tipMessage: "Совет: "
             },
             en: {
                 title: "Trader's Journal",
@@ -998,8 +1035,32 @@
                 tooltipMaxLoss: "Maximum loss per trade",
                 tooltipLongShortRatio: "Long/Short ratio",
                 tooltipProfitableTrades: "Number of profitable trades",
-                tooltipLossTrades: "Number of loss-making trades"
+                tooltipLossTrades: "Number of loss-making trades",
+                newbieAchievement: "Newbie",
+                stableTraderAchievement: "Stable Trader",
+                analysisMasterAchievement: "Analysis Master",
+                sniperAchievement: "Sniper",
+                marathonAchievement: "Marathoner",
+                levelUpMessage: "Congratulations! You reached level: ",
+                tipMessage: "Tip: "
             }
+        };
+
+        const tips = {
+            ru: [
+                "Анализируйте свои ошибки для роста.",
+                "Следите за управлением рисками.",
+                "Доверяйте своему торговому плану.",
+                "Не гонитесь за рынком, ждите сетап.",
+                "Ведите дневник регулярно."
+            ],
+            en: [
+                "Analyze your mistakes to grow.",
+                "Keep an eye on risk management.",
+                "Trust your trading plan.",
+                "Don’t chase the market, wait for setups.",
+                "Keep your journal consistently."
+            ]
         };
 
         function handleImageUpload(type, event) {
@@ -1143,7 +1204,7 @@
                 duration: 3000,
                 gravity: 'top',
                 position: 'right',
-                backgroundColor: type === 'success' ? '#00F7FF' : '#FF00E6',
+                backgroundColor: type === 'success' ? '#00F7FF' : type === 'error' ? '#FF00E6' : '#1E2A44',
                 stopOnFocus: true
             }).showToast();
         }
@@ -1392,6 +1453,15 @@
                 document.getElementById("longShortRatio").textContent = "0/0";
                 document.getElementById("profitableTrades").textContent = "0";
                 document.getElementById("lossTrades").textContent = "0";
+                document.getElementById("newbieAchievement").textContent = translations[currentLanguage].newbieAchievement + ": Не получено";
+                document.getElementById("stableTraderAchievement").textContent = translations[currentLanguage].stableTraderAchievement + ": Не получено";
+                document.getElementById("analysisMasterAchievement").textContent = translations[currentLanguage].analysisMasterAchievement + ": Не получено";
+                document.getElementById("traderLevelTitle").textContent = "Стажер";
+                document.getElementById("traderLevel").textContent = "Уровень 1";
+                document.getElementById("levelProgress").style.width = "0%";
+                document.getElementById("levelProgressText").textContent = "0%";
+                cachedStats = {};
+                localStorage.setItem("cachedStats", JSON.stringify(cachedStats));
                 return;
             }
 
@@ -1409,7 +1479,109 @@
             const lossTrades = trades.filter(t => t.result < 0).length;
             document.getElementById("profitableTrades").textContent = profitableTrades;
             document.getElementById("lossTrades").textContent = lossTrades;
+
+            // Кэширование сложных вычислений
+            if (!cachedStats.tradeCount || cachedStats.tradeCount !== trades.length) {
+                cachedStats.tradeCount = trades.length;
+                cachedStats.consecutiveNoLoss = 0;
+                for (let i = trades.length - 1; i >= 0; i--) {
+                    if (trades[i].result >= 0) cachedStats.consecutiveNoLoss++;
+                    else break;
+                }
+                cachedStats.detailedTrades = trades.filter(t => t.setup && t.notes).length;
+                cachedStats.profitableRate = (profitableTrades / trades.length) * 100;
+                cachedStats.totalProfit = trades.reduce((sum, t) => sum + t.profit - t.loss, 0);
+                cachedStats.avgRating = trades.reduce((sum, t) => sum + t.rating, 0) / trades.length || 0;
+                localStorage.setItem("cachedStats", JSON.stringify(cachedStats));
+            }
+
+            // Геймификация: Достижения
+            const achievements = {
+                newbie: {
+                    condition: trades.length >= 1,
+                    label: translations[currentLanguage].newbieAchievement,
+                    tooltip: "Запишите первую сделку"
+                },
+                stableTrader: {
+                    condition: cachedStats.consecutiveNoLoss >= 10,
+                    label: translations[currentLanguage].stableTraderAchievement,
+                    tooltip: `Осталось ${10 - cachedStats.consecutiveNoLoss} сделок без убытков из 10`
+                },
+                analysisMaster: {
+                    condition: cachedStats.detailedTrades >= 20,
+                    label: translations[currentLanguage].analysisMasterAchievement,
+                    tooltip: `Осталось ${20 - cachedStats.detailedTrades} сделок с анализом из 20`
+                },
+                sniper: {
+                    condition: trades.length >= 10 && cachedStats.profitableRate >= 80,
+                    label: translations[currentLanguage].sniperAchievement,
+                    tooltip: `Достигните 80%+ прибыльных сделок (текущий: ${cachedStats.profitableRate.toFixed(1)}%)`
+                },
+                marathon: {
+                    condition: trades.length >= 100,
+                    label: translations[currentLanguage].marathonAchievement,
+                    tooltip: `Осталось ${100 - trades.length} сделок из 100`
+                }
+            };
+
+            const achievementElements = [
+                "newbieAchievement",
+                "stableTraderAchievement",
+                "analysisMasterAchievement"
+            ];
+
+            Object.keys(achievements).slice(0, 3).forEach((key, index) => {
+                const ach = achievements[key];
+                const isAchieved = ach.condition;
+                document.getElementById(achievementElements[index]).textContent = `${ach.label}: ${isAchieved ? "Получено!" : "Не получено"}`;
+                document.querySelectorAll("#achievementsGrid .stat-card")[index].setAttribute("data-tooltip", isAchieved ? ach.tooltip : ach.tooltip);
+
+                if (isAchieved && !localStorage.getItem(`ach_${key}`)) {
+                    showNotification(`Достижение "${ach.label}" разблокировано!`, 'success');
+                    localStorage.setItem(`ach_${key}`, "true");
+                }
+            });
+
+            // Геймификация: Уровни
+            const totalTrades = trades.length;
+            const totalProfit = cachedStats.totalProfit;
+            const avgRating = cachedStats.avgRating;
+            let level = 1, levelTitle = "Стажер", nextLevelTrades = 10;
+
+            if (totalTrades >= 100 && totalProfit >= 50000 && avgRating >= 4.5) {
+                level = 6; levelTitle = "Легенда"; nextLevelTrades = Infinity;
+            } else if (totalTrades >= 50 && totalProfit >= 10000 && avgRating >= 4) {
+                level = 5; levelTitle = "Мастер"; nextLevelTrades = 100;
+            } else if (totalTrades >= 30 && totalProfit >= 5000 && avgRating >= 3.5) {
+                level = 4; levelTitle = "Эксперт"; nextLevelTrades = 50;
+            } else if (totalTrades >= 20 && totalProfit >= 1000) {
+                level = 3; levelTitle = "Профи"; nextLevelTrades = 30;
+            } else if (totalTrades >= 10 && totalProfit >= 100) {
+                level = 2; levelTitle = "Трейдер"; nextLevelTrades = 20;
+            }
+
+            const lastLevel = parseInt(localStorage.getItem("lastLevel") || 1);
+            if (level > lastLevel) {
+                showNotification(`${translations[currentLanguage].levelUpMessage} ${levelTitle}`, 'success');
+                showNotification(`${translations[currentLanguage].tipMessage} ${tips[currentLanguage][Math.floor(Math.random() * tips[currentLanguage].length)]}`, 'info');
+                localStorage.setItem("lastLevel", level);
+            }
+
+            document.getElementById("traderLevelTitle").textContent = levelTitle;
+            document.getElementById("traderLevel").textContent = `Уровень ${level}`;
+            const progress = level === 6 ? 100 : Math.min((totalTrades / nextLevelTrades) * 100, 100);
+            document.getElementById("levelProgress").style.width = `${progress}%`;
+            document.getElementById("levelProgressText").textContent = `${progress.toFixed(0)}%`;
+            document.querySelector(".stat-card.mx-auto").setAttribute("data-tooltip", `До следующего уровня: ${nextLevelTrades === Infinity ? "Максимум!" : nextLevelTrades - totalTrades} сделок`);
         }
+
+        function updateRatingDisplay() {
+            const rating = document.getElementById("rating").value;
+            document.getElementById("ratingValue").textContent = rating;
+            document.getElementById("ratingFill").style.width = `${(rating - 1) * 25}%`;
+        }
+
+        document.getElementById("rating").addEventListener("input", updateRatingDisplay);
 
         function showSection(section) {
             const sections = ['main', 'view', 'stats'];
