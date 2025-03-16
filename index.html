@@ -558,43 +558,6 @@
             z-index: 1;
             transition: all 0.3s ease;
         }
-        @media (max-width: 968px) {
-            h1 { font-size: 1.5rem; }
-            .card { padding: 10px; }
-            .form-label { font-size: 0.8rem; }
-            .form-control, .form-select { font-size: 0.9rem; height: 35px; }
-            .btn { padding: 6px 12px; font-size: 0.8rem; }
-            .table { font-size: 0.8rem; }
-            .table th, .table td { padding: 6px; }
-            .navbar-brand { 
-                font-size: 0.7rem;
-                padding: 6px 8px;
-            }
-            .lang-toggle { 
-                font-size: 0.7rem;
-                padding: 6px 8px;
-            }
-            .lang-icon { font-size: 0.6rem; }
-            .lang-dropdown { min-width: 60px; }
-            .lang-option { font-size: 0.6rem; padding: 3px 8px; }
-            .stats-grid { grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 10px; }
-            .stat-card { padding: 10px; max-width: 150px; }
-            .stat-card h4 { font-size: 0.9rem; }
-            .stat-card p { font-size: 1rem; }
-            .stat-card span { font-size: 1.1rem; }
-            .stat-icon { font-size: 1.5rem; }
-            .rating-value { font-size: 1rem; top: -18px; }
-            .rating-track, .form-range { height: 8px; }
-            .rating-fill { height: 8px; }
-            .form-range::-webkit-slider-thumb {
-                width: 14px;
-                height: 14px;
-            }
-            .form-range::-moz-range-thumb {
-                width: 14px;
-                height: 14px;
-            }
-        }
     </style>
 </head>
 <body>
@@ -791,6 +754,21 @@
                     <h4>Убыточных</h4>
                     <p><span id="lossTrades">0</span></p>
                 </div>
+                <div class="stat-card" data-tooltip="Общая прибыль по всем сделкам">
+                    <i class="fas fa-money-bill-wave stat-icon profit"></i>
+                    <h4>Общая прибыль</h4>
+                    <p><span id="totalProfit">0.00</span>$</p>
+                </div>
+                <div class="stat-card" data-tooltip="Общий убыток по всем сделкам">
+                    <i class="fas fa-money-bill-wave stat-icon loss"></i>
+                    <h4>Общий убыток</h4>
+                    <p><span id="totalLoss">0.00</span>$</p>
+                </div>
+                <div class="stat-card" data-tooltip="Сумма итогов сделок в процентах">
+                    <i class="fas fa-percent stat-icon"></i>
+                    <h4>Общий % к депозиту</h4>
+                    <p><span id="totalDepositPercent">0.00</span>%</p>
+                </div>
             </div>
             <div class="mt-4">
                 <h3 class="text-center mb-4" style="font-size: 1.5rem;">Достижения</h3>
@@ -809,6 +787,21 @@
                         <i class="fas fa-book stat-icon profit"></i>
                         <h4>Мастер анализа</h4>
                         <p id="analysisMasterAchievement">Не получено</p>
+                    </div>
+                    <div class="stat-card" data-tooltip="За сделки с риском не более 2% от общего риска">
+                        <i class="fas fa-shield-alt stat-icon profit"></i>
+                        <h4>Мастер риска</h4>
+                        <p id="riskMasterAchievement">Не получено</p>
+                    </div>
+                    <div class="stat-card" data-tooltip="За общую прибыль более $10,000">
+                        <i class="fas fa-crown stat-icon profit"></i>
+                        <h4>Король прибыли</h4>
+                        <p id="profitKingAchievement">Не получено</p>
+                    </div>
+                    <div class="stat-card" data-tooltip="За 100+ сделок">
+                        <i class="fas fa-running stat-icon profit"></i>
+                        <h4>Марафонский трейдер</h4>
+                        <p id="marathonTraderAchievement">Не получено</p>
                     </div>
                 </div>
             </div>
@@ -876,6 +869,46 @@
         </div>
     </nav>
 
+    <style>
+        @media (max-width: 968px) {
+            h1 { font-size: 1.5rem; }
+            .card { padding: 10px; }
+            .form-label { font-size: 0.8rem; }
+            .form-control, .form-select { font-size: 0.9rem; height: 35px; }
+            .btn { padding: 6px 12px; font-size: 0.8rem; }
+            .table { font-size: 0.8rem; }
+            .table th, .table td { padding: 6px; }
+            .navbar-brand { 
+                font-size: 0.7rem;
+                padding: 6px 8px;
+            }
+            .lang-toggle { 
+                font-size: 0.7rem;
+                padding: 6px 8px;
+            }
+            .lang-icon { font-size: 0.6rem; }
+            .lang-dropdown { min-width: 60px; }
+            .lang-option { font-size: 0.6rem; padding: 3px 8px; }
+            .stats-grid { grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 10px; }
+            .stat-card { padding: 10px; max-width: 150px; }
+            .stat-card h4 { font-size: 0.9rem; }
+            .stat-card p { font-size: 1rem; }
+            .stat-card span { font-size: 1.1rem; }
+            .stat-icon { font-size: 1.5rem; }
+            .rating-value { font-size: 1rem; top: -18px; }
+            .rating-track, .form-range { height: 8px; }
+            .rating-fill { height: 8px; }
+            .form-range::-webkit-slider-thumb {
+                width: 14px;
+                height: 14px;
+            }
+            .form-range::-moz-range-thumb {
+                width: 14px;
+                height: 14px;
+            }
+        }
+    </style>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <script>
@@ -937,6 +970,9 @@
                 longShortRatioLabel: "Лонги/Шорты",
                 profitableTradesLabel: "Прибыльных",
                 lossTradesLabel: "Убыточных",
+                totalProfitLabel: "Общая прибыль",
+                totalLossLabel: "Общий убыток",
+                totalDepositPercentLabel: "Общий % к депозиту",
                 editButton: "Ред.",
                 deleteButton: "Удал.",
                 actionLabel: "Действия",
@@ -959,13 +995,29 @@
                 tooltipLongShortRatio: "Соотношение лонгов к шортам",
                 tooltipProfitableTrades: "Количество прибыльных сделок",
                 tooltipLossTrades: "Количество убыточных сделок",
+                tooltipTotalProfit: "Общая прибыль по всем сделкам",
+                tooltipTotalLoss: "Общий убыток по всем сделкам",
+                tooltipTotalDepositPercent: "Сумма итогов сделок в процентах",
                 newbieAchievement: "Новичок",
                 stableTraderAchievement: "Стабильный трейдер",
                 analysisMasterAchievement: "Мастер анализа",
-                sniperAchievement: "Снайпер",
-                marathonAchievement: "Марафонец",
+                riskMasterAchievement: "Мастер риска",
+                profitKingAchievement: "Король прибыли",
+                marathonTraderAchievement: "Марафонский трейдер",
+                achieved: "Получено",
+                notAchieved: "Не получено",
                 levelUpMessage: "Поздравляем! Вы достигли уровня: ",
-                tipMessage: "Совет: "
+                tipMessage: "Совет: ",
+                "Стажер": "Стажер",
+                "Новобранец": "Новобранец",
+                "Ученик": "Ученик",
+                "Трейдер": "Трейдер",
+                "Опытный": "Опытный",
+                "Мастер": "Мастер",
+                "Эксперт": "Эксперт",
+                "Профессионал": "Профессионал",
+                "Легенда": "Легенда",
+                "Титан рынка": "Титан рынка"
             },
             en: {
                 title: "Trader's Journal",
@@ -1014,6 +1066,9 @@
                 longShortRatioLabel: "Longs/Shorts",
                 profitableTradesLabel: "Profitable",
                 lossTradesLabel: "Loss-making",
+                totalProfitLabel: "Total Profit",
+                totalLossLabel: "Total Loss",
+                totalDepositPercentLabel: "Total % to Deposit",
                 editButton: "Edit",
                 deleteButton: "Delete",
                 actionLabel: "Actions",
@@ -1036,13 +1091,29 @@
                 tooltipLongShortRatio: "Long/Short ratio",
                 tooltipProfitableTrades: "Number of profitable trades",
                 tooltipLossTrades: "Number of loss-making trades",
+                tooltipTotalProfit: "Total profit across all trades",
+                tooltipTotalLoss: "Total loss across all trades",
+                tooltipTotalDepositPercent: "Sum of trade results in percentage",
                 newbieAchievement: "Newbie",
                 stableTraderAchievement: "Stable Trader",
                 analysisMasterAchievement: "Analysis Master",
-                sniperAchievement: "Sniper",
-                marathonAchievement: "Marathoner",
+                riskMasterAchievement: "Risk Master",
+                profitKingAchievement: "Profit King",
+                marathonTraderAchievement: "Marathon Trader",
+                achieved: "Achieved",
+                notAchieved: "Not Achieved",
                 levelUpMessage: "Congratulations! You reached level: ",
-                tipMessage: "Tip: "
+                tipMessage: "Tip: ",
+                "Trainee": "Trainee",
+                "Rookie": "Rookie",
+                "Apprentice": "Apprentice",
+                "Trader": "Trader",
+                "Experienced": "Experienced",
+                "Master": "Master",
+                "Expert": "Expert",
+                "Professional": "Professional",
+                "Legend": "Legend",
+                "Market Titan": "Market Titan"
             }
         };
 
@@ -1084,7 +1155,7 @@
             if (imageSrc) {
                 const modalImage = document.getElementById('modalImage');
                 modalImage.src = imageSrc;
-                document.getElementById('imageModalLabel').textContent = type === 'setup' ? 'Сетап' : 'Заметки';
+                document.getElementById('imageModalLabel').textContent = type === 'setup' ? translations[currentLanguage].setupDetails : translations[currentLanguage].notesDetails;
                 new bootstrap.Modal(document.getElementById('imageModal')).show();
             }
         }
@@ -1348,8 +1419,8 @@
                     <td>${trade.profit.toFixed(2)}</td>
                     <td>${trade.loss.toFixed(2)}</td>
                     <td>${trade.result.toFixed(2)}</td>
-                    <td><button class="btn-action btn-sm" onclick="showDetailModal(${trade.id}, 'setup')">Подробнее</button></td>
-                    <td><button class="btn-action btn-sm" onclick="showDetailModal(${trade.id}, 'notes')">Подробнее</button></td>
+                    <td><button class="btn-action btn-sm" onclick="showDetailModal(${trade.id}, 'setup')">${translations[currentLanguage].detailsLabel}</button></td>
+                    <td><button class="btn-action btn-sm" onclick="showDetailModal(${trade.id}, 'notes')">${translations[currentLanguage].detailsLabel}</button></td>
                     <td>${trade.rating}</td>
                     <td>
                         <button class="btn-action btn-sm" onclick="editTrade(${trade.id})">${translations[currentLanguage].editButton}</button>
@@ -1410,7 +1481,7 @@
             setTimeout(() => {
                 let csv = "ID,Coin,Position,Date,Risk,Profit,Loss,Result,Setup,Notes,Rating\n";
                 trades.forEach(trade => {
-                    csv += `${trade.id},${trade.coin},${trade.position},${trade.open_date},${trade.risk},${trade.profit},${trade.loss},${trade.result},${trade.setup},${trade.notes || ''},${trade.rating}\n`;
+                    csv += `${trade.id},${trade.coin},${trade.position},${trade.open_date},${trade.risk},${trade.profit},${trade.loss},${trade.result},"${trade.setup.replace(/"/g, '""')}","${(trade.notes || '').replace(/"/g, '""')}",${trade.rating}\n`;
                 });
                 const blob = new Blob([csv], { type: "text/csv" });
                 const url = window.URL.createObjectURL(blob);
@@ -1453,10 +1524,16 @@
                 document.getElementById("longShortRatio").textContent = "0/0";
                 document.getElementById("profitableTrades").textContent = "0";
                 document.getElementById("lossTrades").textContent = "0";
-                document.getElementById("newbieAchievement").textContent = translations[currentLanguage].newbieAchievement + ": Не получено";
-                document.getElementById("stableTraderAchievement").textContent = translations[currentLanguage].stableTraderAchievement + ": Не получено";
-                document.getElementById("analysisMasterAchievement").textContent = translations[currentLanguage].analysisMasterAchievement + ": Не получено";
-                document.getElementById("traderLevelTitle").textContent = "Стажер";
+                document.getElementById("totalProfit").textContent = "0.00";
+                document.getElementById("totalLoss").textContent = "0.00";
+                document.getElementById("totalDepositPercent").textContent = "0.00";
+                document.getElementById("newbieAchievement").textContent = translations[currentLanguage].notAchieved;
+                document.getElementById("stableTraderAchievement").textContent = translations[currentLanguage].notAchieved;
+                document.getElementById("analysisMasterAchievement").textContent = translations[currentLanguage].notAchieved;
+                document.getElementById("riskMasterAchievement").textContent = translations[currentLanguage].notAchieved;
+                document.getElementById("profitKingAchievement").textContent = translations[currentLanguage].notAchieved;
+                document.getElementById("marathonTraderAchievement").textContent = translations[currentLanguage].notAchieved;
+                document.getElementById("traderLevelTitle").textContent = translations[currentLanguage]["Стажер"];
                 document.getElementById("traderLevel").textContent = "Уровень 1";
                 document.getElementById("levelProgress").style.width = "0%";
                 document.getElementById("levelProgressText").textContent = "0%";
@@ -1480,7 +1557,15 @@
             document.getElementById("profitableTrades").textContent = profitableTrades;
             document.getElementById("lossTrades").textContent = lossTrades;
 
-            // Кэширование сложных вычислений
+            const totalProfit = trades.reduce((sum, t) => sum + t.profit, 0);
+            const totalLoss = trades.reduce((sum, t) => sum + t.loss, 0);
+            document.getElementById("totalProfit").textContent = totalProfit.toFixed(2);
+            document.getElementById("totalLoss").textContent = totalLoss.toFixed(2);
+
+            // Расчет "Общий % к депозиту" как суммы всех значений result
+            const totalDepositPercent = trades.reduce((sum, t) => sum + t.result, 0);
+            document.getElementById("totalDepositPercent").textContent = totalDepositPercent.toFixed(2);
+
             if (!cachedStats.tradeCount || cachedStats.tradeCount !== trades.length) {
                 cachedStats.tradeCount = trades.length;
                 cachedStats.consecutiveNoLoss = 0;
@@ -1490,8 +1575,9 @@
                 }
                 cachedStats.detailedTrades = trades.filter(t => t.setup && t.notes).length;
                 cachedStats.profitableRate = (profitableTrades / trades.length) * 100;
-                cachedStats.totalProfit = trades.reduce((sum, t) => sum + t.profit - t.loss, 0);
+                cachedStats.totalProfit = totalProfit - totalLoss;
                 cachedStats.avgRating = trades.reduce((sum, t) => sum + t.rating, 0) / trades.length || 0;
+                cachedStats.totalRisk = trades.reduce((sum, t) => sum + t.risk, 0);
                 localStorage.setItem("cachedStats", JSON.stringify(cachedStats));
             }
 
@@ -1512,235 +1598,197 @@
                     label: translations[currentLanguage].analysisMasterAchievement,
                     tooltip: `Осталось ${20 - cachedStats.detailedTrades} сделок с анализом из 20`
                 },
-                sniper: {
-                    condition: trades.length >= 10 && cachedStats.profitableRate >= 80,
-                    label: translations[currentLanguage].sniperAchievement,
-                    tooltip: `Достигните 80%+ прибыльных сделок (текущий: ${cachedStats.profitableRate.toFixed(1)}%)`
+                riskMaster: {
+                    condition: trades.every(t => t.risk <= (cachedStats.totalRisk / trades.length) * 0.02),
+                    label: translations[currentLanguage].riskMasterAchievement,
+                    tooltip: trades.length > 0 ? (trades.every(t => t.risk <= (cachedStats.totalRisk / trades.length) * 0.02) ? "Достижение получено!" : "Снизьте риск в сделках до 2% от среднего!") : "Запишите сделки с низким риском"
                 },
-                marathon: {
+                profitKing: {
+                    condition: cachedStats.totalProfit >= 10000,
+                    label: translations[currentLanguage].profitKingAchievement,
+                    tooltip: `Осталось $${(10000 - cachedStats.totalProfit).toFixed(2)} до $10,000 прибыли`
+                },
+                marathonTrader: {
                     condition: trades.length >= 100,
-                    label: translations[currentLanguage].marathonAchievement,
+                    label: translations[currentLanguage].marathonTraderAchievement,
                     tooltip: `Осталось ${100 - trades.length} сделок из 100`
                 }
             };
 
-            const achievementElements = [
-                "newbieAchievement",
-                "stableTraderAchievement",
-                "analysisMasterAchievement"
+            // Обновление текста достижений (без повтора названия)
+            document.getElementById("newbieAchievement").textContent = achievements.newbie.condition ? translations[currentLanguage].achieved : translations[currentLanguage].notAchieved;
+            document.getElementById("stableTraderAchievement").textContent = achievements.stableTrader.condition ? translations[currentLanguage].achieved : translations[currentLanguage].notAchieved;
+            document.getElementById("analysisMasterAchievement").textContent = achievements.analysisMaster.condition ? translations[currentLanguage].achieved : translations[currentLanguage].notAchieved;
+            document.getElementById("riskMasterAchievement").textContent = achievements.riskMaster.condition ? translations[currentLanguage].achieved : translations[currentLanguage].notAchieved;
+            document.getElementById("profitKingAchievement").textContent = achievements.profitKing.condition ? translations[currentLanguage].achieved : translations[currentLanguage].notAchieved;
+            document.getElementById("marathonTraderAchievement").textContent = achievements.marathonTrader.condition ? translations[currentLanguage].achieved : translations[currentLanguage].notAchieved;
+
+            // Уровни трейдера
+            const levels = [
+                { name: translations[currentLanguage]["Стажер"], trades: 0, profit: 0, rating: 0 },
+                { name: translations[currentLanguage]["Новобранец"], trades: 10, profit: 100, rating: 2 },
+                { name: translations[currentLanguage]["Ученик"], trades: 20, profit: 500, rating: 2.5 },
+                { name: translations[currentLanguage]["Трейдер"], trades: 30, profit: 1000, rating: 3 },
+                { name: translations[currentLanguage]["Опытный"], trades: 50, profit: 2000, rating: 3.5 },
+                { name: translations[currentLanguage]["Мастер"], trades: 70, profit: 3500, rating: 4 },
+                { name: translations[currentLanguage]["Эксперт"], trades: 90, profit: 5000, rating: 4.2 },
+                { name: translations[currentLanguage]["Профессионал"], trades: 120, profit: 7000, rating: 4.5 },
+                { name: translations[currentLanguage]["Легенда"], trades: 150, profit: 10000, rating: 4.7 },
+                { name: translations[currentLanguage]["Титан рынка"], trades: 200, profit: 15000, rating: 4.9 }
             ];
 
-            Object.keys(achievements).slice(0, 3).forEach((key, index) => {
-                const ach = achievements[key];
-                const isAchieved = ach.condition;
-                document.getElementById(achievementElements[index]).textContent = `${ach.label}: ${isAchieved ? "Получено!" : "Не получено"}`;
-                document.querySelectorAll("#achievementsGrid .stat-card")[index].setAttribute("data-tooltip", isAchieved ? ach.tooltip : ach.tooltip);
-
-                if (isAchieved && !localStorage.getItem(`ach_${key}`)) {
-                    showNotification(`Достижение "${ach.label}" разблокировано!`, 'success');
-                    localStorage.setItem(`ach_${key}`, "true");
+            let currentLevel = 1;
+            for (let i = 0; i < levels.length; i++) {
+                if (trades.length >= levels[i].trades && (cachedStats.totalProfit || 0) >= levels[i].profit && (cachedStats.avgRating || 0) >= levels[i].rating) {
+                    currentLevel = i + 1;
+                } else {
+                    break;
                 }
-            });
-
-            // Геймификация: Уровни
-            const totalTrades = trades.length;
-            const totalProfit = cachedStats.totalProfit;
-            const avgRating = cachedStats.avgRating;
-            let level = 1, levelTitle = "Стажер", nextLevelTrades = 10;
-
-            if (totalTrades >= 100 && totalProfit >= 50000 && avgRating >= 4.5) {
-                level = 6; levelTitle = "Легенда"; nextLevelTrades = Infinity;
-            } else if (totalTrades >= 50 && totalProfit >= 10000 && avgRating >= 4) {
-                level = 5; levelTitle = "Мастер"; nextLevelTrades = 100;
-            } else if (totalTrades >= 30 && totalProfit >= 5000 && avgRating >= 3.5) {
-                level = 4; levelTitle = "Эксперт"; nextLevelTrades = 50;
-            } else if (totalTrades >= 20 && totalProfit >= 1000) {
-                level = 3; levelTitle = "Профи"; nextLevelTrades = 30;
-            } else if (totalTrades >= 10 && totalProfit >= 100) {
-                level = 2; levelTitle = "Трейдер"; nextLevelTrades = 20;
             }
 
-            const lastLevel = parseInt(localStorage.getItem("lastLevel") || 1);
-            if (level > lastLevel) {
-                showNotification(`${translations[currentLanguage].levelUpMessage} ${levelTitle}`, 'success');
-                showNotification(`${translations[currentLanguage].tipMessage} ${tips[currentLanguage][Math.floor(Math.random() * tips[currentLanguage].length)]}`, 'info');
-                localStorage.setItem("lastLevel", level);
+            const nextLevel = currentLevel < levels.length ? levels[currentLevel] : null;
+            let progress = 0;
+            if (nextLevel) {
+                const tradeProgress = Math.min((trades.length / nextLevel.trades) * 100, 100);
+                const profitProgress = Math.min(((cachedStats.totalProfit || 0) / nextLevel.profit) * 100, 100);
+                const ratingProgress = Math.min(((cachedStats.avgRating || 0) / nextLevel.rating) * 100, 100);
+                progress = Math.round((tradeProgress + profitProgress + ratingProgress) / 3);
             }
 
-            document.getElementById("traderLevelTitle").textContent = levelTitle;
-            document.getElementById("traderLevel").textContent = `Уровень ${level}`;
-            const progress = level === 6 ? 100 : Math.min((totalTrades / nextLevelTrades) * 100, 100);
+            document.getElementById("traderLevelTitle").textContent = levels[currentLevel - 1].name;
+            document.getElementById("traderLevel").textContent = `Уровень ${currentLevel}`;
             document.getElementById("levelProgress").style.width = `${progress}%`;
-            document.getElementById("levelProgressText").textContent = `${progress.toFixed(0)}%`;
-            document.querySelector(".stat-card.mx-auto").setAttribute("data-tooltip", `До следующего уровня: ${nextLevelTrades === Infinity ? "Максимум!" : nextLevelTrades - totalTrades} сделок`);
+            document.getElementById("levelProgressText").textContent = `${progress}%`;
+
+            // Уведомление о повышении уровня
+            const previousLevel = parseInt(localStorage.getItem("traderLevel") || "1");
+            if (currentLevel > previousLevel) {
+                showNotification(`${translations[currentLanguage].levelUpMessage} ${levels[currentLevel - 1].name}!`);
+                const randomTip = tips[currentLanguage][Math.floor(Math.random() * tips[currentLanguage].length)];
+                showNotification(`${translations[currentLanguage].tipMessage}${randomTip}`);
+            }
+            localStorage.setItem("traderLevel", currentLevel);
+        }
+
+        function autoSave() {
+            localStorage.setItem("trades", JSON.stringify(trades));
+            localStorage.setItem("coins", JSON.stringify(coins));
+            localStorage.setItem("images", JSON.stringify(images));
+            localStorage.setItem("filters", JSON.stringify(filters));
+        }
+
+        function showSection(section) {
+            document.getElementById("main").style.display = section === "main" ? "block" : "none";
+            document.getElementById("view").style.display = section === "view" ? "block" : "none";
+            document.getElementById("stats").style.display = section === "stats" ? "block" : "none";
+            document.querySelectorAll(".navbar-brand").forEach(btn => btn.classList.remove("active"));
+            document.querySelector(`.navbar-brand[onclick="showSection('${section}')"]`).classList.add("active");
+            if (section === "view") updateTable();
+            if (section === "stats") updateStats();
+        }
+
+        function toggleLanguageDropdown() {
+            const dropdown = document.querySelector(".lang-dropdown");
+            dropdown.classList.toggle("active");
+        }
+
+        function updateLanguage(lang) {
+            currentLanguage = lang;
+            localStorage.setItem("language", lang);
+            document.querySelector(".lang-icon").textContent = lang.toUpperCase();
+            document.querySelector("html").lang = lang;
+            document.querySelector("h1").textContent = translations[lang].title;
+            document.querySelector(".navbar-brand[onclick=\"showSection('main')\"]").innerHTML = `<i class="fas fa-home"></i> ${translations[lang].mainSection}`;
+            document.querySelector(".navbar-brand[onclick=\"showSection('view')\"]").innerHTML = `<i class="fas fa-table"></i> ${translations[lang].viewSection}`;
+            document.querySelector(".navbar-brand[onclick=\"showSection('stats')\"]").innerHTML = `<i class="fas fa-chart-bar"></i> ${translations[lang].statsSection}`;
+            document.querySelector("label[for='coin']").textContent = translations[lang].coinLabel;
+            document.querySelector("label[for='position']").textContent = translations[lang].positionLabel;
+            document.querySelector("label[for='open_date']").textContent = translations[lang].openDateLabel;
+            document.querySelector("label[for='risk']").textContent = translations[lang].riskLabel;
+            document.querySelector("label[for='profit']").textContent = translations[lang].profitLabel;
+            document.querySelector("label[for='loss']").textContent = translations[lang].lossLabel;
+            document.querySelector("label[for='result']").textContent = translations[lang].resultLabel;
+            document.querySelector("label[for='notes']").textContent = translations[lang].notesLabel;
+            document.querySelector("label[for='setup']").textContent = translations[lang].setupLabel;
+            document.querySelector("label[for='rating']").textContent = translations[lang].ratingLabel;
+            document.getElementById("submitBtn").innerHTML = `<i class="fas fa-plus"></i> ${translations[lang].addTradeButton}`;
+            document.getElementById("cancelBtn").textContent = translations[lang].cancelButton;
+            document.querySelector("label[for='filterCoin']").textContent = translations[lang].filterCoinLabel;
+            document.querySelector("label[for='filterDate']").textContent = translations[lang].filterDateLabel;
+            document.querySelector("label[for='filterPosition']").textContent = translations[lang].filterPositionLabel;
+            document.querySelector("label[for='filterRating']").textContent = translations[lang].filterRatingLabel;
+            document.getElementById("filterPosition").innerHTML = `
+                <option value="">${translations[lang].allOption}</option>
+                <option value="Short">${translations[lang].shortOption}</option>
+                <option value="Long">${translations[lang].longOption}</option>
+            `;
+            document.getElementById("filterRating").innerHTML = `
+                <option value="">${translations[lang].allOption}</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            `;
+            document.querySelector("th[data-sort='id']").textContent = "ID";
+            document.querySelector("th[data-sort='coin']").textContent = translations[lang].coinLabel;
+            document.querySelector("th[data-sort='position']").textContent = translations[lang].positionLabel;
+            document.querySelector("th[data-sort='open_date']").textContent = translations[lang].openDateLabel;
+            document.querySelector("th[data-sort='risk']").textContent = translations[lang].riskLabel;
+            document.querySelector("th[data-sort='profit']").textContent = translations[lang].profitLabel;
+            document.querySelector("th[data-sort='loss']").textContent = translations[lang].lossLabel;
+            document.querySelector("th[data-sort='result']").textContent = translations[lang].resultLabel;
+            document.querySelector("th[data-sort='rating']").textContent = translations[lang].ratingLabel;
+            document.querySelector("#tradesTable th:nth-child(9)").textContent = translations[lang].setupLabel;
+            document.querySelector("#tradesTable th:nth-child(10)").textContent = translations[lang].notesLabel;
+            document.querySelector("#tradesTable th:nth-child(12)").textContent = translations[lang].actionLabel;
+            document.querySelector("button[onclick='exportToCSV()']").textContent = translations[lang].exportCSVButton;
+            document.querySelector("button[onclick='exportToPDF()']").textContent = translations[lang].exportPDFButton;
+            document.querySelector("#stats h3").textContent = translations[lang].statsSection;
+            document.querySelector("#stats .stats-grid .stat-card:nth-child(1) h4").textContent = translations[lang].maxProfitLabel;
+            document.querySelector("#stats .stats-grid .stat-card:nth-child(2) h4").textContent = translations[lang].maxLossLabel;
+            document.querySelector("#stats .stats-grid .stat-card:nth-child(3) h4").textContent = translations[lang].longShortRatioLabel;
+            document.querySelector("#stats .stats-grid .stat-card:nth-child(4) h4").textContent = translations[lang].profitableTradesLabel;
+            document.querySelector("#stats .stats-grid .stat-card:nth-child(5) h4").textContent = translations[lang].lossTradesLabel;
+            document.querySelector("#stats .stats-grid .stat-card:nth-child(6) h4").textContent = translations[lang].totalProfitLabel;
+            document.querySelector("#stats .stats-grid .stat-card:nth-child(7) h4").textContent = translations[lang].totalLossLabel;
+            document.querySelector("#stats .stats-grid .stat-card:nth-child(8) h4").textContent = translations[lang].totalDepositPercentLabel;
+            updateFilterCoinOptions();
+            updateTable();
+            updateStats();
         }
 
         function updateRatingDisplay() {
             const rating = document.getElementById("rating").value;
             document.getElementById("ratingValue").textContent = rating;
-            document.getElementById("ratingFill").style.width = `${(rating - 1) * 25}%`;
+            const ratingFill = document.getElementById("ratingFill");
+            const percentage = ((rating - 1) / 4) * 100;
+            ratingFill.style.width = `${percentage}%`;
         }
 
         document.getElementById("rating").addEventListener("input", updateRatingDisplay);
 
-        function showSection(section) {
-            const sections = ['main', 'view', 'stats'];
-            sections.forEach(s => {
-                const element = document.querySelector(`#${s}`);
-                if (element) element.style.display = s === section ? 'block' : 'none';
+        document.querySelectorAll("th[data-sort]").forEach(th => {
+            th.addEventListener("click", () => sortTable(th.dataset.sort));
+        });
+
+        document.querySelectorAll(".lang-option").forEach(option => {
+            option.addEventListener("click", () => {
+                const lang = option.dataset.lang;
+                updateLanguage(lang);
+                toggleLanguageDropdown();
             });
-            if (section === 'main' && !editingTradeId) clearForm();
-            if (section === 'view') {
-                updateTable();
-                updateFilterCoinOptions();
-                document.querySelectorAll('#tradesTable th[data-sort]').forEach(th => {
-                    th.addEventListener('click', () => sortTable(th.getAttribute('data-sort')));
-                });
-            }
-            if (section === 'stats') updateStats();
-            document.querySelectorAll('.navbar-brand').forEach(a => a.classList.remove('active'));
-            document.querySelector(`.navbar-brand[onclick="showSection('${section}')"]`).classList.add('active');
-            translateInterface();
-        }
+        });
 
-        function toggleLanguageDropdown() {
-            const dropdown = document.querySelector('.lang-dropdown');
-            dropdown.classList.toggle('active');
-        }
-
-        function setLanguage(lang) {
-            currentLanguage = lang;
-            localStorage.setItem("language", lang);
-            translateInterface();
-            document.querySelector('.lang-icon').textContent = lang.toUpperCase();
-            document.querySelector('.lang-dropdown').classList.remove('active');
-            updateTable();
+        window.addEventListener("load", () => {
+            updateCoinSelect();
             updateFilterCoinOptions();
-        }
-
-        function translateInterface() {
-            document.querySelector('h1').textContent = translations[currentLanguage].title;
-            document.querySelectorAll('.navbar-brand')[0].innerHTML = `<i class="fas fa-home"></i> ${translations[currentLanguage].mainSection}`;
-            document.querySelectorAll('.navbar-brand')[1].innerHTML = `<i class="fas fa-table"></i> ${translations[currentLanguage].viewSection}`;
-            document.querySelectorAll('.navbar-brand')[2].innerHTML = `<i class="fas fa-chart-bar"></i> ${translations[currentLanguage].statsSection}`;
-            document.querySelector('#view h3').textContent = translations[currentLanguage].viewSection;
-            document.querySelector('#stats h3').textContent = translations[currentLanguage].statsSection;
-            document.querySelector('label[for="coin"]').textContent = translations[currentLanguage].coinLabel;
-            document.querySelector('label[for="position"]').textContent = translations[currentLanguage].positionLabel;
-            document.querySelector('label[for="open_date"]').textContent = translations[currentLanguage].openDateLabel;
-            document.querySelector('label[for="risk"]').textContent = translations[currentLanguage].riskLabel;
-            document.querySelector('label[for="profit"]').textContent = translations[currentLanguage].profitLabel;
-            document.querySelector('label[for="loss"]').textContent = translations[currentLanguage].lossLabel;
-            document.querySelector('label[for="result"]').textContent = translations[currentLanguage].resultLabel;
-            document.querySelector('label[for="notes"]').textContent = translations[currentLanguage].notesLabel;
-            document.querySelector('label[for="setup"]').textContent = translations[currentLanguage].setupLabel;
-            document.querySelector('label[for="rating"]').textContent = translations[currentLanguage].ratingLabel;
-            document.getElementById("submitBtn").textContent = translations[currentLanguage].addTradeButton;
-            document.getElementById("cancelBtn").textContent = translations[currentLanguage].cancelButton;
-            document.querySelector('label[for="filterCoin"]').textContent = translations[currentLanguage].filterCoinLabel;
-            document.querySelector('label[for="filterDate"]').textContent = translations[currentLanguage].filterDateLabel;
-            document.querySelector('label[for="filterPosition"]').textContent = translations[currentLanguage].filterPositionLabel;
-            document.querySelector('label[for="filterRating"]').textContent = translations[currentLanguage].filterRatingLabel;
-            document.querySelector('#filterCoin option[value=""]').textContent = translations[currentLanguage].allOption;
-            document.querySelector('#filterPosition option[value=""]').textContent = translations[currentLanguage].allOption;
-            document.querySelector('#filterPosition option[value="Short"]').textContent = translations[currentLanguage].shortOption;
-            document.querySelector('#filterPosition option[value="Long"]').textContent = translations[currentLanguage].longOption;
-            document.querySelectorAll('.row.mt-2 .col-6 button')[0].textContent = translations[currentLanguage].exportCSVButton;
-            document.querySelectorAll('.row.mt-2 .col-6 button')[1].textContent = translations[currentLanguage].exportPDFButton;
-            document.querySelector('#detailModalLabel').textContent = translations[currentLanguage].detailsLabel;
-            document.querySelector('.modal-footer .btn-action').textContent = translations[currentLanguage].closeButton;
-            document.querySelectorAll('.stat-card h4')[0].textContent = translations[currentLanguage].maxProfitLabel;
-            document.querySelectorAll('.stat-card h4')[1].textContent = translations[currentLanguage].maxLossLabel;
-            document.querySelectorAll('.stat-card h4')[2].textContent = translations[currentLanguage].longShortRatioLabel;
-            document.querySelectorAll('.stat-card h4')[3].textContent = translations[currentLanguage].profitableTradesLabel;
-            document.querySelectorAll('.stat-card h4')[4].textContent = translations[currentLanguage].lossTradesLabel;
-
-            document.querySelectorAll('.table th')[0].textContent = "ID";
-            document.querySelectorAll('.table th')[1].textContent = translations[currentLanguage].coinLabel;
-            document.querySelectorAll('.table th')[2].textContent = translations[currentLanguage].positionLabel;
-            document.querySelectorAll('.table th')[3].textContent = translations[currentLanguage].openDateLabel;
-            document.querySelectorAll('.table th')[4].textContent = translations[currentLanguage].riskLabel;
-            document.querySelectorAll('.table th')[5].textContent = translations[currentLanguage].profitLabel;
-            document.querySelectorAll('.table th')[6].textContent = translations[currentLanguage].lossLabel;
-            document.querySelectorAll('.table th')[7].textContent = translations[currentLanguage].resultLabel;
-            document.querySelectorAll('.table th')[8].textContent = translations[currentLanguage].setupLabel;
-            document.querySelectorAll('.table th')[9].textContent = translations[currentLanguage].notesLabel;
-            document.querySelectorAll('.table th')[10].textContent = translations[currentLanguage].ratingLabel;
-            document.querySelectorAll('.table th')[11].textContent = translations[currentLanguage].actionLabel;
-
-            document.querySelector('label[for="coin"]').setAttribute("data-tooltip", translations[currentLanguage].tooltipSelectCoin);
-            document.querySelector('label[for="position"]').setAttribute("data-tooltip", translations[currentLanguage].tooltipSelectPosition);
-            document.querySelector('label[for="open_date"]').setAttribute("data-tooltip", translations[currentLanguage].tooltipSelectDate);
-            document.querySelector('label[for="risk"]').setAttribute("data-tooltip", translations[currentLanguage].tooltipEnterRisk);
-            document.querySelector('label[for="profit"]').setAttribute("data-tooltip", translations[currentLanguage].tooltipEnterProfit);
-            document.querySelector('label[for="loss"]').setAttribute("data-tooltip", translations[currentLanguage].tooltipEnterLoss);
-            document.querySelector('label[for="result"]').setAttribute("data-tooltip", translations[currentLanguage].tooltipEnterResult);
-            document.querySelector('label[for="notes"]').setAttribute("data-tooltip", translations[currentLanguage].tooltipAddNotes);
-            document.querySelector('label[for="setup"]').setAttribute("data-tooltip", translations[currentLanguage].tooltipDescribeSetup);
-            document.querySelector('label[for="rating"]').setAttribute("data-tooltip", translations[currentLanguage].tooltipRateTrade);
-            document.getElementById("submitBtn").setAttribute("data-tooltip", translations[currentLanguage].tooltipAddTrade);
-            document.getElementById("cancelBtn").setAttribute("data-tooltip", translations[currentLanguage].tooltipCancelEdit);
-            document.querySelector('.btn-add-coin').setAttribute("data-tooltip", translations[currentLanguage].tooltipAddNewCoin);
-            document.querySelectorAll('.btn-add-image').forEach(btn => btn.setAttribute("data-tooltip", translations[currentLanguage].tooltipAddImage));
-            document.querySelectorAll('.stat-card')[0].setAttribute("data-tooltip", translations[currentLanguage].tooltipMaxProfit);
-            document.querySelectorAll('.stat-card')[1].setAttribute("data-tooltip", translations[currentLanguage].tooltipMaxLoss);
-            document.querySelectorAll('.stat-card')[2].setAttribute("data-tooltip", translations[currentLanguage].tooltipLongShortRatio);
-            document.querySelectorAll('.stat-card')[3].setAttribute("data-tooltip", translations[currentLanguage].tooltipProfitableTrades);
-            document.querySelectorAll('.stat-card')[4].setAttribute("data-tooltip", translations[currentLanguage].tooltipLossTrades);
-        }
-
-        function updateRatingDisplay() {
-            const ratingInput = document.getElementById("rating");
-            const ratingValue = document.getElementById("ratingValue");
-            const ratingFill = document.getElementById("ratingFill");
-
-            ratingInput.addEventListener("input", () => {
-                const value = ratingInput.value;
-                ratingValue.textContent = value;
-                const percentage = ((value - 1) / 4) * 100;
-                ratingFill.style.width = `${percentage}%`;
-            });
-
-            const initialValue = ratingInput.value;
-            ratingValue.textContent = initialValue;
-            const initialPercentage = ((initialValue - 1) / 4) * 100;
-            ratingFill.style.width = `${initialPercentage}%`;
-        }
-
-        function autoSave() {
-            clearTimeout(window.autoSaveTimeout);
-            window.autoSaveTimeout = setTimeout(() => {
-                localStorage.setItem("trades", JSON.stringify(trades));
-                localStorage.setItem("coins", JSON.stringify(coins));
-                localStorage.setItem("filters", JSON.stringify(filters));
-            }, 500);
-        }
-
-        document.addEventListener("DOMContentLoaded", () => {
-            showSpinner();
-            setTimeout(() => {
-                updateCoinSelect();
-                updateFilterCoinOptions();
-                document.getElementById("filterCoin").value = filters.coin;
-                document.getElementById("filterPosition").value = filters.position;
-                document.getElementById("filterDate").value = filters.date;
-                document.getElementById("filterRating").value = filters.rating;
-                document.querySelector('.lang-icon').textContent = currentLanguage.toUpperCase();
-                document.querySelectorAll('.lang-option').forEach(option => {
-                    option.addEventListener('click', () => setLanguage(option.getAttribute('data-lang')));
-                });
-                translateInterface();
-                showSection('view');
-                updateRatingDisplay();
-                ['risk', 'profit', 'loss'].forEach(id => {
-                    document.getElementById(id).addEventListener('input', () => {
-                        if (parseFloat(document.getElementById(id).value) < 0) {
-                            document.getElementById(id).value = 0;
-                        }
-                    });
-                });
-                hideSpinner();
-            }, 1000);
+            updateLanguage(currentLanguage);
+            updateTable();
+            updateStats();
+            clearForm();
+            document.getElementById("rating").value = "1";
+            updateRatingDisplay();
         });
     </script>
 </body>
