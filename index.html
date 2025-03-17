@@ -562,24 +562,24 @@
 </head>
 <body>
     <div class="container">
-        <h1 class="fade-in"><i class="fas fa-chart-line"></i> Дневник трейдера</h1>
+        <h1 class="fade-in"><i class="fas fa-chart-line"></i> <span id="pageTitle"></span></h1>
 
         <div id="main" class="card fade-in">
             <form id="tradeForm" onsubmit="saveTrade(event)">
                 <div class="row mb-2">
                     <div class="col-6">
-                        <label for="coin" class="form-label" data-tooltip="Выберите или добавьте монету">Монета</label>
+                        <label for="coin" class="form-label" data-tooltip="tooltipSelectCoin">Монета</label>
                         <div class="d-flex">
                             <select class="form-select" id="coin" required>
                                 <option value="BTCUSD">BTCUSD</option>
                                 <option value="ETHUSD">ETHUSD</option>
                                 <option value="XRPUSD">XRPUSD</option>
                             </select>
-                            <button type="button" class="btn-add-coin" onclick="promptAddCoin()" data-tooltip="Добавить новую монету"><i class="fas fa-plus"></i></button>
+                            <button type="button" class="btn-add-coin" onclick="promptAddCoin()" data-tooltip="tooltipAddNewCoin"><i class="fas fa-plus"></i></button>
                         </div>
                     </div>
                     <div class="col-6">
-                        <label for="position" class="form-label" data-tooltip="Выберите тип позиции">Позиция</label>
+                        <label for="position" class="form-label" data-tooltip="tooltipSelectPosition">Позиция</label>
                         <select class="form-select" id="position" required>
                             <option value="Short">Short</option>
                             <option value="Long">Long</option>
@@ -588,60 +588,60 @@
                 </div>
                 <div class="row mb-2">
                     <div class="col-6">
-                        <label for="open_date" class="form-label" data-tooltip="Выберите дату открытия сделки">Дата открытия</label>
+                        <label for="open_date" class="form-label" data-tooltip="tooltipSelectDate">Дата открытия</label>
                         <div class="input-with-button">
                             <input type="date" class="form-control" id="open_date" required max="${new Date().toISOString().split('T')[0]}">
-                            <i class="fas fa-calendar-alt" onclick="document.getElementById('open_date').showPicker();" data-tooltip="Выбрать дату"></i>
+                            <i class="fas fa-calendar-alt" onclick="document.getElementById('open_date').showPicker();" data-tooltip="tooltipSelectDate"></i>
                         </div>
                     </div>
                     <div class="col-6">
-                        <label for="risk" class="form-label" data-tooltip="Введите риск в долларах">Риск на сделку ($)</label>
+                        <label for="risk" class="form-label" data-tooltip="tooltipEnterRisk">Риск на сделку ($)</label>
                         <input type="number" step="0.01" class="form-control" id="risk" required min="0">
                     </div>
                 </div>
                 <div class="row mb-2">
                     <div class="col-6">
-                        <label for="profit" class="form-label" data-tooltip="Введите прибыль в долларах">Прибыль ($)</label>
+                        <label for="profit" class="form-label" data-tooltip="tooltipEnterProfit">Прибыль ($)</label>
                         <input type="number" step="0.01" class="form-control" id="profit" min="0">
                     </div>
                     <div class="col-6">
-                        <label for="loss" class="form-label" data-tooltip="Введите убыток в долларах">Убыток ($)</label>
+                        <label for="loss" class="form-label" data-tooltip="tooltipEnterLoss">Убыток ($)</label>
                         <input type="number" step="0.01" class="form-control" id="loss" min="0">
                     </div>
                 </div>
                 <div class="row mb-2">
                     <div class="col-6">
-                        <label for="result" class="form-label" data-tooltip="Введите итог сделки в процентах">Итог сделки (%)</label>
+                        <label for="result" class="form-label" data-tooltip="tooltipEnterResult">Итог сделки (%)</label>
                         <input type="number" step="0.01" class="form-control" id="result" required>
                     </div>
                     <div class="col-6">
-                        <label for="notes" class="form-label" data-tooltip="Добавьте заметки к сделке">Заметки</label>
+                        <label for="notes" class="form-label" data-tooltip="tooltipAddNotes">Заметки</label>
                         <div class="input-with-button">
                             <input type="text" class="form-control" id="notes">
-                            <button type="button" class="btn-add-image" onclick="document.getElementById('notesImage').click()" data-tooltip="Добавить изображение"><i class="fas fa-paperclip"></i></button>
+                            <button type="button" class="btn-add-image" onclick="document.getElementById('notesImage').click()" data-tooltip="tooltipAddImage"><i class="fas fa-paperclip"></i></button>
                             <input type="file" class="form-control" id="notesImage" accept="image/*" onchange="handleImageUpload('notes', event)" style="display: none;">
                         </div>
                         <div id="notesImageIcon" class="image-icon-container" style="display: none;">
-                            <img id="notesImagePreview" class="image-icon" onclick="showImageModal('notes')" alt="Иконка заметок">
+                            <img id="notesImagePreview" class="image-icon" onclick="showImageModal('notes')" alt="Notes Icon">
                         </div>
                     </div>
                 </div>
                 <div class="row mb-2">
                     <div class="col-12">
-                        <label for="setup" class="form-label" data-tooltip="Опишите сетап сделки">Сетап</label>
+                        <label for="setup" class="form-label" data-tooltip="tooltipDescribeSetup">Сетап</label>
                         <div class="input-with-button">
                             <textarea class="form-control" id="setup" required style="height: 80px; resize: vertical;"></textarea>
-                            <button type="button" class="btn-add-image" onclick="document.getElementById('setupImage').click()" data-tooltip="Добавить изображение"><i class="fas fa-paperclip"></i></button>
+                            <button type="button" class="btn-add-image" onclick="document.getElementById('setupImage').click()" data-tooltip="tooltipAddImage"><i class="fas fa-paperclip"></i></button>
                             <input type="file" class="form-control" id="setupImage" accept="image/*" onchange="handleImageUpload('setup', event)" style="display: none;">
                         </div>
                         <div id="setupImageIcon" class="image-icon-container" style="display: none;">
-                            <img id="setupImagePreview" class="image-icon" onclick="showImageModal('setup')" alt="Иконка сетапа">
+                            <img id="setupImagePreview" class="image-icon" onclick="showImageModal('setup')" alt="Setup Icon">
                         </div>
                     </div>
                 </div>
                 <div class="row mb-2">
                     <div class="col-12">
-                        <label for="rating" class="form-label" data-tooltip="Оцените сделку от 1 до 5">Оценка (1-5)</label>
+                        <label for="rating" class="form-label" data-tooltip="tooltipRateTrade">Оценка (1-5)</label>
                         <div class="rating-wrapper">
                             <input type="range" class="form-range" id="rating" min="1" max="5" value="1">
                             <div class="rating-track">
@@ -653,32 +653,32 @@
                 </div>
                 <div class="row">
                     <div class="col-12">
-                        <button type="submit" class="btn w-100" id="submitBtn" data-tooltip="Сохранить или добавить сделку"><i class="fas fa-plus"></i> Добавить сделку</button>
-                        <button type="button" class="btn w-100 mt-2" id="cancelBtn" style="display: none;" onclick="cancelEdit()" data-tooltip="Отменить редактирование">Отмена</button>
+                        <button type="submit" class="btn w-100" id="submitBtn" data-tooltip="tooltipAddTrade"><i class="fas fa-plus"></i> <span id="submitBtnText"></span></button>
+                        <button type="button" class="btn w-100 mt-2" id="cancelBtn" style="display: none;" onclick="cancelEdit()" data-tooltip="tooltipCancelEdit"><span id="cancelBtnText"></span></button>
                     </div>
                 </div>
             </form>
         </div>
 
         <div id="view" class="card fade-in" style="display: none;">
-            <h3 class="text-center mb-2" style="font-size: 1.8rem; background: linear-gradient(90deg, #00F7FF, #FF00E6); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Мои сделки</h3>
-            <div class="progress-bar" id="successProgress"><span>0.00%</span></div>
+            <h3 class="text-center mb-2" style="font-size: 1.8rem; background: linear-gradient(90deg, #00F7FF, #FF00E6); -webkit-background-clip: text; -webkit-text-fill-color: transparent;"><span id="viewTitle"></span></h3>
+            <div class="progress-bar" id="successProgress"><span id="successProgressText"></span></div>
             <div class="row mb-3">
                 <div class="col-6">
-                    <label for="filterCoin" class="form-label">Фильтр по монете</label>
+                    <label for="filterCoin" class="form-label" data-tooltip="tooltipFilterCoin">Фильтр по монете</label>
                     <select class="form-select" id="filterCoin" onchange="applyFilters()">
                         <option value="">Все</option>
                     </select>
                 </div>
                 <div class="col-6">
-                    <label for="filterDate" class="form-label">Фильтр по дате</label>
+                    <label for="filterDate" class="form-label" data-tooltip="tooltipFilterDate">Фильтр по дате</label>
                     <div class="input-with-button">
                         <input type="date" class="form-control" id="filterDate" onchange="applyFilters()">
-                        <i class="fas fa-calendar-alt" onclick="document.getElementById('filterDate').showPicker();"></i>
+                        <i class="fas fa-calendar-alt" onclick="document.getElementById('filterDate').showPicker();" data-tooltip="tooltipFilterDate"></i>
                     </div>
                 </div>
                 <div class="col-6">
-                    <label for="filterPosition" class="form-label">Фильтр по позиции</label>
+                    <label for="filterPosition" class="form-label" data-tooltip="tooltipFilterPosition">Фильтр по позиции</label>
                     <select class="form-select" id="filterPosition" onchange="applyFilters()">
                         <option value="">Все</option>
                         <option value="Short">Short</option>
@@ -686,7 +686,7 @@
                     </select>
                 </div>
                 <div class="col-6">
-                    <label for="filterRating" class="form-label">Фильтр по оценке</label>
+                    <label for="filterRating" class="form-label" data-tooltip="tooltipFilterRating">Фильтр по оценке</label>
                     <select class="form-select" id="filterRating" onchange="applyFilters()">
                         <option value="">Все</option>
                         <option value="1">1</option>
@@ -700,116 +700,116 @@
             <table class="table table-striped" id="tradesTable">
                 <thead>
                     <tr>
-                        <th data-sort="id">ID</th>
-                        <th data-sort="coin">Монета</th>
-                        <th data-sort="position">Позиция</th>
-                        <th data-sort="open_date">Дата</th>
-                        <th data-sort="risk">Риск ($)</th>
-                        <th data-sort="profit">Прибыль ($)</th>
-                        <th data-sort="loss">Убыток ($)</th>
-                        <th data-sort="result">Итог (%)</th>
-                        <th>Сетап</th>
-                        <th>Заметки</th>
-                        <th data-sort="rating">Оценка</th>
-                        <th>Действия</th>
+                        <th data-sort="id" id="thId">ID</th>
+                        <th data-sort="coin" id="thCoin">Монета</th>
+                        <th data-sort="position" id="thPosition">Позиция</th>
+                        <th data-sort="open_date" id="thOpenDate">Дата</th>
+                        <th data-sort="risk" id="thRisk">Риск ($)</th>
+                        <th data-sort="profit" id="thProfit">Прибыль ($)</th>
+                        <th data-sort="loss" id="thLoss">Убыток ($)</th>
+                        <th data-sort="result" id="thResult">Итог (%)</th>
+                        <th id="thSetup">Сетап</th>
+                        <th id="thNotes">Заметки</th>
+                        <th data-sort="rating" id="thRating">Оценка</th>
+                        <th id="thActions">Действия</th>
                     </tr>
                 </thead>
                 <tbody id="tradesBody"></tbody>
             </table>
             <div class="row mt-2">
                 <div class="col-6">
-                    <button class="btn w-100" onclick="exportToCSV()">Экспорт в CSV</button>
+                    <button class="btn w-100" onclick="exportToCSV()" id="exportCSVBtn"><span id="exportCSVBtnText"></span></button>
                 </div>
                 <div class="col-6">
-                    <button class="btn w-100" onclick="exportToPDF()">Экспорт в PDF</button>
+                    <button class="btn w-100" onclick="exportToPDF()" id="exportPDFBtn"><span id="exportPDFBtnText"></span></button>
                 </div>
             </div>
         </div>
 
         <div id="stats" class="stats-container fade-in" style="display: none;">
-            <h3 class="text-center mb-4">Статистика</h3>
+            <h3 class="text-center mb-4" id="statsTitle"></h3>
             <div class="stats-grid">
-                <div class="stat-card" data-tooltip="Максимальная прибыль за одну сделку">
+                <div class="stat-card" data-tooltip="tooltipMaxProfit">
                     <i class="fas fa-arrow-up stat-icon profit"></i>
-                    <h4>Макс. прибыль</h4>
+                    <h4 id="maxProfitLabel">Макс. прибыль</h4>
                     <p><span id="maxProfit">0.00</span>$</p>
                 </div>
-                <div class="stat-card" data-tooltip="Максимальный убыток за одну сделку">
+                <div class="stat-card" data-tooltip="tooltipMaxLoss">
                     <i class="fas fa-arrow-down stat-icon loss"></i>
-                    <h4>Макс. убыток</h4>
+                    <h4 id="maxLossLabel">Макс. убыток</h4>
                     <p><span id="maxLoss">0.00</span>$</p>
                 </div>
-                <div class="stat-card" data-tooltip="Соотношение лонгов к шортам">
+                <div class="stat-card" data-tooltip="tooltipLongShortRatio">
                     <i class="fas fa-balance-scale stat-icon"></i>
-                    <h4>Лонги/Шорты</h4>
+                    <h4 id="longShortRatioLabel">Лонги/Шорты</h4>
                     <p><span id="longShortRatio">0/0</span></p>
                 </div>
-                <div class="stat-card" data-tooltip="Количество прибыльных сделок">
+                <div class="stat-card" data-tooltip="tooltipProfitableTrades">
                     <i class="fas fa-check-circle stat-icon profit"></i>
-                    <h4>Прибыльных</h4>
+                    <h4 id="profitableTradesLabel">Прибыльных</h4>
                     <p><span id="profitableTrades">0</span></p>
                 </div>
-                <div class="stat-card" data-tooltip="Количество убыточных сделок">
+                <div class="stat-card" data-tooltip="tooltipLossTrades">
                     <i class="fas fa-times-circle stat-icon loss"></i>
-                    <h4>Убыточных</h4>
+                    <h4 id="lossTradesLabel">Убыточных</h4>
                     <p><span id="lossTrades">0</span></p>
                 </div>
-                <div class="stat-card" data-tooltip="Общая прибыль по всем сделкам">
+                <div class="stat-card" data-tooltip="tooltipTotalProfit">
                     <i class="fas fa-money-bill-wave stat-icon profit"></i>
-                    <h4>Общая прибыль</h4>
+                    <h4 id="totalProfitLabel">Общая прибыль</h4>
                     <p><span id="totalProfit">0.00</span>$</p>
                 </div>
-                <div class="stat-card" data-tooltip="Общий убыток по всем сделкам">
+                <div class="stat-card" data-tooltip="tooltipTotalLoss">
                     <i class="fas fa-money-bill-wave stat-icon loss"></i>
-                    <h4>Общий убыток</h4>
+                    <h4 id="totalLossLabel">Общий убыток</h4>
                     <p><span id="totalLoss">0.00</span>$</p>
                 </div>
-                <div class="stat-card" data-tooltip="Сумма итогов сделок в процентах">
+                <div class="stat-card" data-tooltip="tooltipTotalDepositPercent">
                     <i class="fas fa-percent stat-icon"></i>
-                    <h4>Общий % к депозиту</h4>
+                    <h4 id="totalDepositPercentLabel">Общий % к депозиту</h4>
                     <p><span id="totalDepositPercent">0.00</span>%</p>
                 </div>
             </div>
             <div class="mt-4">
-                <h3 class="text-center mb-4" style="font-size: 1.5rem;">Достижения</h3>
+                <h3 class="text-center mb-4" id="achievementsTitle" style="font-size: 1.5rem;">Достижения</h3>
                 <div class="stats-grid" id="achievementsGrid">
-                    <div class="stat-card" data-tooltip="За первую записанную сделку">
+                    <div class="stat-card" data-tooltip="tooltipNewbieAchievement">
                         <i class="fas fa-trophy stat-icon profit"></i>
-                        <h4>Новичок</h4>
+                        <h4 id="newbieAchievementLabel">Новичок</h4>
                         <p id="newbieAchievement">Не получено</p>
                     </div>
-                    <div class="stat-card" data-tooltip="За 10 сделок подряд без убытков">
+                    <div class="stat-card" data-tooltip="tooltipStableTraderAchievement">
                         <i class="fas fa-star stat-icon profit"></i>
-                        <h4>Стабильный трейдер</h4>
+                        <h4 id="stableTraderAchievementLabel">Стабильный трейдер</h4>
                         <p id="stableTraderAchievement">Не получено</p>
                     </div>
-                    <div class="stat-card" data-tooltip="За заполнение сетапов и заметок в 20 сделках">
+                    <div class="stat-card" data-tooltip="tooltipAnalysisMasterAchievement">
                         <i class="fas fa-book stat-icon profit"></i>
-                        <h4>Мастер анализа</h4>
+                        <h4 id="analysisMasterAchievementLabel">Мастер анализа</h4>
                         <p id="analysisMasterAchievement">Не получено</p>
                     </div>
-                    <div class="stat-card" data-tooltip="За сделки с риском не более 2% от общего риска">
+                    <div class="stat-card" data-tooltip="tooltipRiskMasterAchievement">
                         <i class="fas fa-shield-alt stat-icon profit"></i>
-                        <h4>Мастер риска</h4>
+                        <h4 id="riskMasterAchievementLabel">Мастер риска</h4>
                         <p id="riskMasterAchievement">Не получено</p>
                     </div>
-                    <div class="stat-card" data-tooltip="За общую прибыль более $10,000">
+                    <div class="stat-card" data-tooltip="tooltipProfitKingAchievement">
                         <i class="fas fa-crown stat-icon profit"></i>
-                        <h4>Король прибыли</h4>
+                        <h4 id="profitKingAchievementLabel">Король прибыли</h4>
                         <p id="profitKingAchievement">Не получено</p>
                     </div>
-                    <div class="stat-card" data-tooltip="За 100+ сделок">
+                    <div class="stat-card" data-tooltip="tooltipMarathonTraderAchievement">
                         <i class="fas fa-running stat-icon profit"></i>
-                        <h4>Марафонский трейдер</h4>
+                        <h4 id="marathonTraderAchievementLabel">Марафонский трейдер</h4>
                         <p id="marathonTraderAchievement">Не получено</p>
                     </div>
                 </div>
             </div>
             <div class="mt-4">
-                <h3 class="text-center mb-4" style="font-size: 1.5rem;">Уровень трейдера</h3>
-                <div class="stat-card mx-auto" data-tooltip="Ваш текущий уровень трейдера">
+                <h3 class="text-center mb-4" id="traderLevelTitleHeader" style="font-size: 1.5rem;">Уровень трейдера</h3>
+                <div class="stat-card mx-auto" data-tooltip="tooltipTraderLevel">
                     <i class="fas fa-user-graduate stat-icon profit"></i>
-                    <h4 id="traderLevelTitle">Стажер</h4>
+                    <h4 id="traderLevelLabel">Стажер</h4>
                     <p><span id="traderLevel">Уровень 1</span></p>
                 </div>
                 <div class="progress-bar mt-3" id="levelProgress"><span id="levelProgressText">0%</span></div>
@@ -829,7 +829,7 @@
                     </div>
                     <div class="modal-body" id="detailModalBody"></div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-action" data-bs-dismiss="modal">Закрыть</button>
+                        <button type="button" class="btn btn-action" data-bs-dismiss="modal" id="closeModalBtn"><span id="closeModalBtnText"></span></button>
                     </div>
                 </div>
             </div>
@@ -843,10 +843,10 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
                     </div>
                     <div class="modal-body">
-                        <img id="modalImage" class="modal-image" alt="Полное изображение">
+                        <img id="modalImage" class="modal-image" alt="Image View">
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-action" data-bs-dismiss="modal">Закрыть</button>
+                        <button type="button" class="btn btn-action" data-bs-dismiss="modal" id="imageCloseModalBtn"><span id="imageCloseModalBtnText"></span></button>
                     </div>
                 </div>
             </div>
@@ -855,9 +855,9 @@
 
     <nav class="navbar navbar-dark">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#" onclick="showSection('main')"><i class="fas fa-home"></i> Главная</a>
-            <a class="navbar-brand active" href="#" onclick="showSection('view')"><i class="fas fa-table"></i> Мои сделки</a>
-            <a class="navbar-brand" href="#" onclick="showSection('stats')"><i class="fas fa-chart-bar"></i> Статистика</a>
+            <a class="navbar-brand" href="#" onclick="showSection('main')"><i class="fas fa-home"></i> <span id="navMain"></span></a>
+            <a class="navbar-brand active" href="#" onclick="showSection('view')"><i class="fas fa-table"></i> <span id="navView"></span></a>
+            <a class="navbar-brand" href="#" onclick="showSection('stats')"><i class="fas fa-chart-bar"></i> <span id="navStats"></span></a>
             <div class="lang-toggle" onclick="toggleLanguageDropdown()">
                 <span class="lang-icon">RU</span>
                 <i class="fas fa-globe" style="margin-left: 5px;"></i>
@@ -930,14 +930,14 @@
                 statsSection: "Статистика",
                 coinLabel: "Монета",
                 positionLabel: "Позиция",
-                openDateLabel: "Дата",
-                riskLabel: "Риск ($)",
+                openDateLabel: "Дата открытия",
+                riskLabel: "Риск на сделку ($)",
                 profitLabel: "Прибыль ($)",
                 lossLabel: "Убыток ($)",
-                resultLabel: "Итог (%)",
+                resultLabel: "Итог сделки (%)",
                 notesLabel: "Заметки",
                 setupLabel: "Сетап",
-                ratingLabel: "Оценка",
+                ratingLabel: "Оценка (1-5)",
                 addTradeButton: "Добавить сделку",
                 cancelButton: "Отмена",
                 filterCoinLabel: "Фильтр по монете",
@@ -998,6 +998,13 @@
                 tooltipTotalProfit: "Общая прибыль по всем сделкам",
                 tooltipTotalLoss: "Общий убыток по всем сделкам",
                 tooltipTotalDepositPercent: "Сумма итогов сделок в процентах",
+                tooltipNewbieAchievement: "За первую записанную сделку",
+                tooltipStableTraderAchievement: "За 10 сделок подряд без убытков",
+                tooltipAnalysisMasterAchievement: "За заполнение сетапов и заметок в 20 сделках",
+                tooltipRiskMasterAchievement: "За сделки с риском не более 2% от общего риска",
+                tooltipProfitKingAchievement: "За общую прибыль более $10,000",
+                tooltipMarathonTraderAchievement: "За 100+ сделок",
+                tooltipTraderLevel: "Ваш текущий уровень трейдера",
                 newbieAchievement: "Новичок",
                 stableTraderAchievement: "Стабильный трейдер",
                 analysisMasterAchievement: "Мастер анализа",
@@ -1017,7 +1024,10 @@
                 "Эксперт": "Эксперт",
                 "Профессионал": "Профессионал",
                 "Легенда": "Легенда",
-                "Титан рынка": "Титан рынка"
+                "Титан рынка": "Титан рынка",
+                imageModalTitle: "Просмотр изображения",
+                levelTitle: "Уровень трейдера",
+                achievementTitle: "Достижения"
             },
             en: {
                 title: "Trader's Journal",
@@ -1033,7 +1043,7 @@
                 resultLabel: "Result (%)",
                 notesLabel: "Notes",
                 setupLabel: "Setup",
-                ratingLabel: "Rating",
+                ratingLabel: "Rating (1-5)",
                 addTradeButton: "Add Trade",
                 cancelButton: "Cancel",
                 filterCoinLabel: "Filter by Coin",
@@ -1094,6 +1104,13 @@
                 tooltipTotalProfit: "Total profit across all trades",
                 tooltipTotalLoss: "Total loss across all trades",
                 tooltipTotalDepositPercent: "Sum of trade results in percentage",
+                tooltipNewbieAchievement: "For recording your first trade",
+                tooltipStableTraderAchievement: "For 10 consecutive trades without losses",
+                tooltipAnalysisMasterAchievement: "For filling setups and notes in 20 trades",
+                tooltipRiskMasterAchievement: "For trades with risk not exceeding 2% of total risk",
+                tooltipProfitKingAchievement: "For total profit exceeding $10,000",
+                tooltipMarathonTraderAchievement: "For 100+ trades",
+                tooltipTraderLevel: "Your current trader level",
                 newbieAchievement: "Newbie",
                 stableTraderAchievement: "Stable Trader",
                 analysisMasterAchievement: "Analysis Master",
@@ -1113,7 +1130,10 @@
                 "Expert": "Expert",
                 "Professional": "Professional",
                 "Legend": "Legend",
-                "Market Titan": "Market Titan"
+                "Market Titan": "Market Titan",
+                imageModalTitle: "View Image",
+                levelTitle: "Trader Level",
+                achievementTitle: "Achievements"
             }
         };
 
@@ -1155,7 +1175,7 @@
             if (imageSrc) {
                 const modalImage = document.getElementById('modalImage');
                 modalImage.src = imageSrc;
-                document.getElementById('imageModalLabel').textContent = type === 'setup' ? translations[currentLanguage].setupDetails : translations[currentLanguage].notesDetails;
+                document.getElementById('imageModalLabel').textContent = translations[currentLanguage].imageModalTitle;
                 new bootstrap.Modal(document.getElementById('imageModal')).show();
             }
         }
@@ -1445,14 +1465,14 @@
                 const modalBody = document.getElementById("detailModalBody");
                 let content = "";
                 if (type === 'setup') {
-                    content = trade.setup || "Информация о сетапе отсутствует.";
+                    content = trade.setup || `${translations[currentLanguage].setupDetails} ${translations[currentLanguage].notAchieved.toLowerCase()}.`;
                     if (trade.setupImage) {
-                        content += `<img src="${trade.setupImage}" alt="Setup Image" style="max-width: 100%; margin-top: 10px;">`;
+                        content += `<img src="${trade.setupImage}" alt="${translations[currentLanguage].setupDetails} Image" style="max-width: 100%; margin-top: 10px;">`;
                     }
                 } else if (type === 'notes') {
-                    content = trade.notes || "Заметки отсутствуют.";
+                    content = trade.notes || `${translations[currentLanguage].notesDetails} ${translations[currentLanguage].notAchieved.toLowerCase()}.`;
                     if (trade.notesImage) {
-                        content += `<img src="${trade.notesImage}" alt="Notes Image" style="max-width: 100%; margin-top: 10px;">`;
+                        content += `<img src="${trade.notesImage}" alt="${translations[currentLanguage].notesDetails} Image" style="max-width: 100%; margin-top: 10px;">`;
                     }
                 }
                 modalBody.innerHTML = `<p>${content}</p>`;
@@ -1491,7 +1511,7 @@
                 a.click();
                 window.URL.revokeObjectURL(url);
                 hideSpinner();
-                showNotification("Экспорт в CSV успешно выполнен!", 'success');
+                showNotification(`${translations[currentLanguage].exportCSVButton} ${translations[currentLanguage].tradeAddedAlert.toLowerCase()}`, 'success');
             }, 1000);
         }
 
@@ -1500,11 +1520,11 @@
             setTimeout(() => {
                 const { jsPDF } = window.jspdf;
                 const doc = new jsPDF();
-                doc.text("Trader's Journal", 10, 10);
+                doc.text(translations[currentLanguage].title, 10, 10);
                 let y = 20;
                 doc.setFontSize(12);
                 trades.forEach(trade => {
-                    doc.text(`ID: ${trade.id}, Coin: ${trade.coin}, Position: ${trade.position}, Date: ${formatDate(trade.open_date)}, Risk: ${trade.risk}$, Profit: ${trade.profit}$, Loss: ${trade.loss}$, Result: ${trade.result}%, Setup: ${trade.setup}, Notes: ${trade.notes || ''}, Rating: ${trade.rating}`, 10, y);
+                    doc.text(`ID: ${trade.id}, ${translations[currentLanguage].coinLabel}: ${trade.coin}, ${translations[currentLanguage].positionLabel}: ${trade.position}, ${translations[currentLanguage].openDateLabel}: ${formatDate(trade.open_date)}, ${translations[currentLanguage].riskLabel}: ${trade.risk}$, ${translations[currentLanguage].profitLabel}: ${trade.profit}$, ${translations[currentLanguage].lossLabel}: ${trade.loss}$, ${translations[currentLanguage].resultLabel}: ${trade.result}%, ${translations[currentLanguage].setupLabel}: ${trade.setup}, ${translations[currentLanguage].notesLabel}: ${trade.notes || ''}, ${translations[currentLanguage].ratingLabel}: ${trade.rating}`, 10, y);
                     y += 10;
                     if (y > 280) {
                         doc.addPage();
@@ -1513,7 +1533,7 @@
                 });
                 doc.save("trading_journal.pdf");
                 hideSpinner();
-                showNotification("Экспорт в PDF успешно выполнен!", 'success');
+                showNotification(`${translations[currentLanguage].exportPDFButton} ${translations[currentLanguage].tradeAddedAlert.toLowerCase()}`, 'success');
             }, 1000);
         }
 
@@ -1533,8 +1553,8 @@
                 document.getElementById("riskMasterAchievement").textContent = translations[currentLanguage].notAchieved;
                 document.getElementById("profitKingAchievement").textContent = translations[currentLanguage].notAchieved;
                 document.getElementById("marathonTraderAchievement").textContent = translations[currentLanguage].notAchieved;
-                document.getElementById("traderLevelTitle").textContent = translations[currentLanguage]["Стажер"];
-                document.getElementById("traderLevel").textContent = "Уровень 1";
+                document.getElementById("traderLevelLabel").textContent = translations[currentLanguage]["Стажер"];
+                document.getElementById("traderLevel").textContent = "Level 1";
                 document.getElementById("levelProgress").style.width = "0%";
                 document.getElementById("levelProgressText").textContent = "0%";
                 cachedStats = {};
@@ -1562,7 +1582,6 @@
             document.getElementById("totalProfit").textContent = totalProfit.toFixed(2);
             document.getElementById("totalLoss").textContent = totalLoss.toFixed(2);
 
-            // Расчет "Общий % к депозиту" как суммы всех значений result
             const totalDepositPercent = trades.reduce((sum, t) => sum + t.result, 0);
             document.getElementById("totalDepositPercent").textContent = totalDepositPercent.toFixed(2);
 
@@ -1581,41 +1600,39 @@
                 localStorage.setItem("cachedStats", JSON.stringify(cachedStats));
             }
 
-            // Геймификация: Достижения
             const achievements = {
                 newbie: {
                     condition: trades.length >= 1,
                     label: translations[currentLanguage].newbieAchievement,
-                    tooltip: "Запишите первую сделку"
+                    tooltip: translations[currentLanguage].tooltipNewbieAchievement
                 },
                 stableTrader: {
                     condition: cachedStats.consecutiveNoLoss >= 10,
                     label: translations[currentLanguage].stableTraderAchievement,
-                    tooltip: `Осталось ${10 - cachedStats.consecutiveNoLoss} сделок без убытков из 10`
+                    tooltip: `${translations[currentLanguage].stableTraderAchievement}: ${translations[currentLanguage].notAchieved} (${10 - cachedStats.consecutiveNoLoss} ${translations[currentLanguage].lossTradesLabel.toLowerCase()} ${translations[currentLanguage].notAchieved.toLowerCase()})`
                 },
                 analysisMaster: {
                     condition: cachedStats.detailedTrades >= 20,
                     label: translations[currentLanguage].analysisMasterAchievement,
-                    tooltip: `Осталось ${20 - cachedStats.detailedTrades} сделок с анализом из 20`
+                    tooltip: `${translations[currentLanguage].analysisMasterAchievement}: ${translations[currentLanguage].notAchieved} (${20 - cachedStats.detailedTrades} ${translations[currentLanguage].tradeAddedAlert.toLowerCase()} ${translations[currentLanguage].notAchieved.toLowerCase()})`
                 },
                 riskMaster: {
                     condition: trades.every(t => t.risk <= (cachedStats.totalRisk / trades.length) * 0.02),
                     label: translations[currentLanguage].riskMasterAchievement,
-                    tooltip: trades.length > 0 ? (trades.every(t => t.risk <= (cachedStats.totalRisk / trades.length) * 0.02) ? "Достижение получено!" : "Снизьте риск в сделках до 2% от среднего!") : "Запишите сделки с низким риском"
+                    tooltip: trades.length > 0 ? (trades.every(t => t.risk <= (cachedStats.totalRisk / trades.length) * 0.02) ? `${translations[currentLanguage].riskMasterAchievement}: ${translations[currentLanguage].achieved}` : `${translations[currentLanguage].riskMasterAchievement}: ${translations[currentLanguage].notAchieved} (${translations[currentLanguage].riskLabel.toLowerCase()} <= 2% ${translations[currentLanguage].notAchieved.toLowerCase()})`) : `${translations[currentLanguage].riskMasterAchievement}: ${translations[currentLanguage].notAchieved}`
                 },
                 profitKing: {
                     condition: cachedStats.totalProfit >= 10000,
                     label: translations[currentLanguage].profitKingAchievement,
-                    tooltip: `Осталось $${(10000 - cachedStats.totalProfit).toFixed(2)} до $10,000 прибыли`
+                    tooltip: `${translations[currentLanguage].profitKingAchievement}: ${translations[currentLanguage].notAchieved} ($${Math.max(0, 10000 - cachedStats.totalProfit).toFixed(2)} ${translations[currentLanguage].notAchieved.toLowerCase()})`
                 },
                 marathonTrader: {
                     condition: trades.length >= 100,
                     label: translations[currentLanguage].marathonTraderAchievement,
-                    tooltip: `Осталось ${100 - trades.length} сделок из 100`
+                    tooltip: `${translations[currentLanguage].marathonTraderAchievement}: ${translations[currentLanguage].notAchieved} (${100 - trades.length} ${translations[currentLanguage].tradeAddedAlert.toLowerCase()} ${translations[currentLanguage].notAchieved.toLowerCase()})`
                 }
             };
 
-            // Обновление текста достижений (без повтора названия)
             document.getElementById("newbieAchievement").textContent = achievements.newbie.condition ? translations[currentLanguage].achieved : translations[currentLanguage].notAchieved;
             document.getElementById("stableTraderAchievement").textContent = achievements.stableTrader.condition ? translations[currentLanguage].achieved : translations[currentLanguage].notAchieved;
             document.getElementById("analysisMasterAchievement").textContent = achievements.analysisMaster.condition ? translations[currentLanguage].achieved : translations[currentLanguage].notAchieved;
@@ -1623,7 +1640,6 @@
             document.getElementById("profitKingAchievement").textContent = achievements.profitKing.condition ? translations[currentLanguage].achieved : translations[currentLanguage].notAchieved;
             document.getElementById("marathonTraderAchievement").textContent = achievements.marathonTrader.condition ? translations[currentLanguage].achieved : translations[currentLanguage].notAchieved;
 
-            // Уровни трейдера
             const levels = [
                 { name: translations[currentLanguage]["Стажер"], trades: 0, profit: 0, rating: 0 },
                 { name: translations[currentLanguage]["Новобранец"], trades: 10, profit: 100, rating: 2 },
@@ -1655,12 +1671,11 @@
                 progress = Math.round((tradeProgress + profitProgress + ratingProgress) / 3);
             }
 
-            document.getElementById("traderLevelTitle").textContent = levels[currentLevel - 1].name;
-            document.getElementById("traderLevel").textContent = `Уровень ${currentLevel}`;
+            document.getElementById("traderLevelLabel").textContent = levels[currentLevel - 1].name;
+            document.getElementById("traderLevel").textContent = `Level ${currentLevel}`;
             document.getElementById("levelProgress").style.width = `${progress}%`;
             document.getElementById("levelProgressText").textContent = `${progress}%`;
 
-            // Уведомление о повышении уровня
             const previousLevel = parseInt(localStorage.getItem("traderLevel") || "1");
             if (currentLevel > previousLevel) {
                 showNotification(`${translations[currentLanguage].levelUpMessage} ${levels[currentLevel - 1].name}!`);
@@ -1697,7 +1712,7 @@
             localStorage.setItem("language", lang);
             document.querySelector(".lang-icon").textContent = lang.toUpperCase();
             document.querySelector("html").lang = lang;
-            document.querySelector("h1").textContent = translations[lang].title;
+            document.getElementById("pageTitle").textContent = translations[lang].title;
             document.querySelector(".navbar-brand[onclick=\"showSection('main')\"]").innerHTML = `<i class="fas fa-home"></i> ${translations[lang].mainSection}`;
             document.querySelector(".navbar-brand[onclick=\"showSection('view')\"]").innerHTML = `<i class="fas fa-table"></i> ${translations[lang].viewSection}`;
             document.querySelector(".navbar-brand[onclick=\"showSection('stats')\"]").innerHTML = `<i class="fas fa-chart-bar"></i> ${translations[lang].statsSection}`;
@@ -1730,32 +1745,46 @@
                 <option value="4">4</option>
                 <option value="5">5</option>
             `;
-            document.querySelector("th[data-sort='id']").textContent = "ID";
-            document.querySelector("th[data-sort='coin']").textContent = translations[lang].coinLabel;
-            document.querySelector("th[data-sort='position']").textContent = translations[lang].positionLabel;
-            document.querySelector("th[data-sort='open_date']").textContent = translations[lang].openDateLabel;
-            document.querySelector("th[data-sort='risk']").textContent = translations[lang].riskLabel;
-            document.querySelector("th[data-sort='profit']").textContent = translations[lang].profitLabel;
-            document.querySelector("th[data-sort='loss']").textContent = translations[lang].lossLabel;
-            document.querySelector("th[data-sort='result']").textContent = translations[lang].resultLabel;
-            document.querySelector("th[data-sort='rating']").textContent = translations[lang].ratingLabel;
-            document.querySelector("#tradesTable th:nth-child(9)").textContent = translations[lang].setupLabel;
-            document.querySelector("#tradesTable th:nth-child(10)").textContent = translations[lang].notesLabel;
-            document.querySelector("#tradesTable th:nth-child(12)").textContent = translations[lang].actionLabel;
-            document.querySelector("button[onclick='exportToCSV()']").textContent = translations[lang].exportCSVButton;
-            document.querySelector("button[onclick='exportToPDF()']").textContent = translations[lang].exportPDFButton;
-            document.querySelector("#stats h3").textContent = translations[lang].statsSection;
-            document.querySelector("#stats .stats-grid .stat-card:nth-child(1) h4").textContent = translations[lang].maxProfitLabel;
-            document.querySelector("#stats .stats-grid .stat-card:nth-child(2) h4").textContent = translations[lang].maxLossLabel;
-            document.querySelector("#stats .stats-grid .stat-card:nth-child(3) h4").textContent = translations[lang].longShortRatioLabel;
-            document.querySelector("#stats .stats-grid .stat-card:nth-child(4) h4").textContent = translations[lang].profitableTradesLabel;
-            document.querySelector("#stats .stats-grid .stat-card:nth-child(5) h4").textContent = translations[lang].lossTradesLabel;
-            document.querySelector("#stats .stats-grid .stat-card:nth-child(6) h4").textContent = translations[lang].totalProfitLabel;
-            document.querySelector("#stats .stats-grid .stat-card:nth-child(7) h4").textContent = translations[lang].totalLossLabel;
-            document.querySelector("#stats .stats-grid .stat-card:nth-child(8) h4").textContent = translations[lang].totalDepositPercentLabel;
+            document.getElementById("thId").textContent = "ID";
+            document.getElementById("thCoin").textContent = translations[lang].coinLabel;
+            document.getElementById("thPosition").textContent = translations[lang].positionLabel;
+            document.getElementById("thOpenDate").textContent = translations[lang].openDateLabel;
+            document.getElementById("thRisk").textContent = translations[lang].riskLabel;
+            document.getElementById("thProfit").textContent = translations[lang].profitLabel;
+            document.getElementById("thLoss").textContent = translations[lang].lossLabel;
+            document.getElementById("thResult").textContent = translations[lang].resultLabel;
+            document.getElementById("thSetup").textContent = translations[lang].setupLabel;
+            document.getElementById("thNotes").textContent = translations[lang].notesLabel;
+            document.getElementById("thRating").textContent = translations[lang].ratingLabel;
+            document.getElementById("thActions").textContent = translations[lang].actionLabel;
+            document.getElementById("exportCSVBtn").textContent = translations[lang].exportCSVButton;
+            document.getElementById("exportPDFBtn").textContent = translations[lang].exportPDFButton;
+            document.getElementById("statsTitle").textContent = translations[lang].statsSection;
+            document.getElementById("maxProfitLabel").textContent = translations[lang].maxProfitLabel;
+            document.getElementById("maxLossLabel").textContent = translations[lang].maxLossLabel;
+            document.getElementById("longShortRatioLabel").textContent = translations[lang].longShortRatioLabel;
+            document.getElementById("profitableTradesLabel").textContent = translations[lang].profitableTradesLabel;
+            document.getElementById("lossTradesLabel").textContent = translations[lang].lossTradesLabel;
+            document.getElementById("totalProfitLabel").textContent = translations[lang].totalProfitLabel;
+            document.getElementById("totalLossLabel").textContent = translations[lang].totalLossLabel;
+            document.getElementById("totalDepositPercentLabel").textContent = translations[lang].totalDepositPercentLabel;
+            document.getElementById("newbieAchievementLabel").textContent = translations[lang].newbieAchievement;
+            document.getElementById("stableTraderAchievementLabel").textContent = translations[lang].stableTraderAchievement;
+            document.getElementById("analysisMasterAchievementLabel").textContent = translations[lang].analysisMasterAchievement;
+            document.getElementById("riskMasterAchievementLabel").textContent = translations[lang].riskMasterAchievement;
+            document.getElementById("profitKingAchievementLabel").textContent = translations[lang].profitKingAchievement;
+            document.getElementById("marathonTraderAchievementLabel").textContent = translations[lang].marathonTraderAchievement;
+            document.getElementById("achievementsTitle").textContent = translations[lang].achievementTitle;
+            document.getElementById("traderLevelTitleHeader").textContent = translations[lang].levelTitle;
+            document.getElementById("closeModalBtn").textContent = translations[lang].closeButton;
+            document.getElementById("imageCloseModalBtn").textContent = translations[lang].closeButton;
+            document.getElementById("viewTitle").textContent = translations[lang].viewSection;
             updateFilterCoinOptions();
             updateTable();
             updateStats();
+            document.querySelectorAll("[data-tooltip]").forEach(element => {
+                element.setAttribute("data-tooltip", translations[lang][element.getAttribute("data-tooltip")]);
+            });
         }
 
         function updateRatingDisplay() {
