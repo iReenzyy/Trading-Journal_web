@@ -717,11 +717,17 @@
                 <tbody id="tradesBody"></tbody>
             </table>
             <div class="row mt-2">
-                <div class="col-6">
+                <div class="col-4">
                     <button class="btn w-100" onclick="exportToCSV()" id="exportCSVBtn"><span id="exportCSVBtnText"></span></button>
                 </div>
-                <div class="col-6">
+                <div class="col-4">
                     <button class="btn w-100" onclick="exportToPDF()" id="exportPDFBtn"><span id="exportPDFBtnText"></span></button>
+                </div>
+                <div class="col-4">
+                    <label for="importFile" class="btn w-100" style="cursor: pointer; text-align: center; padding: 8px 15px;">
+                        <span id="importBtnText"></span>
+                        <input type="file" id="importFile" accept=".csv" style="display: none;" onchange="importFromCSV(event)">
+                    </label>
                 </div>
             </div>
         </div>
@@ -931,13 +937,13 @@
                 coinLabel: "Монета",
                 positionLabel: "Позиция",
                 openDateLabel: "Дата открытия",
-                riskLabel: "Риск на сделку ($)",
+                riskLabel: "Риск ($)",
                 profitLabel: "Прибыль ($)",
                 lossLabel: "Убыток ($)",
-                resultLabel: "Итог сделки (%)",
+                resultLabel: "Результат (%)",
                 notesLabel: "Заметки",
                 setupLabel: "Сетап",
-                ratingLabel: "Оценка (1-5)",
+                ratingLabel: "Оценка",
                 addTradeButton: "Добавить сделку",
                 cancelButton: "Отмена",
                 filterCoinLabel: "Фильтр по монете",
@@ -949,6 +955,7 @@
                 longOption: "Long",
                 exportCSVButton: "Экспорт в CSV",
                 exportPDFButton: "Экспорт в PDF",
+                importButton: "Импорт",
                 detailsLabel: "Детали",
                 setupDetails: "Сетап",
                 notesDetails: "Заметки",
@@ -962,6 +969,8 @@
                 tradeUpdatedAlert: "Сделка обновлена!",
                 tradeDeletedAlert: "Сделка удалена!",
                 noTradesAlert: "Нет сделок для экспорта!",
+                importSuccessAlert: "Данные успешно импортированы!",
+                importErrorAlert: "Ошибка импорта: неверный формат файла или данные!",
                 requiredFieldAlert: "Поле",
                 requiredFieldMessage: "обязательно для заполнения!",
                 negativeValueAlert: "не может быть отрицательным!",
@@ -1055,6 +1064,7 @@
                 longOption: "Long",
                 exportCSVButton: "Export to CSV",
                 exportPDFButton: "Export to PDF",
+                importButton: "Import",
                 detailsLabel: "Details",
                 setupDetails: "Setup",
                 notesDetails: "Notes",
@@ -1068,6 +1078,8 @@
                 tradeUpdatedAlert: "Trade updated!",
                 tradeDeletedAlert: "Trade deleted!",
                 noTradesAlert: "No trades to export!",
+                importSuccessAlert: "Data imported successfully!",
+                importErrorAlert: "Import error: invalid file format or data!",
                 requiredFieldAlert: "Field",
                 requiredFieldMessage: "is required!",
                 negativeValueAlert: "cannot be negative!",
@@ -1537,6 +1549,91 @@
             }, 1000);
         }
 
+        function importFromCSV(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            showSpinner();
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const text = e.target.result;
+                const rows = text.split('\n').map(row => row.trim()).filter(row => row);
+                if (rows.length <= 1) {
+                    hideSpinner();
+                    showNotification(translations[currentLanguage].importErrorAlert, 'error');
+                    return;
+                }
+
+                const headers = rows[0].split(',');
+                if (headers.length < 11 || headers[0] !== "ID" || headers[1] !== "Coin" || headers[2] !== "Position" || headers[3] !== "Date" || headers[4] !== "Risk" || headers[5] !== "Profit" || headers[6] !== "Loss" || headers[7] !== "Result" || headers[8] !== "Setup" || headers[9] !== "Notes" || headers[10] !== "Rating") {
+                    hideSpinner();
+                    showNotification(translations[currentLanguage].importErrorAlert, 'error');
+                    return;
+                }
+
+                const newTrades = [];
+                for (let i = 1; i < rows.length; i++) {
+                    const cols = rows[i].split(',');
+                    if (cols.length < 11) continue;
+
+                    const trade = {
+                        id: parseInt(cols[0]) || trades.length + i,
+                        coin: cols[1].trim(),
+                        position: cols[2].trim(),
+                        open_date: cols[3].trim(),
+                        risk: parseFloat(cols[4]) || 0,
+                        profit: parseFloat(cols[5]) || 0,
+                        loss: parseFloat(cols[6]) || 0,
+                        result: parseFloat(cols[7]) || 0,
+                        setup: cols[8].trim().replace(/^"(.*)"$/, '$1'), // Удаляем кавычки
+                        notes: cols[9].trim().replace(/^"(.*)"$/, '$1'), // Удаляем кавычки
+                        rating: parseInt(cols[10]) || 1,
+                        setupImage: "",
+                        notesImage: ""
+                    };
+
+                    // Валидация данных
+                    if (!trade.coin || !trade.position || !trade.open_date || !trade.setup ||
+                        trade.risk < 0 || trade.profit < 0 || trade.loss < 0 || trade.rating < 1 || trade.rating > 5) {
+                        continue;
+                    }
+
+                    // Проверка формата даты
+                    if (!/^\d{4}-\d{2}-\d{2}$/.test(trade.open_date) || isNaN(new Date(trade.open_date))) {
+                        continue;
+                    }
+
+                    // Проверка позиции
+                    if (!["Short", "Long"].includes(trade.position)) {
+                        continue;
+                    }
+
+                    // Добавляем монету, если её нет в списке
+                    if (!coins.includes(trade.coin)) {
+                        coins.push(trade.coin);
+                    }
+
+                    newTrades.push(trade);
+                }
+
+                if (newTrades.length > 0) {
+                    trades = trades.concat(newTrades);
+                    trades = trades.map((trade, index) => ({ ...trade, id: index + 1 }));
+                    localStorage.setItem("trades", JSON.stringify(trades));
+                    localStorage.setItem("coins", JSON.stringify(coins));
+                    updateCoinSelect();
+                    updateFilterCoinOptions();
+                    updateTable();
+                    updateStats();
+                    showNotification(translations[currentLanguage].importSuccessAlert);
+                } else {
+                    showNotification(translations[currentLanguage].importErrorAlert, 'error');
+                }
+                hideSpinner();
+            };
+            reader.readAsText(file);
+        }
+
         function updateStats() {
             if (trades.length === 0) {
                 document.getElementById("maxProfit").textContent = "0.00";
@@ -1759,6 +1856,7 @@
             document.getElementById("thActions").textContent = translations[lang].actionLabel;
             document.getElementById("exportCSVBtn").textContent = translations[lang].exportCSVButton;
             document.getElementById("exportPDFBtn").textContent = translations[lang].exportPDFButton;
+            document.getElementById("importBtnText").textContent = translations[lang].importButton;
             document.getElementById("statsTitle").textContent = translations[lang].statsSection;
             document.getElementById("maxProfitLabel").textContent = translations[lang].maxProfitLabel;
             document.getElementById("maxLossLabel").textContent = translations[lang].maxLossLabel;
