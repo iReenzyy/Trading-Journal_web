@@ -1289,28 +1289,28 @@
         }
 
         function validateForm() {
-            const requiredFields = [
-                { id: "coin", type: "select" },
-                { id: "position", type: "select" },
-                { id: "open_date", type: "date" },
-                { id: "risk", type: "number", min: 0 },
-                { id: "result", type: "number" },
-                { id: "setup", type: "textarea" }
-            ];
+    const requiredFields = [
+        { id: "coin", type: "select" },
+        { id: "position", type: "select" },
+        { id: "open_date", type: "date" },
+        { id: "risk", type: "number", min: -100 },
+        { id: "result", type: "number" }, // Убрано ограничение min: 0
+        { id: "setup", type: "textarea" }
+    ];
 
-            for (let field of requiredFields) {
-                const value = document.getElementById(field.id).value.trim();
-                if (!value) {
-                    showNotification(`${translations[currentLanguage].requiredFieldAlert} "${document.querySelector(`label[for="${field.id}"]`).textContent}" ${translations[currentLanguage].requiredFieldMessage}`, 'error');
-                    return false;
-                }
-                if (field.type === "number" && parseFloat(value) < (field.min || 0)) {
-                    showNotification(`${document.querySelector(`label[for="${field.id}"]`).textContent} ${translations[currentLanguage].negativeValueAlert}`, 'error');
-                    return false;
-                }
-            }
-            return true;
+    for (let field of requiredFields) {
+        const value = document.getElementById(field.id).value.trim();
+        if (!value) {
+            showNotification(`${translations[currentLanguage].requiredFieldAlert} "${document.querySelector(`label[for="${field.id}"]`).textContent}" ${translations[currentLanguage].requiredFieldMessage}`, 'error');
+            return false;
         }
+        if (field.type === "number" && parseFloat(value) < (field.min || -100)) {
+            showNotification(`${document.querySelector(`label[for="${field.id}"]`).textContent} ${translations[currentLanguage].negativeValueAlert}`, 'error');
+            return false;
+        }
+    }
+    return true;
+}
 
         function showNotification(message, type = 'success') {
             Toastify({
